@@ -28,6 +28,8 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
 
     <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="https://v1.hitokoto.cn/?c=d&encode=js&select=%23hitokoto" defer></script>
+<!--    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>-->
 
 <meta name="generator" content="Hexo 5.2.0"></head>
 
@@ -381,14 +383,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    219
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    5 分
                 </div>
                 
 
@@ -429,9 +431,92 @@
 <li>在合适的地方新建一个文件夹，例如<code>D:\Blog</code></li>
 <li>打开cmd（命令提示符），使用<code>cd D:\Blog</code>切换到新建的目录</li>
 <li>输入命令<code>npm i hexo-cli -g</code></li>
-<li>安装完成后可以使用<code>hexo -v</code>检查是否安装成功</li>
+<li>安装完成后可以使用<code>hexo -v</code>检查是否安装成功，结果类似下图</li>
 </ul>
+<p><img src="hexov.png"></p>
+<ul>
+<li>接着输入命令<code>hexo init &lt;folder&gt;</code>，其中folder为你想要新建hexo博客的地方，也可以直接不输入folder。</li>
+<li>如果上一步选择了folder，则切换到folder目录下，输入命令<code>npm install</code></li>
+<li>完成上述 步骤之后，输入<code>hexo g</code>生成静态网页，再输入<code>hexo s</code>打开本地服务器。</li>
+<li>浏览器打开<code>localhost:4000</code>，能访问则表明建站成功</li>
+</ul>
+<h4 id="配置Github"><a href="#配置Github" class="headerlink" title="配置Github"></a>配置Github</h4><h5 id="设置本地git信息"><a href="#设置本地git信息" class="headerlink" title="设置本地git信息"></a>设置本地git信息</h5><ul>
+<li><p>在之前建立的文件夹下右键选择<em>git bash here</em></p>
+</li>
+<li><p>输入</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> config --global user.name <span class="token string">"XXXX"</span> //自定义用户名
+<span class="token function">git</span> config --global user.email <span class="token string">"xxxx@xx.com"</span>  //Github注册邮箱<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>打开命令行输入<code>ssh-keygen -t rsa -C &quot;xxxx@xx.com&quot;</code>一路回车</p>
+</li>
+<li><p>打开Github，点击右上角头像后选择settings，选择<em>New SSH key</em></p>
+</li>
+<li><p>如果是windows用户，那么在系统盘下（一般是C）选择User文件夹（也可能是用户），找到.ssh文件夹，使用记事本打开<em>id_rsa.pub</em>文件，将其中的内容复制下来</p>
+</li>
+<li><p>将刚刚复制的内容粘贴到下图中的Key栏里，title随意</p>
+</li>
+</ul>
+<p><img src="SSH.png"></p>
+<ul>
+<li>点击<em>Add</em> <em>SSH</em> <em>key</em></li>
+<li>在命令行中输入<code>ssh -T git@github.com</code>，若出现类似下图的提示，则表明成功</li>
+</ul>
+<p><img src="ssh1.png"></p>
+<ul>
+<li>打开博客根目录下的<em>_config.yml</em>文件，这是博客的配置文件，用于配置博客的各种信息。</li>
+<li>在最后一行加入如下信息，记得修改为自己的信息。<span style="color:red">注意！冒号后面一定要有一个空格！</span></li>
+</ul>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">deploy:
+  type: <span class="token function">git</span>
+  repo: git@github.com:L-htian/L-htian.github.io.git
+  branch: main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
+<ul>
+<li>打开Github，参考<a target="_blank" rel="noopener" href="https://docs.github.com/cn/free-pro-team@latest/github/working-with-github-pages/creating-a-github-pages-site">Github Docs</a>设置Github Page</li>
+<li>在命令行中输入<code>hexo clean</code>与<code>hexo d</code>后在github.io上查看</li>
+</ul>
+<h3 id="设置matery主题"><a href="#设置matery主题" class="headerlink" title="设置matery主题"></a>设置matery主题</h3><h4 id="Hexo主题"><a href="#Hexo主题" class="headerlink" title="Hexo主题"></a>Hexo主题</h4><p><em>Hexo</em>相关的主题非常多，在Github上搜索<em>Hexo</em>就能搜到很多，我个人使用的是<a target="_blank" rel="noopener" href="https://github.com/L-htian/hexo-theme-matery"><em>matery</em></a>主题。很多地方参考主题的说明文档使用即可。下面说一些踩到的坑。</p>
+<h4 id="npm命令卡顿、速度过慢"><a href="#npm命令卡顿、速度过慢" class="headerlink" title="npm命令卡顿、速度过慢"></a>npm命令卡顿、速度过慢</h4><p>使用主题时许多命令需要用到<em>npm</em>，但是常常会卡在原地一动不动。可以进行换源处理，具体操作为在命令行中输入<code>npm config set registry https://registry.npm.taobao.org</code></p>
+<h4 id="莫名报错"><a href="#莫名报错" class="headerlink" title="莫名报错"></a>莫名报错</h4><p>大部分情况下输入<code>hexo clean</code>都能解决</p>
+<h4 id="matery主题优化相关"><a href="#matery主题优化相关" class="headerlink" title="matery主题优化相关"></a>matery主题优化相关</h4><h5 id="修改公告-dream一栏-里的每日一句"><a href="#修改公告-dream一栏-里的每日一句" class="headerlink" title="修改公告(dream一栏)里的每日一句"></a>修改公告(dream一栏)里的每日一句</h5><p>首页dream公告栏是matery主题的特色，但同样只支持纯文本。用同样的方法修改，使之显示“一言”的每日一句-小说类型。</p>
+<ul>
+<li><p><code>/themes/hexo-theme-matery/layout/index.ejx</code> line 16改为 <code>&lt;i class=&quot;fa fa-volume-up fa-lg fa-fw text-color&quot;&gt;&lt;/i&gt; &lt;%- &#39;&lt;span id=&quot;hitokoto&quot;&gt;一言API请求超时。请稍后重试。&lt;/span&gt;&#39; %&gt;</code></p>
+</li>
+<li><p>同时在<code>/themes/hexo-theme-matery/layout/_partial/head.ejs</code>增加代码：</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;v1.hitokoto.cn&#x2F;?c&#x3D;d&amp;encode&#x3D;js&amp;select&#x3D;%23hitokoto&quot; defer&gt;&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+</li>
+</ul>
+<h5 id="添加动态科技线条背景"><a href="#添加动态科技线条背景" class="headerlink" title="添加动态科技线条背景"></a>添加动态科技线条背景</h5><ul>
+<li><p>在<code>themes/matery/layout/layout.ejs</code>文件中添加如下代码：</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token comment">&lt;!--动态线条背景--></span> 
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span> <span class="token attr-name">color</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>122 103 238<span class="token punctuation">"</span></span> <span class="token attr-name">opacity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">'</span>0.7<span class="token punctuation">'</span></span> <span class="token attr-name">zIndex</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>-2<span class="token punctuation">"</span></span> <span class="token attr-name">count</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>200<span class="token punctuation">"</span></span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"><span class="token language-javascript"> </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+</li>
+</ul>
+<h5 id="去掉右上角的github图标"><a href="#去掉右上角的github图标" class="headerlink" title="去掉右上角的github图标"></a>去掉右上角的github图标</h5><p>打开你的主题配置文件，找到下面的配置:</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># Whether to display fork me on github icon and link, default true, You can change it to your repo address
+# 配置是否在 header 中显示 fork me on github 的图标，默认为true，你可以修改为你的仓库地址.
+githubLink:
+  enable: true
+  url: https:&#x2F;&#x2F;github.com&#x2F;blinkfox&#x2F;hexo-theme-matery
+  title: Fork Me<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将<strong>enable</strong>的属性值由<strong>true</strong>改为<strong>false</strong>即可。</p>
+<h5 id="去掉主页的Github按钮"><a href="#去掉主页的Github按钮" class="headerlink" title="去掉主页的Github按钮"></a>去掉主页的Github按钮</h5><p>打开主题配置文件，找到下面的配置：</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml"># 首页 banner 中的第二个按钮的配置，包括按钮的显示名称、font awesome图标和按钮的超链接.
+indexbtn:
+  enable: true
+  name: Github
+  icon: fab fa-github-alt
+  url: https:&#x2F;&#x2F;github.com&#x2F;blinkfox&#x2F;hexo-theme-matery<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将<strong>enable</strong>属性值由<strong>true</strong>改为<strong>false</strong>即可。</p>
+<h5 id="修改导航栏颜色及透明效果"><a href="#修改导航栏颜色及透明效果" class="headerlink" title="修改导航栏颜色及透明效果"></a>修改导航栏颜色及透明效果</h5><p>打开<code>themes/matery/source/css/matery.css</code>文件，大约在250行，有一个<code>.bg-color</code>属性，修改其属性值即可，代码如下：</p>
+<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.bg-color</span> <span class="token punctuation">&#123;</span>
+    <span class="token property">background-image</span><span class="token punctuation">:</span> <span class="token function">linear-gradient</span><span class="token punctuation">(</span>to right<span class="token punctuation">,</span> #4cbf30 0%<span class="token punctuation">,</span> #0f9d58 100%<span class="token punctuation">)</span><span class="token punctuation">;</span> //修改成自己喜欢的颜色值
+    <span class="token property">opacity</span><span class="token punctuation">:</span> 0.8<span class="token punctuation">;</span>  //透明效果 值范围 0~1，看情况自己修改
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -841,7 +926,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">219</span>&nbsp;
+                class="white-color">1.3k</span>&nbsp;
             
             
             
