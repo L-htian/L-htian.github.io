@@ -383,14 +383,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    132
+                    547
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -416,6 +416,77 @@
                 <h2 id="前端水印"><a href="#前端水印" class="headerlink" title="前端水印"></a>前端水印</h2><p>水印其实并不是一个陌生的词，很多网站都有着自己的水印。使用水印可以很好的保护产权。一般的水印又分可见水印和不可见水印。</p>
 <h3 id="可见水印"><a href="#可见水印" class="headerlink" title="可见水印"></a>可见水印</h3><p>可见水印的类型有很多，有一些是整图覆盖在图层上的水印，还有一些是在角落。</p>
 <p>可见水印的生成方式主要可以归为两类，一种是 纯 html 元素(纯div)，另一种则为背景图（canvas/svg）。</p>
+<h4 id="纯-html-元素-纯div"><a href="#纯-html-元素-纯div" class="headerlink" title="纯 html 元素(纯div)"></a>纯 html 元素(纯div)</h4><p>首先是HTML的内容</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">></span></span>
+<span class="token comment">&lt;!--文本内容--></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>app<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>Erio<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>L-htian<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>js/watermark.js<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script"></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>首先我们来生成一个水印块，就是上面的 一个个<code>Lhtian</code>。这里主要有一点就是设置一个透明度（为了让水印看起来不是那么明显，从而不遮挡我们的主要页面），另一个就是一个旋转，如果是正的水平会显得不是那么好看，最后一点就是使用 <code>user-select</code> 属性，让此时的文字无法被选中。CSS 属性 <code>user-select</code> 控制用户能否选中文本。除了文本框内，它对被载入为 chrome 的内容没有影响</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">cssHelper</span><span class="token punctuation">(</span><span class="token parameter">el<span class="token punctuation">,</span> prototype</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token keyword">in</span> prototype<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        el<span class="token punctuation">.</span>style<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> prototype<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">const</span> waterWrapper <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">cssHelper</span><span class="token punctuation">(</span>waterWrapper<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+    position<span class="token operator">:</span> <span class="token string">'fixed'</span><span class="token punctuation">,</span>
+    top<span class="token operator">:</span> <span class="token string">'0px'</span><span class="token punctuation">,</span>
+    right<span class="token operator">:</span> <span class="token string">'0px '</span><span class="token punctuation">,</span>
+    bottom<span class="token operator">:</span> <span class="token string">'0px'</span><span class="token punctuation">,</span>
+    left<span class="token operator">:</span> <span class="token string">'0px'</span><span class="token punctuation">,</span>
+    overflow<span class="token operator">:</span> <span class="token string">'hidden'</span><span class="token punctuation">,</span>
+    display<span class="token operator">:</span> <span class="token string">'flex'</span><span class="token punctuation">,</span>
+    <span class="token string">'flex-wrap'</span><span class="token operator">:</span> <span class="token string">'wrap'</span><span class="token punctuation">,</span>
+    <span class="token string">'pointer-events'</span><span class="token operator">:</span> <span class="token string">'none'</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>有了一个水印片，我们就可以通过计算屏幕的宽高，以及水印的大小来计算我们需要生成的水印个数。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> waterHeight <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> waterWidth <span class="token operator">=</span> <span class="token number">180</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> <span class="token punctuation">&#123;</span> clientWidth<span class="token punctuation">,</span> clientHeight <span class="token punctuation">&#125;</span> <span class="token operator">=</span> document<span class="token punctuation">.</span>documentElement <span class="token operator">||</span> document<span class="token punctuation">.</span>body<span class="token punctuation">;</span>
+<span class="token keyword">const</span> column <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>clientWidth <span class="token operator">/</span> waterWidth<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> rows <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">ceil</span><span class="token punctuation">(</span>clientHeight <span class="token operator">/</span> waterHeight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">createItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> item <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span>
+    item<span class="token punctuation">.</span>innerHTML <span class="token operator">=</span> <span class="token string">'Lhtian'</span>
+    <span class="token function">cssHelper</span><span class="token punctuation">(</span>item<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span>
+        position<span class="token operator">:</span> <span class="token string">'absolute'</span><span class="token punctuation">,</span>
+        top<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">50px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        left<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">50px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        fontSize<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">16px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        color<span class="token operator">:</span> <span class="token string">'#000'</span><span class="token punctuation">,</span>
+        lineHeight<span class="token operator">:</span> <span class="token number">1.5</span><span class="token punctuation">,</span>
+        opacity<span class="token operator">:</span> <span class="token number">0.1</span><span class="token punctuation">,</span>
+        transform<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">rotate(-15deg)</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        transformOrigin<span class="token operator">:</span> <span class="token string">'0 0'</span><span class="token punctuation">,</span>
+        userSelect<span class="token operator">:</span> <span class="token string">'none'</span><span class="token punctuation">,</span>
+        whiteSpace<span class="token operator">:</span> <span class="token string">'nowrap'</span><span class="token punctuation">,</span>
+        overflow<span class="token operator">:</span> <span class="token string">'hidden'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> item
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">let</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> column <span class="token operator">*</span> rows<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> wrap <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span><span class="token string">'div'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">cssHelper</span><span class="token punctuation">(</span>wrap<span class="token punctuation">,</span> Object<span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>
+        position<span class="token operator">:</span> <span class="token string">'relative'</span><span class="token punctuation">,</span>
+        width<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>waterWidth<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        height<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>waterHeight<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        flex<span class="token operator">:</span> <span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">0 0 </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">$&#123;</span>waterWidth<span class="token interpolation-punctuation punctuation">&#125;</span></span><span class="token string">px</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">,</span>
+        overflow<span class="token operator">:</span> <span class="token string">'hidden'</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    wrap<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span><span class="token function">createItem</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    waterWrapper<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>wrap<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span>waterWrapper<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最终结果实现为</p>
+<p><img src="divwm.png"></p>
 
                 
             </div>
@@ -550,7 +621,7 @@
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Web前端第二次作业要求进行与水印有关的实现，具体为可见水印和不可见水印
+                            Web前端第二次作业要求进行与水印有关的实现，具体为可见水印和不可见水印。
                         
                     </div>
                     <div class="publish-info">
@@ -825,7 +896,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">1.4k</span>&nbsp;
+                class="white-color">1.8k</span>&nbsp;
             
             
             
