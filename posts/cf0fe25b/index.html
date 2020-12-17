@@ -376,21 +376,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-16
+                    2020-12-17
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    547
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    7 分
                 </div>
                 
 
@@ -487,7 +487,122 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
 
 <p>最终结果实现为</p>
 <p><img src="divwm.png"></p>
+<h4 id="背景图（canvas-svg）"><a href="#背景图（canvas-svg）" class="headerlink" title="背景图（canvas/svg）"></a>背景图（canvas/svg）</h4><p>本次作业我使用的是canvas画布实现明水印</p>
+<p>首先是HTML的内容</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>img/wm.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>img-vwm<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>canvas</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myCanvas<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>384<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>502<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>您的浏览器不支持Canvas<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>canvas</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
+<p>简简单单的把图放上去，并添加一块canvas画布，设置画布宽高，下面使用js将水印画在画布上，可以理解为将想要加水印的图绘制在canvas画布上，然后在绘制了图的画布上再进行水印添加，而添加的水印就相当于在画布上进行文字添加</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">const</span> img <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//为新建的img赋值src</span>
+<span class="token keyword">const</span> mImg <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"img-vwm"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+img<span class="token punctuation">.</span>src <span class="token operator">=</span> mImg<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// img加载完成</span>
+img<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//准备canvas</span>
+    <span class="token keyword">const</span> myCanvas <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"myCanvas"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">const</span> ctx <span class="token operator">=</span> myCanvas<span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">"2d"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 绘制图片</span>
+    <span class="token keyword">var</span> imageWidth <span class="token operator">=</span> img<span class="token punctuation">.</span>width
+    <span class="token keyword">var</span> imageHeight <span class="token operator">=</span> img<span class="token punctuation">.</span>height
+    <span class="token comment">//此处的384是压缩后图片的宽度，也是canvas画布的宽度</span>
+    <span class="token keyword">var</span> img_width <span class="token operator">=</span> <span class="token number">384</span>
+    <span class="token comment">//通过计算可得出缩放后的高</span>
+    myCanvas<span class="token punctuation">.</span>height <span class="token operator">=</span> img_width <span class="token operator">*</span> imageHeight <span class="token operator">/</span> imageWidth
+    myCanvas<span class="token punctuation">.</span>width <span class="token operator">=</span> img_width
+    ctx<span class="token punctuation">.</span><span class="token function">drawImage</span><span class="token punctuation">(</span>img<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> imageWidth<span class="token punctuation">,</span> imageHeight<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> img_width<span class="token punctuation">,</span> img_width <span class="token operator">*</span> imageHeight <span class="token operator">/</span> imageWidth<span class="token punctuation">)</span>
+    <span class="token comment">// 绘制水印</span>
+    ctx<span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token string">"20px microsoft yahei"</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span>fillStyle <span class="token operator">=</span> <span class="token string">"rgba(255,255,255,0.8)"</span><span class="token punctuation">;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">fillText</span><span class="token punctuation">(</span><span class="token string">"Lhtian"</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">,</span> <span class="token number">425</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>附上原图与加了水印之后的对比，由于相当于是将整张图压缩进画布里的，所以加了水印之后的图会显得有些模糊</p>
+<p><img src="wmv.png"></p>
+<h3 id="不可见水印"><a href="#不可见水印" class="headerlink" title="不可见水印"></a>不可见水印</h3><p>暗水印是一种肉眼不可见的水印方式，可以保持图片美观的同时，保护你的资源版权。暗水印的生成方式有很多，常见的为通过修改RGB 分量值的小量变动、DWT、DCT 和 FFT 等等方法。</p>
+<h4 id="基本想法"><a href="#基本想法" class="headerlink" title="基本想法"></a>基本想法</h4><p>我们知道图片的像素信息里存储着 RGB 的色值，R、G、B 分别为该像素的红、绿、蓝通道，每个通道的分量值范围在 0-255，16 进制则是 00-FF。在 CSS 中经常使用其 16 进制形式，比如指定博客头部背景色为 #A9D5F4。其中 R（红色）的 16 进制值为 A9，换算成十进制为 169。这时候，对 R 分量的值+1，即为 170，整个像素 RGB 值为 #AAD5F4，别说你看不出差别，就连火眼金金的“ 像素眼” 设计师都察觉不出来呢。于此同时，修改 G、B 的分量值，也是我们无法察觉的。因此可以得出重要结论：RGB 分量值的小量变动，是肉眼无法分辨的，不影响对图片的识别。</p>
+<p>因此，可以通过修改图片的像素值实现简单的加密操作。</p>
+<h4 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h4><h5 id="图片加密"><a href="#图片加密" class="headerlink" title="图片加密"></a>图片加密</h5><p>首先是HTML的内容</p>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>img/wm.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>img-uvwm<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>canvas</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>myCanvasU<span class="token punctuation">"</span></span> <span class="token attr-name">width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>384<span class="token punctuation">"</span></span> <span class="token attr-name">height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>502<span class="token punctuation">"</span></span> <span class="token punctuation">></span></span>您的浏览器不支持Canvas<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>canvas</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>同样的，添加图片和画布，接下来进行加密操作，既然要在图片中加入文字信息，那么首先要获取文字的像素信息，这里先用 canvas 在画布上打印文字，获取像素信息。</p>
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">var</span> textData<span class="token punctuation">;</span>
+<span class="token keyword">var</span> ctx <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">'myCanvasU'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getContext</span><span class="token punctuation">(</span><span class="token string">'2d'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ctx<span class="token punctuation">.</span>font <span class="token operator">=</span> <span class="token string">'30px Microsoft Yahei'</span><span class="token punctuation">;</span>
+ctx<span class="token punctuation">.</span><span class="token function">fillText</span><span class="token punctuation">(</span><span class="token string">'Lhtian'</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">130</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+textData <span class="token operator">=</span> ctx<span class="token punctuation">.</span><span class="token function">getImageData</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> ctx<span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>width<span class="token punctuation">,</span> ctx<span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">.</span>data<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>接着加载图片</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">const</span> imgU <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Image</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//为新建的img赋值src</span>
+<span class="token keyword">const</span> mImgU <span class="token operator">=</span> document<span class="token punctuation">.</span><span class="token function">getElementById</span><span class="token punctuation">(</span><span class="token string">"img-uvwm"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+imgU<span class="token punctuation">.</span>src <span class="token operator">=</span> mImgU<span class="token punctuation">.</span><span class="token function">getAttribute</span><span class="token punctuation">(</span><span class="token string">'src'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>对图片进行处理的方法，下面的代码做的是，接受要隐藏的数据以及隐藏的颜色通道，然后对原图进行操作，修改图片该通道分量的最低位，如果有文字信息，则最低位置为 1，否则为 0。从上面可以知道，RGB 的三个通道可以分别隐藏不同信息。</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">mergeData</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">ctx<span class="token punctuation">,</span> newData<span class="token punctuation">,</span> color<span class="token punctuation">,</span> originalData</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> oData <span class="token operator">=</span> originalData<span class="token punctuation">.</span>data<span class="token punctuation">;</span>
+     <span class="token comment">// offset的作用是找到alpha通道值</span>
+    <span class="token keyword">var</span> bit<span class="token punctuation">,</span> offset<span class="token punctuation">;</span>
+
+    <span class="token keyword">switch</span> <span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> <span class="token string">'R'</span><span class="token operator">:</span>
+            bit <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            offset <span class="token operator">=</span> <span class="token number">3</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'G'</span><span class="token operator">:</span>
+            bit <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            offset <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token keyword">case</span> <span class="token string">'B'</span><span class="token operator">:</span>
+            bit <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            offset <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">var</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> oData<span class="token punctuation">.</span>length<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">%</span> <span class="token number">4</span> <span class="token operator">==</span> bit<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">// 只处理目标通道</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>newData<span class="token punctuation">[</span>i <span class="token operator">+</span> offset<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>oData<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 没有信息的像素，该通道最低位置0，但不要越界</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>oData<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">===</span> <span class="token number">255</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    oData<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">--</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                    oData<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>newData<span class="token punctuation">[</span>i <span class="token operator">+</span> offset<span class="token punctuation">]</span> <span class="token operator">!==</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">(</span>oData<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">===</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token comment">// // 有信息的像素，该通道最低位置1，可以想想上面的斑点效果是怎么实现的</span>
+                oData<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    ctx<span class="token punctuation">.</span><span class="token function">putImageData</span><span class="token punctuation">(</span>originalData<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后在onload方法内调用即可</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">imgU<span class="token punctuation">.</span><span class="token function-variable function">onload</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">// 获取指定区域的canvas像素信息</span>
+    <span class="token comment">// 绘制图片</span>
+    <span class="token keyword">var</span> imageWidth <span class="token operator">=</span> imgU<span class="token punctuation">.</span>width
+    <span class="token keyword">var</span> imageHeight <span class="token operator">=</span> imgU<span class="token punctuation">.</span>height
+    <span class="token comment">//定义压缩后的宽度，也可封装后调用时传入</span>
+    <span class="token comment">//此处的384是压缩后图片的宽度，也是canvas画布的宽度</span>
+    <span class="token keyword">var</span> img_width <span class="token operator">=</span> <span class="token number">384</span>
+    <span class="token comment">//通过计算可得出缩放后的高</span>
+    ctx<span class="token punctuation">.</span>height <span class="token operator">=</span> img_width <span class="token operator">*</span> imageHeight <span class="token operator">/</span> imageWidth
+    ctx<span class="token punctuation">.</span>width <span class="token operator">=</span> img_width
+    ctx<span class="token punctuation">.</span><span class="token function">drawImage</span><span class="token punctuation">(</span>imgU<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> imageWidth<span class="token punctuation">,</span> imageHeight<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> img_width<span class="token punctuation">,</span> img_width <span class="token operator">*</span> imageHeight <span class="token operator">/</span> imageWidth<span class="token punctuation">)</span>
+    originalData <span class="token operator">=</span> ctx<span class="token punctuation">.</span><span class="token function">getImageData</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> ctx<span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>width<span class="token punctuation">,</span> ctx<span class="token punctuation">.</span>canvas<span class="token punctuation">.</span>height<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">mergeData</span><span class="token punctuation">(</span>ctx<span class="token punctuation">,</span>textData<span class="token punctuation">,</span><span class="token string">'R'</span><span class="token punctuation">,</span>originalData<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>效果图如下</p>
+<p><img src="wmuv.png"></p>
+<p>除了因为加载进画布而导致的模糊以外看不出任何问题，接下来我们保存下来这张图片，然后进行处理</p>
+<h5 id="解密图片"><a href="#解密图片" class="headerlink" title="解密图片"></a>解密图片</h5>
                 
             </div>
             <hr/>
@@ -896,7 +1011,7 @@ document<span class="token punctuation">.</span>body<span class="token punctuati
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">1.8k</span>&nbsp;
+                class="white-color">3.1k</span>&nbsp;
             
             
             
