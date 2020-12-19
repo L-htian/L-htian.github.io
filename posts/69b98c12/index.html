@@ -368,21 +368,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-18
+                    2020-12-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    112
+                    1.8k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 
@@ -407,7 +407,219 @@
             <div id="articleContent">
                 <h2 id="集群搭建"><a href="#集群搭建" class="headerlink" title="集群搭建"></a>集群搭建</h2><p>云计算结课已经有一段时间了，现在回想起来当时搭建集群的过程真是心有余悸。全程都是在报错和搜索中度过，现在想对这个痛苦的过程做一个简单的小总结，尤其是中间踩的坑。</p>
 <p>不过，最最重要的一点是<span style="color:red"><strong>一定要在Linux环境下配置集群！</strong></span></p>
-<h3 id="Hadoop集群搭建"><a href="#Hadoop集群搭建" class="headerlink" title="Hadoop集群搭建"></a>Hadoop集群搭建</h3><h4 id="前置配置"><a href="#前置配置" class="headerlink" title="前置配置"></a>前置配置</h4><h5 id="SSH配置"><a href="#SSH配置" class="headerlink" title="SSH配置"></a>SSH配置</h5>
+<h3 id="Hadoop集群搭建"><a href="#Hadoop集群搭建" class="headerlink" title="Hadoop集群搭建"></a>Hadoop集群搭建</h3><h4 id="前置配置"><a href="#前置配置" class="headerlink" title="前置配置"></a>前置配置</h4><h5 id="SSH配置"><a href="#SSH配置" class="headerlink" title="SSH配置"></a>SSH配置</h5><p><strong>本机自身无密码登陆</strong></p>
+<ul>
+<li><p>生成公钥、私钥对</p>
+<p><code>ssh-keygen -t rsa</code></p>
+</li>
+<li><p>创建“authorized_keys”文件，并修改权限为“600”</p>
+<p><code>chmod 600 ~/.ssh/authorized_keys</code></p>
+</li>
+<li><p>追加公钥到“authorized_keys”文件中</p>
+<p><code>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code></p>
+</li>
+</ul>
+<p><strong>不同主机无密码登陆</strong></p>
+<ul>
+<li><p>首先保证每台主机都生成了公钥、私钥对</p>
+</li>
+<li><p>使用scp命令，将A主机公钥发送给B主机，将B主机公钥发送给A主机。</p>
+<p><code>scp ~/.ssh/id_rsa.pub  username@ip:~/.</code></p>
+</li>
+<li><p>追加公钥到“authorized_keys”文件中</p>
+<p><code>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code></p>
+</li>
+<li><p>需要保证需要互相登陆的主机都拥有彼此的公钥</p>
+</li>
+</ul>
+<h5 id="安装Java"><a href="#安装Java" class="headerlink" title="安装Java"></a>安装Java</h5><p>网上关于Linux环境下安装Java的博文已经有很多了，这里就不赘述了，只说一下需要注意的点。</p>
+<p><strong>注意：</strong><span style="color:red"><strong>集群中的所有机器的Java版本必须一样，安装路径必须相同</strong></span></p>
+<h4 id="安装Hadoop"><a href="#安装Hadoop" class="headerlink" title="安装Hadoop"></a>安装Hadoop</h4><ol>
+<li><p>从 hadoop官网 下载当前最新的文件，Binary版本是二进制版本，直接解压安装； src 是 Hadoop<br> 源代码，需要编译才可安装。</p>
+ <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">wget http:<span class="token operator">/</span><span class="token operator">/</span>mirrors<span class="token punctuation">.</span>nju<span class="token punctuation">.</span>edu<span class="token punctuation">.</span>cn<span class="token operator">/</span>apache<span class="token operator">/</span>hadoop<span class="token operator">/</span>common<span class="token operator">/</span>hadoop<span class="token operator">-</span>3<span class="token punctuation">.</span>2<span class="token punctuation">.</span>1<span class="token operator">/</span>hadoop<span class="token operator">-</span>
+3<span class="token punctuation">.</span>2<span class="token punctuation">.</span>1<span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>将hadoop压缩包移动到合适的目录下并解压，这里选了/usr/local，后面的命令需要sudo权限</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo mv hadoop-3.2.1.tar.gz &#x2F;usr&#x2F;local
+sudo tar -zxvf hadoop-3.2.1.tar.gz
+sudo mv hadoop-3.2.1 hadoop
+sudo chown -R hadoop:hadoop hadoop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>将hadoop程序添加到环境变量</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">echo</span> <span class="token string">'export HADOOP_HOME=/usr/local/hadoop'</span> >> <span class="token operator">/</span>etc<span class="token operator">/</span>profile
+<span class="token function">echo</span> <span class="token string">'export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop'</span> >> <span class="token operator">/</span>etc<span class="token operator">/</span>profile
+<span class="token function">echo</span> <span class="token string">'export PATH=$PATH:/usr/local/hadoop/bin:/usr/local/hadoop/sbin'</span> >>
+<span class="token operator">/</span>etc<span class="token operator">/</span>profile
+<span class="token punctuation">.</span> <span class="token operator">/</span>etc<span class="token operator">/</span>profile
+<span class="token function">update-alternatives</span> <span class="token operator">--</span>display java
+vim <span class="token operator">/</span>usr<span class="token operator">/</span>local<span class="token operator">/</span>hadoop<span class="token operator">/</span>etc<span class="token operator">/</span>hadoop<span class="token operator">/</span>hadoop<span class="token operator">-</span>env<span class="token punctuation">.</span>sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将54行修改为<code>export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64</code></p>
+</li>
+<li><p>验证安装</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">hadoop version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+</li>
+</ol>
+<h4 id="Hadoop集群配置"><a href="#Hadoop集群配置" class="headerlink" title="Hadoop集群配置"></a>Hadoop集群配置</h4><h5 id="前置配置-1"><a href="#前置配置-1" class="headerlink" title="前置配置"></a>前置配置</h5><p>修改<code>host</code> 文件，例如</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vim &#x2F;etc&#x2F;hosts
+192.168.43.147 hadoop-master
+192.168.43.37 hadoop-slave1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><p>如果是<strong>Ubuntu</strong>系统，<strong>需要将 127.0.0.1 行注释掉</strong>，否则会在集群启动的时候会只监听本地端<br>口，其他节点无法成功连接到它</p>
+</li>
+<li><p>如果是<strong>Centos</strong>系统，<strong>不可以注释掉127.0.0.1</strong> ,否则会在集群启动的时候报 datanode 端口监<br>听错误，监听 0:0端口无效</p>
+</li>
+</ul>
+<h5 id="主节点配置"><a href="#主节点配置" class="headerlink" title="主节点配置"></a>主节点配置</h5><ol>
+<li><p>配置<code>core-site.xml</code>，写入</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!--用来指定使用hadoop时产生文件的存放目录--></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>hadoop.tmp.dir<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>file:/usr/local/hadoop/tmp<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>description</span><span class="token punctuation">></span></span>Abase for other temporary directories.
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>description</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!--指定namenode的地址--></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>fs.defaultFS<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>hdfs://hadoop-master:9000<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>配置<code>hdfs-site.xml</code>，写入</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>dfs.replication<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>2<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>dfs.namenode.name.dir<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>file:/usr/local/hadoop/tmp/dfs/name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>dfs.datanode.data.dir<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>file:/usr/local/hadoop/tmp/dfs/data<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>配置<code>mapred-site.xml</code>，写入</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>mapreduce.framework.name<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>yarn<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>mapred.job.tracker<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>http://hadoop-master:9001<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!-- 如果没有以下3行，分布式运行的时候可能会报文件路径找不到等类似错误 --></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.app.mapreduce.am.env<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>HADOOP_MAPRED_HOME=/usr/local/hadoop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>mapreduce.map.env<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>HADOOP_MAPRED_HOME=/usr/local/hadoop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>mapreduce.reduce.env<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>HADOOP_MAPRED_HOME=/usr/local/hadoop<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>配置<code>yarn-site.xml</code>，写入</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!-- Site specific YARN configuration properties --></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.nodemanager.aux-services<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>mapreduce_shuffle<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.resourcemanager.hostname<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>hadoop-master<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!--下列内容根据实际配置 --></span>
+	<span class="token comment">&lt;!-- 分配给hadoop的内存资源，注意该值应该小于(不建议等于)系统的总内存,或者使用`free
+-h` 查看系统当前可用的系统资源，该值请不要小于1536 --></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.nodemanager.resource.memory-mb<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>1600<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!-- 分配给hadoop的CPU数量 --></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.nodemanager.resource.cpu-vcores<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>1<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!-- 以下内容炸鸡根据自身情况配置 --></span>
+	<span class="token comment">&lt;!-- hadoop的虚拟内存:上面分给hadoop的实际内存，默认2.1,当系统是1C2G时，该值不要
+小于2.4 --></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.nodemanager.vmem-pmem-ratio<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!-- 每个任务的最小分配内存 --></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.scheduler.minimum-allocation-mb<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>400<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+	<span class="token comment">&lt;!-- 每个任务的最大分配内存，该值请不要小于1536 --></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span><span class="token punctuation">></span></span>yarn.scheduler.maximum-allocation-mb<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>name</span><span class="token punctuation">></span></span>
+		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>value</span><span class="token punctuation">></span></span>1600<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>value</span><span class="token punctuation">></span></span>
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>配置<code>workers </code>文件，写入worker的主机名即可</p>
+</li>
+</ol>
+<h5 id="配置从节点"><a href="#配置从节点" class="headerlink" title="配置从节点"></a>配置从节点</h5><p>将主节点的Hadoop文件夹拷贝给从节点主机即可</p>
+<h5 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h5><ol>
+<li><p>格式化节点</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hdfs namenode -format<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</li>
+<li><p>在任何一个节点执行<code>start-all.sh</code></p>
+</li>
+<li><p>主节点的 <a target="_blank" rel="noopener" href="http://masterip:9870/">http://masterip:9870</a> 查看集群状态</p>
+</li>
+</ol>
+<p>以上为Hadoop节点的搭建内容，如果保证在Linux环境下，且节点的Hadoop和Java安装路径与安装版本都一样，应该是不会出现问题的。</p>
+<h3 id="Spark集群搭建"><a href="#Spark集群搭建" class="headerlink" title="Spark集群搭建"></a>Spark集群搭建</h3><h4 id="前置配置-2"><a href="#前置配置-2" class="headerlink" title="前置配置"></a>前置配置</h4><h5 id="Scala配置"><a href="#Scala配置" class="headerlink" title="Scala配置"></a>Scala配置</h5><p>同上文的Java配置，保证版本与路径相同</p>
+<h4 id="spark配置"><a href="#spark配置" class="headerlink" title="spark配置"></a>spark配置</h4><ol>
+<li><p>在官网下载与前面下载的Scala版本对应的spark版本，<span style="color:red"><strong>版本一定要对应，不然会报错</strong></span></p>
+</li>
+<li><p>在spark安装路径下，找到conf文件夹，复制<code>spark-env.sh.template</code>并重命名为<code>spark-env.sh</code>，配置``spark-env.sh`</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">
+export SCALA_HOME&#x3D;&#x2F;usr&#x2F;scala &#x2F;&#x2F;scala安装路径，自行更改
+export SPARK_HOME&#x3D;&#x2F;usr&#x2F;spark &#x2F;&#x2F;spark安装路径，自行更改
+export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk &#x2F;&#x2F;Java安装路径，自行更改
+ 
+export HADOOP_CONF_DIR&#x3D;&#x2F;usr&#x2F;hadoop&#x2F;etc&#x2F;hadoop &#x2F;&#x2F;Hadoop安装路径，自行更改
+#export SPARK_EXECUTOR_INSTANCES&#x3D;2
+#export SPARK_EXECUTOR_CORES&#x3D;2
+#export SPARK_EXECUTOR_MEMORY&#x3D;2G
+export SPARK_WORKER_MEMORY&#x3D;2G   
+#export SPARK_YARN_APP_NAME&#x3D;Spark
+#export SPARK_YARN_QUEUE&#x3D;default
+export SPARK_MASTER_IP&#x3D;192.168.0.100 &#x2F;&#x2F;主机ip，自行更改<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>把<code>slaves.template</code>拷贝为<code>slaves</code>,并编辑 <code>slaves</code>文件，内容根据自己的集群节点名字更改</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hadoop-master
+hadoop-slave1
+hadoop-slave2<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>将上面的配置同步到所有节点</p>
+</li>
+</ol>
+<h5 id="spark集群启动"><a href="#spark集群启动" class="headerlink" title="spark集群启动"></a>spark集群启动</h5><p>在spark安装目录的sbin目录下执行</p>
+<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token punctuation">.</span><span class="token operator">/</span><span class="token function">start-all</span><span class="token punctuation">.</span>sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h5 id="spark集群检查"><a href="#spark集群检查" class="headerlink" title="spark集群检查"></a>spark集群检查</h5><p>访问<a target="_blank" rel="noopener" href="http://masterip:8080/">http://masterip:8080/</a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>其实如果能注意到在Linux环境下并保证节点主机的路径与版本相同，配置起来并不是特别麻烦。当初最开始配置的时候，在Windows环境下折腾了半天，只配出来了一个伪分布式的集群，最后换成Linux虚拟机，半小时不到就搞定了。<del><strong>Linux天下第一！</strong></del></p>
+
                 
             </div>
             <hr/>
@@ -800,7 +1012,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">3.5k</span>&nbsp;
+                class="white-color">5.2k</span>&nbsp;
             
             
             
