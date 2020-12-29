@@ -383,7 +383,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.8k
+                    1.7k
                 </div>
                 
 
@@ -448,10 +448,10 @@
 3<span class="token punctuation">.</span>2<span class="token punctuation">.</span>1<span class="token punctuation">.</span>tar<span class="token punctuation">.</span>gz<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
 <li><p>将hadoop压缩包移动到合适的目录下并解压，这里选了/usr/local，后面的命令需要sudo权限</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">sudo mv hadoop-3.2.1.tar.gz &#x2F;usr&#x2F;local
-sudo tar -zxvf hadoop-3.2.1.tar.gz
-sudo mv hadoop-3.2.1 hadoop
-sudo chown -R hadoop:hadoop hadoop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">sudo</span> <span class="token function">mv</span> hadoop-3.2.1.tar.gz /usr/local
+<span class="token function">sudo</span> <span class="token function">tar</span> -zxvf hadoop-3.2.1.tar.gz
+<span class="token function">sudo</span> <span class="token function">mv</span> hadoop-3.2.1 hadoop
+<span class="token function">sudo</span> <span class="token function">chown</span> -R hadoop:hadoop hadoop<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>将hadoop程序添加到环境变量</p>
 <pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell"><span class="token function">echo</span> <span class="token string">'export HADOOP_HOME=/usr/local/hadoop'</span> >> <span class="token operator">/</span>etc<span class="token operator">/</span>profile
@@ -470,9 +470,9 @@ vim <span class="token operator">/</span>usr<span class="token operator">/</span
 </li>
 </ol>
 <h4 id="Hadoop集群配置"><a href="#Hadoop集群配置" class="headerlink" title="Hadoop集群配置"></a>Hadoop集群配置</h4><h5 id="前置配置-1"><a href="#前置配置-1" class="headerlink" title="前置配置"></a>前置配置</h5><p>修改<code>host</code> 文件，例如</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">vim &#x2F;etc&#x2F;hosts
-192.168.43.147 hadoop-master
-192.168.43.37 hadoop-slave1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">vim</span> /etc/hosts
+<span class="token number">192.168</span>.43.147 hadoop-master
+<span class="token number">192.168</span>.43.37 hadoop-slave1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 <p><strong>注意：</strong></p>
 <ul>
@@ -601,18 +601,18 @@ vim <span class="token operator">/</span>usr<span class="token operator">/</span
 </li>
 <li><p>在spark安装路径下，找到conf文件夹，复制<code>spark-env.sh.template</code>并重命名为<code>spark-env.sh</code>，配置``spark-env.sh`</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">
-export SCALA_HOME&#x3D;&#x2F;usr&#x2F;scala &#x2F;&#x2F;scala安装路径，自行更改
-export SPARK_HOME&#x3D;&#x2F;usr&#x2F;spark &#x2F;&#x2F;spark安装路径，自行更改
-export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk &#x2F;&#x2F;Java安装路径，自行更改
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SCALA_HOME</span><span class="token operator">=</span>/usr/scala //scala安装路径，自行更改
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SPARK_HOME</span><span class="token operator">=</span>/usr/spark //spark安装路径，自行更改
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span>/usr/java/jdk //Java安装路径，自行更改
  
-export HADOOP_CONF_DIR&#x3D;&#x2F;usr&#x2F;hadoop&#x2F;etc&#x2F;hadoop &#x2F;&#x2F;Hadoop安装路径，自行更改
-#export SPARK_EXECUTOR_INSTANCES&#x3D;2
-#export SPARK_EXECUTOR_CORES&#x3D;2
-#export SPARK_EXECUTOR_MEMORY&#x3D;2G
-export SPARK_WORKER_MEMORY&#x3D;2G   
-#export SPARK_YARN_APP_NAME&#x3D;Spark
-#export SPARK_YARN_QUEUE&#x3D;default
-export SPARK_MASTER_IP&#x3D;192.168.0.100 &#x2F;&#x2F;主机ip，自行更改<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">HADOOP_CONF_DIR</span><span class="token operator">=</span>/usr/hadoop/etc/hadoop //Hadoop安装路径，自行更改
+<span class="token comment">#export SPARK_EXECUTOR_INSTANCES=2</span>
+<span class="token comment">#export SPARK_EXECUTOR_CORES=2</span>
+<span class="token comment">#export SPARK_EXECUTOR_MEMORY=2G</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SPARK_WORKER_MEMORY</span><span class="token operator">=</span>2G   
+<span class="token comment">#export SPARK_YARN_APP_NAME=Spark</span>
+<span class="token comment">#export SPARK_YARN_QUEUE=default</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SPARK_MASTER_IP</span><span class="token operator">=</span><span class="token number">192.168</span>.0.100 //主机ip，自行更改<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 </li>
 <li><p>把<code>slaves.template</code>拷贝为<code>slaves</code>,并编辑 <code>slaves</code>文件，内容根据自己的集群节点名字更改</p>
 <pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">hadoop-master
@@ -892,6 +892,7 @@ hadoop-slave2<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 </script>
 
 
+
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
@@ -902,13 +903,10 @@ hadoop-slave2<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
 
 <!-- 代码块收缩 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1026,7 +1024,7 @@ hadoop-slave2<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">18.2k</span>&nbsp;
+                class="white-color">17.5k</span>&nbsp;
             
             
             

@@ -379,14 +379,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    6k
+                    5.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    28 分
+                    24 分
                 </div>
                 
 
@@ -639,24 +639,24 @@
 </li>
 </ol>
 <p><strong>代码实现</strong></p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">typedef unsigned char uchar;
-typedef unsigned short ushort;
-typedef unsigned int uint;
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> uchar<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">short</span> ushort<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> uint<span class="token punctuation">;</span>
 
-struct BPB &#123;
-    ushort BytePerSec;    &#x2F;&#x2F;每扇区字节数
-    uchar SecPerClus;    &#x2F;&#x2F;每簇扇区数
-    ushort RsvdSecCnt;    &#x2F;&#x2F;Boot记录占用的扇区数
-    uchar NumFATs;    &#x2F;&#x2F;FAT表个数
-    ushort RootEntCnt;    &#x2F;&#x2F;根目录最大文件数
-    ushort TotSec16;        &#x2F;&#x2F;扇区总数
-    uchar Media;        &#x2F;&#x2F;介质描述符
-    ushort FATSz16;    &#x2F;&#x2F;FAT扇区数
-    ushort SecPerTrk;  &#x2F;&#x2F;	每磁道扇区数
-    ushort NumHeads;    &#x2F;&#x2F;磁头数（面数）
-    uint HiddSec;    &#x2F;&#x2F;隐藏扇区数
-    uint TotSec32;    &#x2F;&#x2F;如果BPB_FATSz16为0，该值为FAT扇区数
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">struct</span> <span class="token class-name">BPB</span> <span class="token punctuation">&#123;</span>
+    ushort BytePerSec<span class="token punctuation">;</span>    <span class="token comment">//每扇区字节数</span>
+    uchar SecPerClus<span class="token punctuation">;</span>    <span class="token comment">//每簇扇区数</span>
+    ushort RsvdSecCnt<span class="token punctuation">;</span>    <span class="token comment">//Boot记录占用的扇区数</span>
+    uchar NumFATs<span class="token punctuation">;</span>    <span class="token comment">//FAT表个数</span>
+    ushort RootEntCnt<span class="token punctuation">;</span>    <span class="token comment">//根目录最大文件数</span>
+    ushort TotSec16<span class="token punctuation">;</span>        <span class="token comment">//扇区总数</span>
+    uchar Media<span class="token punctuation">;</span>        <span class="token comment">//介质描述符</span>
+    ushort FATSz16<span class="token punctuation">;</span>    <span class="token comment">//FAT扇区数</span>
+    ushort SecPerTrk<span class="token punctuation">;</span>  <span class="token comment">//	每磁道扇区数</span>
+    ushort NumHeads<span class="token punctuation">;</span>    <span class="token comment">//磁头数（面数）</span>
+    uint HiddSec<span class="token punctuation">;</span>    <span class="token comment">//隐藏扇区数</span>
+    uint TotSec32<span class="token punctuation">;</span>    <span class="token comment">//如果BPB_FATSz16为0，该值为FAT扇区数</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="3、FAT表"><a href="#3、FAT表" class="headerlink" title="3、FAT表"></a>3、FAT表</h4><p>FAT1和FAT2是两个完全相同的FAT表，每个FAT占用9个扇区。其中FAT1占用1—9扇区，FAT2占用10—18扇区。为了防止存储空间的碎片化，人们设计了一种链式存储方法。 但是这种方法对于文件内容的随机访问而言，其查找效率是很低的，因而又增加了一个 <strong>FAT(File Allocation Table)</strong> 查找表的概念，专门用一块空间记录各个文件对于簇的使用情况。</p>
 <p>在保留区之后就是 FAT 表区，FAT表的数量由保留区中字段<code>BPB_NumFATs</code>来决定，一般都会有两个 FAT 表。其中一个表用作备份，当一个表所在扇区损坏时，还可以从备份中获取数据。</p>
@@ -717,19 +717,19 @@ struct BPB &#123;
 </tr>
 </tbody></table>
 <p><strong>代码实现</strong></p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">typedef unsigned char uchar;
-typedef unsigned short ushort;
-typedef unsigned int uint;
+<pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> uchar<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">short</span> ushort<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> uint<span class="token punctuation">;</span>
 
-struct RootEntry &#123;
-    uchar Name[11];
-    uchar Attr;        &#x2F;&#x2F;文件属性
-    char reserved[10];
-    ushort WrtTime;
-    ushort WrtDate;
-    ushort FstClus;    &#x2F;&#x2F;开始簇号
-    uint FileSize;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span class="token keyword">struct</span> <span class="token class-name">RootEntry</span> <span class="token punctuation">&#123;</span>
+    uchar Name<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    uchar Attr<span class="token punctuation">;</span>        <span class="token comment">//文件属性</span>
+    <span class="token keyword">char</span> reserved<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    ushort WrtTime<span class="token punctuation">;</span>
+    ushort WrtDate<span class="token punctuation">;</span>
+    ushort FstClus<span class="token punctuation">;</span>    <span class="token comment">//开始簇号</span>
+    uint FileSize<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="实验相关"><a href="#实验相关" class="headerlink" title="实验相关"></a>实验相关</h3><h4 id="实验要求"><a href="#实验要求" class="headerlink" title="实验要求"></a>实验要求</h4><p>用C/C++和nasm编写一个FAT12镜像查看⼯具，读取一个.img格式的文件并响应用户输入。</p>
 <h5 id="功能列表"><a href="#功能列表" class="headerlink" title="功能列表"></a>功能列表</h5><ol>
@@ -827,525 +827,524 @@ struct RootEntry &#123;
         pop     <span class="token register variable">ebp</span>
         ret<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="C-部分"><a href="#C-部分" class="headerlink" title="C++部分"></a>C++部分</h5><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-#include &lt;string.h&gt;
-#include&lt;iostream&gt;
-#include&lt;string&gt;
-#include&lt;sstream&gt;
-#include&lt;vector&gt;
+<h5 id="C-部分"><a href="#C-部分" class="headerlink" title="C++部分"></a>C++部分</h5><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdlib.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;string.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;iostream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;string></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;sstream></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&lt;vector></span></span>
 
-using namespace std;
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
 
-typedef unsigned char uchar;
-typedef unsigned short ushort;
-typedef unsigned int uint;
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">char</span> uchar<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">short</span> ushort<span class="token punctuation">;</span>
+<span class="token keyword">typedef</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> uint<span class="token punctuation">;</span>
 
-int BytePerSec; &#x2F;&#x2F;每扇区字节数
-int SecPerClus; &#x2F;&#x2F;每簇扇区数
-int RsvdSecCnt; &#x2F;&#x2F;Boot记录所用的扇区
-int NumFATs; &#x2F;&#x2F;FAT表的记录数
-int RootEntCnt;&#x2F;&#x2F;最大根目录文件数
-int FATSz;
-int FAT_Base; &#x2F;&#x2F;FAT表起始地址
-int Root_Base;&#x2F;&#x2F;根目录区起始地址
-int Data_Base;&#x2F;&#x2F;数据区起始地址
+<span class="token keyword">int</span> BytePerSec<span class="token punctuation">;</span> <span class="token comment">//每扇区字节数</span>
+<span class="token keyword">int</span> SecPerClus<span class="token punctuation">;</span> <span class="token comment">//每簇扇区数</span>
+<span class="token keyword">int</span> RsvdSecCnt<span class="token punctuation">;</span> <span class="token comment">//Boot记录所用的扇区</span>
+<span class="token keyword">int</span> NumFATs<span class="token punctuation">;</span> <span class="token comment">//FAT表的记录数</span>
+<span class="token keyword">int</span> RootEntCnt<span class="token punctuation">;</span><span class="token comment">//最大根目录文件数</span>
+<span class="token keyword">int</span> FATSz<span class="token punctuation">;</span>
+<span class="token keyword">int</span> FAT_Base<span class="token punctuation">;</span> <span class="token comment">//FAT表起始地址</span>
+<span class="token keyword">int</span> Root_Base<span class="token punctuation">;</span><span class="token comment">//根目录区起始地址</span>
+<span class="token keyword">int</span> Data_Base<span class="token punctuation">;</span><span class="token comment">//数据区起始地址</span>
 
-#pragma pack (1)&#x2F;&#x2F;将结构体数据强制连续排列
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">pragma</span> <span class="token expression"><span class="token function">pack</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span></span><span class="token comment">//将结构体数据强制连续排列</span></span>
 
-struct BPB &#123;
-    ushort BytePerSec;    &#x2F;&#x2F;每扇区字节数
-    uchar SecPerClus;    &#x2F;&#x2F;每簇扇区数
-    ushort RsvdSecCnt;    &#x2F;&#x2F;Boot记录占用的扇区数
-    uchar NumFATs;    &#x2F;&#x2F;FAT表个数
-    ushort RootEntCnt;    &#x2F;&#x2F;根目录最大文件数
-    ushort TotSec16;        &#x2F;&#x2F;扇区总数
-    uchar Media;        &#x2F;&#x2F;介质描述符
-    ushort FATSz16;    &#x2F;&#x2F;FAT扇区数
-    ushort SecPerTrk;  &#x2F;&#x2F;	每磁道扇区数
-    ushort NumHeads;    &#x2F;&#x2F;磁头数（面数）
-    uint HiddSec;    &#x2F;&#x2F;隐藏扇区数
-    uint TotSec32;    &#x2F;&#x2F;如果BPB_FATSz16为0，该值为FAT扇区数
-&#125;;
+<span class="token keyword">struct</span> <span class="token class-name">BPB</span> <span class="token punctuation">&#123;</span>
+    ushort BytePerSec<span class="token punctuation">;</span>    <span class="token comment">//每扇区字节数</span>
+    uchar SecPerClus<span class="token punctuation">;</span>    <span class="token comment">//每簇扇区数</span>
+    ushort RsvdSecCnt<span class="token punctuation">;</span>    <span class="token comment">//Boot记录占用的扇区数</span>
+    uchar NumFATs<span class="token punctuation">;</span>    <span class="token comment">//FAT表个数</span>
+    ushort RootEntCnt<span class="token punctuation">;</span>    <span class="token comment">//根目录最大文件数</span>
+    ushort TotSec16<span class="token punctuation">;</span>        <span class="token comment">//扇区总数</span>
+    uchar Media<span class="token punctuation">;</span>        <span class="token comment">//介质描述符</span>
+    ushort FATSz16<span class="token punctuation">;</span>    <span class="token comment">//FAT扇区数</span>
+    ushort SecPerTrk<span class="token punctuation">;</span>  <span class="token comment">//	每磁道扇区数</span>
+    ushort NumHeads<span class="token punctuation">;</span>    <span class="token comment">//磁头数（面数）</span>
+    uint HiddSec<span class="token punctuation">;</span>    <span class="token comment">//隐藏扇区数</span>
+    uint TotSec32<span class="token punctuation">;</span>    <span class="token comment">//如果BPB_FATSz16为0，该值为FAT扇区数</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-struct RootEntry &#123;
-    uchar Name[11];
-    uchar Attr;        &#x2F;&#x2F;文件属性
-    char reserved[10];
-    ushort WrtTime;
-    ushort WrtDate;
-    ushort FstClus;    &#x2F;&#x2F;开始簇号
-    uint FileSize;
-&#125;;
+<span class="token keyword">struct</span> <span class="token class-name">RootEntry</span> <span class="token punctuation">&#123;</span>
+    uchar Name<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    uchar Attr<span class="token punctuation">;</span>        <span class="token comment">//文件属性</span>
+    <span class="token keyword">char</span> reserved<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    ushort WrtTime<span class="token punctuation">;</span>
+    ushort WrtDate<span class="token punctuation">;</span>
+    ushort FstClus<span class="token punctuation">;</span>    <span class="token comment">//开始簇号</span>
+    uint FileSize<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-#pragma pack ()&#x2F;&#x2F;取消指定对齐
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">pragma</span> <span class="token expression"><span class="token function">pack</span> <span class="token punctuation">(</span><span class="token punctuation">)</span></span><span class="token comment">//取消指定对齐</span></span>
 
-&#x2F;&#x2F;此类用于存储读取出来的文件数据
-class Node &#123;
-public:
-    string name; &#x2F;&#x2F;文件&#x2F;文件夹名字
-    vector&lt;Node *&gt; next; &#x2F;&#x2F;下一级目录
-    string path; &#x2F;&#x2F;记录路径
-    uint FileSize; &#x2F;&#x2F;文件大小
-    bool isFile &#x3D; false; &#x2F;&#x2F;是否是文件
-    bool isVal &#x3D; true; &#x2F;&#x2F;是否是.和.. true不是
-    int file_count &#x3D; 0; &#x2F;&#x2F;下一级有多少文件
-    int dir_count &#x3D; 0; &#x2F;&#x2F;下一级多少目录
-    char *content &#x3D; new char[5000]&#123;&#125;;&#x2F;&#x2F;文件内容记录
-&#125;;
+<span class="token comment">//此类用于存储读取出来的文件数据</span>
+<span class="token keyword">class</span> <span class="token class-name">Node</span> <span class="token punctuation">&#123;</span>
+<span class="token keyword">public</span><span class="token operator">:</span>
+    string name<span class="token punctuation">;</span> <span class="token comment">//文件/文件夹名字</span>
+    vector<span class="token operator">&lt;</span>Node <span class="token operator">*</span><span class="token operator">></span> next<span class="token punctuation">;</span> <span class="token comment">//下一级目录</span>
+    string path<span class="token punctuation">;</span> <span class="token comment">//记录路径</span>
+    uint FileSize<span class="token punctuation">;</span> <span class="token comment">//文件大小</span>
+    <span class="token keyword">bool</span> isFile <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span> <span class="token comment">//是否是文件</span>
+    <span class="token keyword">bool</span> isVal <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span> <span class="token comment">//是否是.和.. true不是</span>
+    <span class="token keyword">int</span> file_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//下一级有多少文件</span>
+    <span class="token keyword">int</span> dir_count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//下一级多少目录</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>content <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token keyword">char</span><span class="token punctuation">[</span><span class="token number">5000</span><span class="token punctuation">]</span><span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span><span class="token comment">//文件内容记录</span>
+<span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
 
-extern &quot;C&quot; void myprint(const char *, const int);
+<span class="token keyword">extern</span> <span class="token string">"C"</span> <span class="token keyword">void</span> <span class="token function">myprint</span><span class="token punctuation">(</span><span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-void ReadBPB(FILE *fat12, struct BPB *pbp); &#x2F;&#x2F;读取BPB
-void ReadRoot(FILE *fat12, struct RootEntry *rootEntry_ptr, Node *fatherNode); &#x2F;&#x2F;读取文件
-bool isFileName(uchar *name);&#x2F;&#x2F;判断是否为文件名
-void GetFileName(char *re, uchar *name);&#x2F;&#x2F;获得文件名字
-void GetDirName(char *re, uchar *name); &#x2F;&#x2F;获得目录名字
-void ReadFileContent(FILE *fat12, int startClus, Node *sonNode);&#x2F;&#x2F;读取文件
-void ReadDirContent(FILE *fat12, int startClus, Node *fatherNode);&#x2F;&#x2F;读取目录
-int getFATEntry(FILE *fat12, int clusValue);&#x2F;&#x2F;获得FATEntry项
-void ReadCommon(FILE *fat12, RootEntry *entry, Node *reNode);&#x2F;&#x2F;抽象封装读取操作
-void operate(Node *root);&#x2F;&#x2F;获得操作
-string getVec(int be, int af, string ss);&#x2F;&#x2F;指令解析
-void PrintAll(Node *root);&#x2F;&#x2F;单纯的ls操作
-void PrintL(Node *root); &#x2F;&#x2F; ls -l操作
-void PrintLP(Node *root, string path, bool findL, bool &amp;fa);&#x2F;&#x2F;带有路径的ls
-void PrintCat(Node *root, string path);&#x2F;&#x2F;cat
-int main() &#123;
-    FILE *fat12;
-    fat12 &#x3D; fopen(&quot;a.img&quot;, &quot;rb&quot;);    &#x2F;&#x2F;打开FAT12的映像文件
+<span class="token keyword">void</span> <span class="token function">ReadBPB</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">BPB</span> <span class="token operator">*</span>pbp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//读取BPB</span>
+<span class="token keyword">void</span> <span class="token function">ReadRoot</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">RootEntry</span> <span class="token operator">*</span>rootEntry_ptr<span class="token punctuation">,</span> Node <span class="token operator">*</span>fatherNode<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//读取文件</span>
+<span class="token keyword">bool</span> <span class="token function">isFileName</span><span class="token punctuation">(</span>uchar <span class="token operator">*</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//判断是否为文件名</span>
+<span class="token keyword">void</span> <span class="token function">GetFileName</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>re<span class="token punctuation">,</span> uchar <span class="token operator">*</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获得文件名字</span>
+<span class="token keyword">void</span> <span class="token function">GetDirName</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>re<span class="token punctuation">,</span> uchar <span class="token operator">*</span>name<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//获得目录名字</span>
+<span class="token keyword">void</span> <span class="token function">ReadFileContent</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">int</span> startClus<span class="token punctuation">,</span> Node <span class="token operator">*</span>sonNode<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//读取文件</span>
+<span class="token keyword">void</span> <span class="token function">ReadDirContent</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">int</span> startClus<span class="token punctuation">,</span> Node <span class="token operator">*</span>fatherNode<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//读取目录</span>
+<span class="token keyword">int</span> <span class="token function">getFATEntry</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">int</span> clusValue<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获得FATEntry项</span>
+<span class="token keyword">void</span> <span class="token function">ReadCommon</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> RootEntry <span class="token operator">*</span>entry<span class="token punctuation">,</span> Node <span class="token operator">*</span>reNode<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//抽象封装读取操作</span>
+<span class="token keyword">void</span> <span class="token function">operate</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//获得操作</span>
+string <span class="token function">getVec</span><span class="token punctuation">(</span><span class="token keyword">int</span> be<span class="token punctuation">,</span> <span class="token keyword">int</span> af<span class="token punctuation">,</span> string ss<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//指令解析</span>
+<span class="token keyword">void</span> <span class="token function">PrintAll</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//单纯的ls操作</span>
+<span class="token keyword">void</span> <span class="token function">PrintL</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ls -l操作</span>
+<span class="token keyword">void</span> <span class="token function">PrintLP</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">,</span> string path<span class="token punctuation">,</span> <span class="token keyword">bool</span> findL<span class="token punctuation">,</span> <span class="token keyword">bool</span> <span class="token operator">&amp;</span>fa<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//带有路径的ls</span>
+<span class="token keyword">void</span> <span class="token function">PrintCat</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">,</span> string path<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//cat</span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    FILE <span class="token operator">*</span>fat12<span class="token punctuation">;</span>
+    fat12 <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"a.img"</span><span class="token punctuation">,</span> <span class="token string">"rb"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>    <span class="token comment">//打开FAT12的映像文件</span>
 
-    struct BPB bpb;
-    struct BPB *bpb_ptr &#x3D; &amp;bpb;
-
-
-    ReadBPB(fat12, bpb_ptr);
-
-    BytePerSec &#x3D; bpb_ptr-&gt;BytePerSec;
-    SecPerClus &#x3D; bpb_ptr-&gt;SecPerClus;
-    RsvdSecCnt &#x3D; bpb_ptr-&gt;RsvdSecCnt;
-    NumFATs &#x3D; bpb_ptr-&gt;NumFATs;
-    RootEntCnt &#x3D; bpb_ptr-&gt;RootEntCnt;
-    FATSz &#x3D; bpb_ptr-&gt;FATSz16;
-    FAT_Base &#x3D; RsvdSecCnt * BytePerSec;
-    Root_Base &#x3D; (RsvdSecCnt + NumFATs * FATSz) * BytePerSec;
-    Data_Base &#x3D; (RsvdSecCnt + NumFATs * FATSz + (RootEntCnt * 32 + BytePerSec - 1) &#x2F; BytePerSec) * BytePerSec;
-
-    struct RootEntry rootEntry;
-    struct RootEntry *rootEntry_ptr &#x3D; &amp;rootEntry;
-    &#x2F;&#x2F;创建根节点
-    Node *root &#x3D; new Node();
-    root-&gt;name &#x3D; &quot;&quot;;
-    root-&gt;path &#x3D; &quot;&#x2F;&quot;;
-    ReadRoot(fat12, rootEntry_ptr, root);
-    operate(root);
-    fclose(fat12);
-&#125;
-
-void ReadBPB(FILE *fat12, struct BPB *pbp) &#123;
-    fseek(fat12, 11, SEEK_SET);
-    fread(pbp, 1, 25, fat12);
-&#125;
-
-void ReadRoot(FILE *fat12, struct RootEntry *rootEntry_ptr, Node *fatherNode) &#123;
-    for (int i &#x3D; 0; i &lt; RootEntCnt; i++) &#123;
-        fseek(fat12, Root_Base + i * 32, SEEK_SET);
-        fread(rootEntry_ptr, 1, 32, fat12);
-        if (rootEntry_ptr-&gt;Name[0] &#x3D;&#x3D; &#39;\0&#39;) continue;
-        ReadCommon(fat12, rootEntry_ptr, fatherNode);
-    &#125;
-&#125;
+    <span class="token keyword">struct</span> <span class="token class-name">BPB</span> bpb<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> <span class="token class-name">BPB</span> <span class="token operator">*</span>bpb_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>bpb<span class="token punctuation">;</span>
 
 
-bool isFileName(uchar *name) &#123;
-    for (int i &#x3D; 0; i &lt; 11; ++i) &#123;
-        &#x2F;&#x2F;判断是否均为数字或者字母
-        if (!((name[i] &gt;&#x3D; &#39;0&#39; &amp;&amp; name[i] &lt;&#x3D; &#39;9&#39;)
-              || (name[i] &gt;&#x3D; &#39;a&#39; &amp;&amp; name[i] &lt;&#x3D; &#39;z&#39;)
-              || (name[i] &gt;&#x3D; &#39;A&#39; &amp;&amp; name[i] &lt;&#x3D; &#39;Z&#39;)
-              || name[i] &#x3D;&#x3D; &#39; &#39;)) &#123;
-            return false;
-        &#125;
-    &#125;
-    return true;
-&#125;
+    <span class="token function">ReadBPB</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> bpb_ptr<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-void ReadFileContent(FILE *fat12, int startClus, Node *sonNode) &#123;
-    int currentClus &#x3D; startClus;
-    int tempCount &#x3D; 0;
-    char *p &#x3D; sonNode-&gt;content;
-    if (startClus &#x3D;&#x3D; 0) return;
-    while (tempCount &lt; 0xFF8) &#123;
-        tempCount &#x3D; getFATEntry(fat12, currentClus);
-        if (tempCount &#x3D;&#x3D; 0xFF7) &#123;
-            myprint(&quot;Bad Clus\n&quot;, 9);
-            break;
-        &#125;
-        char *str &#x3D; (char *) malloc(SecPerClus * BytePerSec);
-        char *content &#x3D; str;&#x2F;&#x2F;使用动态数组记录内容
-        fseek(fat12, Data_Base + (currentClus - 2) * SecPerClus * BytePerSec, SEEK_SET);
-        fread(content, 1, SecPerClus * BytePerSec, fat12);
-        for (int i &#x3D; 0; i &lt; SecPerClus * BytePerSec; ++i) &#123;
-            *p &#x3D; content[i];
-            p++;
-        &#125;
-        free(str);
-        currentClus &#x3D; tempCount;
-    &#125;
-&#125;
+    BytePerSec <span class="token operator">=</span> bpb_ptr<span class="token operator">-></span>BytePerSec<span class="token punctuation">;</span>
+    SecPerClus <span class="token operator">=</span> bpb_ptr<span class="token operator">-></span>SecPerClus<span class="token punctuation">;</span>
+    RsvdSecCnt <span class="token operator">=</span> bpb_ptr<span class="token operator">-></span>RsvdSecCnt<span class="token punctuation">;</span>
+    NumFATs <span class="token operator">=</span> bpb_ptr<span class="token operator">-></span>NumFATs<span class="token punctuation">;</span>
+    RootEntCnt <span class="token operator">=</span> bpb_ptr<span class="token operator">-></span>RootEntCnt<span class="token punctuation">;</span>
+    FATSz <span class="token operator">=</span> bpb_ptr<span class="token operator">-></span>FATSz16<span class="token punctuation">;</span>
+    FAT_Base <span class="token operator">=</span> RsvdSecCnt <span class="token operator">*</span> BytePerSec<span class="token punctuation">;</span>
+    Root_Base <span class="token operator">=</span> <span class="token punctuation">(</span>RsvdSecCnt <span class="token operator">+</span> NumFATs <span class="token operator">*</span> FATSz<span class="token punctuation">)</span> <span class="token operator">*</span> BytePerSec<span class="token punctuation">;</span>
+    Data_Base <span class="token operator">=</span> <span class="token punctuation">(</span>RsvdSecCnt <span class="token operator">+</span> NumFATs <span class="token operator">*</span> FATSz <span class="token operator">+</span> <span class="token punctuation">(</span>RootEntCnt <span class="token operator">*</span> <span class="token number">32</span> <span class="token operator">+</span> BytePerSec <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">/</span> BytePerSec<span class="token punctuation">)</span> <span class="token operator">*</span> BytePerSec<span class="token punctuation">;</span>
 
-void ReadDirContent(FILE *fat12, int startClus, Node *fatherNode) &#123;
-    int currentClus &#x3D; startClus;
-    int tempCount &#x3D; 0;
-    while (tempCount &lt; 0xFF8) &#123;
-        tempCount &#x3D; getFATEntry(fat12, currentClus);
-        if (tempCount &#x3D;&#x3D; 0xFF7) &#123;
-            myprint(&quot;Bad Clus\n&quot;, 9);
-            break;
-        &#125;
-        for (int co &#x3D; 0; co * 32 &lt; SecPerClus * BytePerSec; co++) &#123;
-            RootEntry sonEntry;
-            RootEntry *sonEntry_ptr &#x3D; &amp;sonEntry;
-            fseek(fat12, Data_Base + (currentClus - 2) * SecPerClus * BytePerSec + co * 32, SEEK_SET);
-            fread(sonEntry_ptr, 1, 32, fat12);
-            if (sonEntry_ptr-&gt;Name[0] &#x3D;&#x3D; &#39;\0&#39;) continue;
-            ReadCommon(fat12, sonEntry_ptr, fatherNode);
-        &#125;
-        currentClus &#x3D; tempCount;
-    &#125;
-&#125;
+    <span class="token keyword">struct</span> <span class="token class-name">RootEntry</span> rootEntry<span class="token punctuation">;</span>
+    <span class="token keyword">struct</span> <span class="token class-name">RootEntry</span> <span class="token operator">*</span>rootEntry_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>rootEntry<span class="token punctuation">;</span>
+    <span class="token comment">//创建根节点</span>
+    Node <span class="token operator">*</span>root <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    root<span class="token operator">-></span>name <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    root<span class="token operator">-></span>path <span class="token operator">=</span> <span class="token string">"/"</span><span class="token punctuation">;</span>
+    <span class="token function">ReadRoot</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> rootEntry_ptr<span class="token punctuation">,</span> root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">operate</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fclose</span><span class="token punctuation">(</span>fat12<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-void GetFileName(char *re, uchar *name) &#123;
-    int len &#x3D; 0;
-    &#x2F;&#x2F;文件名八个字节，扩展名三个字节
-    for (; len &lt; 8; len++) &#123;
-        if (name[len] &#x3D;&#x3D; 0x20) &#123;
-            break;
-        &#125;
-        *(re + len) &#x3D; name[len];
-    &#125;
-    *(re + len) &#x3D; &#39;.&#39;;
-    len++;
-    for (int i &#x3D; 8; i &lt; 11; i++) &#123;
-        if (name[i] &#x3D;&#x3D; 0x20) &#123;
-            break;
-        &#125;
-        *(re + len) &#x3D; name[i];
-        len++;
-    &#125;
-    *(re + len) &#x3D; &#39;\0&#39;;
-&#125;
+<span class="token keyword">void</span> <span class="token function">ReadBPB</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">BPB</span> <span class="token operator">*</span>pbp<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">fseek</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> <span class="token number">11</span><span class="token punctuation">,</span> <span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fread</span><span class="token punctuation">(</span>pbp<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">25</span><span class="token punctuation">,</span> fat12<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-void GetDirName(char *re, uchar *name) &#123;
-    int len &#x3D; 0;
-    &#x2F;&#x2F;文件名八个字节，扩展名三个字节
-    for (; len &lt; 11; len++) &#123;
-        if (name[len] &#x3D;&#x3D; 0x20) &#123;
-            break;
-        &#125;
-        *(re + len) &#x3D; name[len];
-    &#125;
-    *(re + len) &#x3D; &#39;\0&#39;;
-&#125;
+<span class="token keyword">void</span> <span class="token function">ReadRoot</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">struct</span> <span class="token class-name">RootEntry</span> <span class="token operator">*</span>rootEntry_ptr<span class="token punctuation">,</span> Node <span class="token operator">*</span>fatherNode<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> RootEntCnt<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">fseek</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> Root_Base <span class="token operator">+</span> i <span class="token operator">*</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">fread</span><span class="token punctuation">(</span>rootEntry_ptr<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> fat12<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>rootEntry_ptr<span class="token operator">-></span>Name<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\0'</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+        <span class="token function">ReadCommon</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> rootEntry_ptr<span class="token punctuation">,</span> fatherNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-void ReadCommon(FILE *fat12, RootEntry *entry, Node *reNode) &#123;
-    if (isFileName(entry-&gt;Name)) &#123;
-        &#x2F;&#x2F;目录
-        if (entry-&gt;Attr &#x3D;&#x3D; 0x10) &#123;
-            char FileName[12];
-            GetDirName(FileName, entry-&gt;Name);
-            Node *sonNode &#x3D; new Node();
-            reNode-&gt;next.push_back(sonNode);
-            sonNode-&gt;name &#x3D; FileName;
-            sonNode-&gt;path &#x3D; reNode-&gt;path + FileName + &quot;&#x2F;&quot;;
-            reNode-&gt;dir_count++;
-            &#x2F;&#x2F;方便后续输出
-            Node *q &#x3D; new Node();
-            q-&gt;name &#x3D; &quot;.&quot;;
-            q-&gt;isVal &#x3D; false;
-            sonNode-&gt;next.push_back(q);
-            q &#x3D; new Node();
-            q-&gt;name &#x3D; &quot;..&quot;;
-            q-&gt;isVal &#x3D; false;
-            sonNode-&gt;next.push_back(q);
-            ReadDirContent(fat12, entry-&gt;FstClus, sonNode);
-        &#125; else &#123;
-            char FileName[12];
-            GetFileName(FileName, entry-&gt;Name);
-            Node *sonNode &#x3D; new Node();
-            reNode-&gt;next.push_back(sonNode);
-            sonNode-&gt;name &#x3D; FileName;
-            sonNode-&gt;FileSize &#x3D; entry-&gt;FileSize;
-            sonNode-&gt;isFile &#x3D; true;
-            sonNode-&gt;path &#x3D; reNode-&gt;path + FileName + &quot;&#x2F;&quot;;
-            reNode-&gt;file_count++;
-            ReadFileContent(fat12, entry-&gt;FstClus, sonNode);
-        &#125;
-    &#125;
-&#125;
 
-int getFATEntry(FILE *fat12, int clusValue) &#123;
-    fseek(fat12, FAT_Base + clusValue * 3 &#x2F; 2, SEEK_SET);
-    ushort re;
-    &#x2F;&#x2F;读取FAT项所在的两个字节
-    fread(&amp;re, 1, 2, fat12);
-    &#x2F;&#x2F;表从头开始按3字节分成一组，一组中第2字节的低半字节作为最高半字节和一组中第1字节组成整数表示一个簇号，
-    &#x2F;&#x2F;第2字节的高半字节作为最低半字节和第3字节组成整数表示一个簇号。
-    &#x2F;&#x2F; ushort结合存储的小尾顺序和FAT项结构可以得到
-    &#x2F;&#x2F; clus是偶数项的话，取byte2的低4位和byte1构成的值，clus是奇数项的话，取byte2和byte1的高4位构成的值
-    if (clusValue % 2 &#x3D;&#x3D; 0) &#123;
-        re &#x3D; re &lt;&lt; 4;
-        return re &gt;&gt; 4;
-    &#125; else &#123;
-        return re &gt;&gt; 4;
-    &#125;
-&#125;
+<span class="token keyword">bool</span> <span class="token function">isFileName</span><span class="token punctuation">(</span>uchar <span class="token operator">*</span>name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">11</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//判断是否均为数字或者字母</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token punctuation">(</span>name<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token string">'0'</span> <span class="token operator">&amp;&amp;</span> name<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token string">'9'</span><span class="token punctuation">)</span>
+              <span class="token operator">||</span> <span class="token punctuation">(</span>name<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token string">'a'</span> <span class="token operator">&amp;&amp;</span> name<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token string">'z'</span><span class="token punctuation">)</span>
+              <span class="token operator">||</span> <span class="token punctuation">(</span>name<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token string">'A'</span> <span class="token operator">&amp;&amp;</span> name<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&lt;=</span> <span class="token string">'Z'</span><span class="token punctuation">)</span>
+              <span class="token operator">||</span> name<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">' '</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-void operate(Node *root) &#123;
-    while (true) &#123;
-        myprint(&quot;&gt;&quot;,1);
-        string ss;
-        getline(cin, ss);
-        vector&lt;string&gt; input;
-        int be &#x3D; 0;
-        int af &#x3D; 0;
-        for (int i &#x3D; 0; i &lt; ss.size(); ++i) &#123; &#x2F;&#x2F;获取输入指令
-            if (ss[i] &#x3D;&#x3D; &#39; &#39;) &#123;
-                af &#x3D; i - 1;
-                input.push_back(getVec(be, af, ss));
-                be &#x3D; af + 2;
-            &#125;
-        &#125;
-        input.push_back(getVec(be, ss.size() - 1, ss));
-        if (input[0] &#x3D;&#x3D; &quot;exit&quot;) &#123;
-            return;
-        &#125; else if (input[0] &#x3D;&#x3D; &quot;ls&quot;) &#123;
-            if (input.size() &#x3D;&#x3D; 1) &#123; &#x2F;&#x2F;全部输出
-                PrintAll(root);
-            &#125; else &#123;
-                bool findL &#x3D; false;
-                bool findPath &#x3D; false;
-                bool getError &#x3D; false;
-                string path;
-                for (int i &#x3D; 1; i &lt; input.size(); ++i) &#123;
-                    if (input[i][0] !&#x3D; &#39;-&#39;) &#123;
-                        if (findPath) &#123;
-                            string print_re &#x3D; &quot;Wrong Parameter!\n&quot;;
-                            myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;                            cout &lt;&lt; print_re;
-                            getError &#x3D; true;
-                            break;
-                        &#125; else &#123;
-                            findPath &#x3D; true;
-                            string temp &#x3D; input[i];
-                            if (temp.find(&#39;&#x2F;&#39;) !&#x3D; 0) &#123; &#x2F;&#x2F;第一次找到 &#x2F; 的不在0位置
-                                temp &#x3D; &quot;&#x2F;&quot; + temp;
-                            &#125;
-                            if (temp.rfind(&#39;&#x2F;&#39;) !&#x3D; temp.size() - 1) &#123; &#x2F;&#x2F;最后一次找到 &#x2F; 不在最后位置
-                                temp +&#x3D; &quot;&#x2F;&quot;;
-                            &#125;
-                            path &#x3D; temp;
-                        &#125;
-                    &#125; else &#123;
-                        if (input[i].length() &#x3D;&#x3D; 1) &#123;
-                            string print_re &#x3D; &quot;Wrong Parameter!\n&quot;;
-                            myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;                            cout &lt;&lt; print_re;
-                            getError &#x3D; true;
-                            break;
-                        &#125;
+<span class="token keyword">void</span> <span class="token function">ReadFileContent</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">int</span> startClus<span class="token punctuation">,</span> Node <span class="token operator">*</span>sonNode<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> currentClus <span class="token operator">=</span> startClus<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> tempCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>p <span class="token operator">=</span> sonNode<span class="token operator">-></span>content<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>startClus <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>tempCount <span class="token operator">&lt;</span> <span class="token number">0xFF8</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        tempCount <span class="token operator">=</span> <span class="token function">getFATEntry</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> currentClus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>tempCount <span class="token operator">==</span> <span class="token number">0xFF7</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">myprint</span><span class="token punctuation">(</span><span class="token string">"Bad Clus\n"</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">char</span> <span class="token operator">*</span>str <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span><span class="token punctuation">)</span> <span class="token function">malloc</span><span class="token punctuation">(</span>SecPerClus <span class="token operator">*</span> BytePerSec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">char</span> <span class="token operator">*</span>content <span class="token operator">=</span> str<span class="token punctuation">;</span><span class="token comment">//使用动态数组记录内容</span>
+        <span class="token function">fseek</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> Data_Base <span class="token operator">+</span> <span class="token punctuation">(</span>currentClus <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> SecPerClus <span class="token operator">*</span> BytePerSec<span class="token punctuation">,</span> <span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">fread</span><span class="token punctuation">(</span>content<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> SecPerClus <span class="token operator">*</span> BytePerSec<span class="token punctuation">,</span> fat12<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> SecPerClus <span class="token operator">*</span> BytePerSec<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token operator">*</span>p <span class="token operator">=</span> content<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            p<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token function">free</span><span class="token punctuation">(</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        currentClus <span class="token operator">=</span> tempCount<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-                        if (!input[i].find(&#39;l&#39;)) &#123;
-                            string print_re &#x3D; &quot;Wrong Parameter!\n&quot;;
-                            myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;                            cout &lt;&lt; print_re;
-                            getError &#x3D; true;
-                            break;
-                        &#125;
-                        findL &#x3D; true;
-                    &#125;
-                &#125;
-                if (getError) continue;
-                bool fa &#x3D; false;
-                if (findL &amp;&amp; !findPath) &#123; &#x2F;&#x2F;ls -l
-                    PrintL(root);
-                    fa &#x3D; true;
-                &#125; else if (!findL &amp;&amp; findPath) &#123; &#x2F;&#x2F;ls &#x2F;Dir
-                    PrintLP(root, path, findL, fa);
-                &#125; else if (findL &amp;&amp; findPath) &#123; &#x2F;&#x2F;ls &#x2F;Dir -l
-                    PrintLP(root, path, findL, fa);
-                &#125; else &#123;
-                    PrintAll(root);
-                    continue;
-                &#125;
-                if(!fa)&#123;
-                    string print_re &#x3D; &quot;No such Dir!\n&quot;;
-                myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;                    cout&lt;&lt;print_re;
-                &#125;
-            &#125;
-        &#125; else if (input[0] &#x3D;&#x3D; &quot;cat&quot;) &#123;
-            if (input.size() &#x3D;&#x3D; 2 &amp;&amp; input[1][0] !&#x3D; &#39;-&#39;) &#123;
-                string path;
-                string temp &#x3D; input[1];
-                if (temp.find(&#39;&#x2F;&#39;) !&#x3D; 0) &#123; &#x2F;&#x2F;第一次找到 &#x2F; 的不在0位置
-                    temp &#x3D; &quot;&#x2F;&quot; + temp;
-                &#125;
-                if (temp.rfind(&#39;&#x2F;&#39;) !&#x3D; temp.size() - 1) &#123; &#x2F;&#x2F;最后一次找到 &#x2F; 不在最后位置
-                    temp +&#x3D; &quot;&#x2F;&quot;;
-                &#125;
-                path &#x3D; temp;
-                PrintCat(root, path);
-            &#125; else &#123;
-                string print_re &#x3D; &quot;Wrong Parameter!\n&quot;;
-                myprint(print_re.c_str(), strlen(print_re.c_str()));
-            &#125;
-        &#125; else &#123;
-            string print_re &#x3D; &quot;Wrong Instructions!\n&quot;;
-            myprint(print_re.c_str(),strlen(print_re.c_str()));
-&#x2F;&#x2F;            cout&lt;&lt;print_re;
+<span class="token keyword">void</span> <span class="token function">ReadDirContent</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">int</span> startClus<span class="token punctuation">,</span> Node <span class="token operator">*</span>fatherNode<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> currentClus <span class="token operator">=</span> startClus<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> tempCount <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>tempCount <span class="token operator">&lt;</span> <span class="token number">0xFF8</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        tempCount <span class="token operator">=</span> <span class="token function">getFATEntry</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> currentClus<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>tempCount <span class="token operator">==</span> <span class="token number">0xFF7</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">myprint</span><span class="token punctuation">(</span><span class="token string">"Bad Clus\n"</span><span class="token punctuation">,</span> <span class="token number">9</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> co <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> co <span class="token operator">*</span> <span class="token number">32</span> <span class="token operator">&lt;</span> SecPerClus <span class="token operator">*</span> BytePerSec<span class="token punctuation">;</span> co<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            RootEntry sonEntry<span class="token punctuation">;</span>
+            RootEntry <span class="token operator">*</span>sonEntry_ptr <span class="token operator">=</span> <span class="token operator">&amp;</span>sonEntry<span class="token punctuation">;</span>
+            <span class="token function">fseek</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> Data_Base <span class="token operator">+</span> <span class="token punctuation">(</span>currentClus <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">*</span> SecPerClus <span class="token operator">*</span> BytePerSec <span class="token operator">+</span> co <span class="token operator">*</span> <span class="token number">32</span><span class="token punctuation">,</span> <span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">fread</span><span class="token punctuation">(</span>sonEntry_ptr<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">32</span><span class="token punctuation">,</span> fat12<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>sonEntry_ptr<span class="token operator">-></span>Name<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">'\0'</span><span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+            <span class="token function">ReadCommon</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> sonEntry_ptr<span class="token punctuation">,</span> fatherNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        currentClus <span class="token operator">=</span> tempCount<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-        &#125;
-    &#125;
-&#125;
+<span class="token keyword">void</span> <span class="token function">GetFileName</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>re<span class="token punctuation">,</span> uchar <span class="token operator">*</span>name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> len <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">//文件名八个字节，扩展名三个字节</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> len <span class="token operator">&lt;</span> <span class="token number">8</span><span class="token punctuation">;</span> len<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>name<span class="token punctuation">[</span>len<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0x20</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token operator">*</span><span class="token punctuation">(</span>re <span class="token operator">+</span> len<span class="token punctuation">)</span> <span class="token operator">=</span> name<span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span>re <span class="token operator">+</span> len<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">'.'</span><span class="token punctuation">;</span>
+    len<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">8</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">11</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>name<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0x20</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token operator">*</span><span class="token punctuation">(</span>re <span class="token operator">+</span> len<span class="token punctuation">)</span> <span class="token operator">=</span> name<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        len<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span>re <span class="token operator">+</span> len<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-void PrintAll(Node *root) &#123;
-    Node *p &#x3D; root;
-    string print_re;
-    if (p-&gt;isFile) return;
-    print_re &#x3D; p-&gt;path + &quot;:\n&quot;;
-    myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;    cout &lt;&lt; print_re;
-    Node *q;
-    for (int i &#x3D; 0; i &lt; p-&gt;next.size(); i++) &#123;
-        q &#x3D; p-&gt;next[i];
-        if (q-&gt;isFile) &#123;
-            print_re &#x3D; q-&gt;name + &quot; &quot;;
-            myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;            cout &lt;&lt; print_re;
-        &#125; else &#123;
-            print_re &#x3D; &quot;\033[31m&quot; + q-&gt;name + &quot;\033[0m&quot; + &quot; &quot;;
-            myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;            cout &lt;&lt; print_re;
-        &#125;
-    &#125;
-    myprint(&quot;\n&quot;, 1);
-&#x2F;&#x2F;    cout &lt;&lt; &quot;\n&quot;;
-    for (int i &#x3D; 0; i &lt; p-&gt;next.size(); ++i) &#123;
-        if (p-&gt;next[i]-&gt;isVal) &#123;
-            PrintAll(p-&gt;next[i]);
-        &#125;
-    &#125;
-&#125;
+<span class="token keyword">void</span> <span class="token function">GetDirName</span><span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token operator">*</span>re<span class="token punctuation">,</span> uchar <span class="token operator">*</span>name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> len <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">//文件名八个字节，扩展名三个字节</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">;</span> len <span class="token operator">&lt;</span> <span class="token number">11</span><span class="token punctuation">;</span> len<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>name<span class="token punctuation">[</span>len<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token number">0x20</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">break</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token operator">*</span><span class="token punctuation">(</span>re <span class="token operator">+</span> len<span class="token punctuation">)</span> <span class="token operator">=</span> name<span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token operator">*</span><span class="token punctuation">(</span>re <span class="token operator">+</span> len<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">'\0'</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
 
-void PrintL(Node *root) &#123;
-    Node *p &#x3D; root;
-    string print_re;
-    if (p-&gt;isFile) return;
-    print_re &#x3D; p-&gt;path + &quot; &quot; + to_string(p-&gt;dir_count) + &quot; &quot; + to_string(p-&gt;file_count) + &quot;:\n&quot;;
-    myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;    cout &lt;&lt; print_re;
-    Node *q;
-    for (int i &#x3D; 0; i &lt; p-&gt;next.size(); ++i) &#123;
-        q &#x3D; p-&gt;next[i];
-        if (q-&gt;isFile) &#123;
-            print_re &#x3D; q-&gt;name + &quot;  &quot; + to_string(q-&gt;FileSize) + &quot;\n&quot;;
-            myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;            cout &lt;&lt; print_re;
-        &#125; else &#123;
-            if (q-&gt;isVal) &#123;
-                print_re &#x3D;
-                        &quot;\033[31m&quot; + q-&gt;name + &quot;\033[0m&quot; + &quot;  &quot; + to_string(q-&gt;dir_count) + &quot; &quot; +
-                        to_string(q-&gt;file_count) +
-                        &quot;\n&quot;;
-&#x2F;&#x2F;                cout &lt;&lt; print_re;
-                myprint(print_re.c_str(), strlen(print_re.c_str()));
-            &#125; else &#123;
-                print_re &#x3D; &quot;\033[31m&quot; + q-&gt;name + &quot;\033[0m&quot; + &quot;  \n&quot;;
-                myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;                cout &lt;&lt; print_re;
-            &#125;
-        &#125;
-    &#125;
-    myprint(&quot;\n&quot;,1);
-    cout &lt;&lt; &quot;\n&quot;;
-    for (int i &#x3D; 0; i &lt; p-&gt;next.size(); ++i) &#123;
-        if (p-&gt;next[i]-&gt;isVal) &#123;
-            PrintL(p-&gt;next[i]);
-        &#125;
-    &#125;
-&#125;
+<span class="token keyword">void</span> <span class="token function">ReadCommon</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> RootEntry <span class="token operator">*</span>entry<span class="token punctuation">,</span> Node <span class="token operator">*</span>reNode<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isFileName</span><span class="token punctuation">(</span>entry<span class="token operator">-></span>Name<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//目录</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>entry<span class="token operator">-></span>Attr <span class="token operator">==</span> <span class="token number">0x10</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">char</span> FileName<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">GetDirName</span><span class="token punctuation">(</span>FileName<span class="token punctuation">,</span> entry<span class="token operator">-></span>Name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Node <span class="token operator">*</span>sonNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            reNode<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>sonNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sonNode<span class="token operator">-></span>name <span class="token operator">=</span> FileName<span class="token punctuation">;</span>
+            sonNode<span class="token operator">-></span>path <span class="token operator">=</span> reNode<span class="token operator">-></span>path <span class="token operator">+</span> FileName <span class="token operator">+</span> <span class="token string">"/"</span><span class="token punctuation">;</span>
+            reNode<span class="token operator">-></span>dir_count<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token comment">//方便后续输出</span>
+            Node <span class="token operator">*</span>q <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token operator">-></span>name <span class="token operator">=</span> <span class="token string">"."</span><span class="token punctuation">;</span>
+            q<span class="token operator">-></span>isVal <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            sonNode<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            q<span class="token operator">-></span>name <span class="token operator">=</span> <span class="token string">".."</span><span class="token punctuation">;</span>
+            q<span class="token operator">-></span>isVal <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+            sonNode<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>q<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token function">ReadDirContent</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> entry<span class="token operator">-></span>FstClus<span class="token punctuation">,</span> sonNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">char</span> FileName<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token function">GetFileName</span><span class="token punctuation">(</span>FileName<span class="token punctuation">,</span> entry<span class="token operator">-></span>Name<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            Node <span class="token operator">*</span>sonNode <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            reNode<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span>sonNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            sonNode<span class="token operator">-></span>name <span class="token operator">=</span> FileName<span class="token punctuation">;</span>
+            sonNode<span class="token operator">-></span>FileSize <span class="token operator">=</span> entry<span class="token operator">-></span>FileSize<span class="token punctuation">;</span>
+            sonNode<span class="token operator">-></span>isFile <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            sonNode<span class="token operator">-></span>path <span class="token operator">=</span> reNode<span class="token operator">-></span>path <span class="token operator">+</span> FileName <span class="token operator">+</span> <span class="token string">"/"</span><span class="token punctuation">;</span>
+            reNode<span class="token operator">-></span>file_count<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token function">ReadFileContent</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> entry<span class="token operator">-></span>FstClus<span class="token punctuation">,</span> sonNode<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-void PrintLP(Node *root, string path, bool findL,bool &amp;fa) &#123;
-    if (path &#x3D;&#x3D; root-&gt;path) &#123; &#x2F;&#x2F;路径相同
-        if (root-&gt;isFile) &#123;
-            string print_re &#x3D; &quot;File can not open!\n&quot;;
-            myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;            cout &lt;&lt; print_re;
-            return;
-        &#125; else &#123;
-            fa &#x3D; true;
-            if (findL) &#123;
-                PrintL(root);
-            &#125; else &#123;
-                PrintAll(root);
-            &#125;
-        &#125;
-        return;
-    &#125;
-    if (path.length() &lt;&#x3D; root-&gt;path.length()) &#123;
-        return;
-    &#125;
-    if (path.substr(0, root-&gt;path.length()) &#x3D;&#x3D; root-&gt;path) &#123; &#x2F;&#x2F;例如 ls &#x2F;NJU&#x2F;ROOT 进行部分对比相同则向下一个节点寻找
-&#x2F;&#x2F;        for (Node *q:root-&gt;next) &#123;
-&#x2F;&#x2F;            PrintLP(q, path, findL,fa);
-&#x2F;&#x2F;        &#125;
-        for (int i &#x3D; 0; i &lt; root-&gt;next.size(); ++i) &#123;
-            PrintLP(root-&gt;next[i],path,findL,fa);
-        &#125;
-    &#125;
+<span class="token keyword">int</span> <span class="token function">getFATEntry</span><span class="token punctuation">(</span>FILE <span class="token operator">*</span>fat12<span class="token punctuation">,</span> <span class="token keyword">int</span> clusValue<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">fseek</span><span class="token punctuation">(</span>fat12<span class="token punctuation">,</span> FAT_Base <span class="token operator">+</span> clusValue <span class="token operator">*</span> <span class="token number">3</span> <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token constant">SEEK_SET</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ushort re<span class="token punctuation">;</span>
+    <span class="token comment">//读取FAT项所在的两个字节</span>
+    <span class="token function">fread</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>re<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> fat12<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//表从头开始按3字节分成一组，一组中第2字节的低半字节作为最高半字节和一组中第1字节组成整数表示一个簇号，</span>
+    <span class="token comment">//第2字节的高半字节作为最低半字节和第3字节组成整数表示一个簇号。</span>
+    <span class="token comment">// ushort结合存储的小尾顺序和FAT项结构可以得到</span>
+    <span class="token comment">// clus是偶数项的话，取byte2的低4位和byte1构成的值，clus是奇数项的话，取byte2和byte1的高4位构成的值</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>clusValue <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        re <span class="token operator">=</span> re <span class="token operator">&lt;&lt;</span> <span class="token number">4</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> re <span class="token operator">>></span> <span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> re <span class="token operator">>></span> <span class="token number">4</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
 
-&#125;
+<span class="token keyword">void</span> <span class="token function">operate</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">myprint</span><span class="token punctuation">(</span><span class="token string">">"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        string ss<span class="token punctuation">;</span>
+        <span class="token function">getline</span><span class="token punctuation">(</span>cin<span class="token punctuation">,</span> ss<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        vector<span class="token operator">&lt;</span>string<span class="token operator">></span> input<span class="token punctuation">;</span>
+        <span class="token keyword">int</span> be <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> af <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> ss<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//获取输入指令</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>ss<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">' '</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                af <span class="token operator">=</span> i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                input<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token function">getVec</span><span class="token punctuation">(</span>be<span class="token punctuation">,</span> af<span class="token punctuation">,</span> ss<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                be <span class="token operator">=</span> af <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        input<span class="token punctuation">.</span><span class="token function">push_back</span><span class="token punctuation">(</span><span class="token function">getVec</span><span class="token punctuation">(</span>be<span class="token punctuation">,</span> ss<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> ss<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>input<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"exit"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>input<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"ls"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>input<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//全部输出</span>
+                <span class="token function">PrintAll</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">bool</span> findL <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">bool</span> findPath <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">bool</span> getError <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                string path<span class="token punctuation">;</span>
+                <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> input<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    <span class="token keyword">if</span> <span class="token punctuation">(</span>input<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'-'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>findPath<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            string print_re <span class="token operator">=</span> <span class="token string">"Wrong Parameter!\n"</span><span class="token punctuation">;</span>
+                            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//                            cout &lt;&lt; print_re;</span>
+                            getError <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                            <span class="token keyword">break</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                            findPath <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                            string temp <span class="token operator">=</span> input<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//第一次找到 / 的不在0位置</span>
+                                temp <span class="token operator">=</span> <span class="token string">"/"</span> <span class="token operator">+</span> temp<span class="token punctuation">;</span>
+                            <span class="token punctuation">&#125;</span>
+                            <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">.</span><span class="token function">rfind</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span> <span class="token operator">!=</span> temp<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//最后一次找到 / 不在最后位置</span>
+                                temp <span class="token operator">+=</span> <span class="token string">"/"</span><span class="token punctuation">;</span>
+                            <span class="token punctuation">&#125;</span>
+                            path <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+                        <span class="token punctuation">&#125;</span>
+                    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span>input<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            string print_re <span class="token operator">=</span> <span class="token string">"Wrong Parameter!\n"</span><span class="token punctuation">;</span>
+                            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//                            cout &lt;&lt; print_re;</span>
+                            getError <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                            <span class="token keyword">break</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">&#125;</span>
 
-void PrintCat(Node *root, string path) &#123;
-    if (path &#x3D;&#x3D; root-&gt;path) &#123;
-        if (root-&gt;isFile) &#123;
-            if (root-&gt;content[0] !&#x3D; 0) &#123;
-                myprint(root-&gt;content,strlen(root-&gt;content));
-                myprint(&quot;\n&quot;,1);
-&#x2F;&#x2F;                cout &lt;&lt; root-&gt;content;
-            &#125;
-            return;
-        &#125; else &#123;
-            string print_re &#x3D; &quot;File can not open!\n&quot;;
-            myprint(print_re.c_str(), strlen(print_re.c_str()));
-            return;
-        &#125;
-    &#125;
-    if (path.length() &lt;&#x3D; root-&gt;path.length()) &#123;
-        string print_re &#x3D; &quot;No such Dir!\n&quot;;
-        myprint(print_re.c_str(), strlen(print_re.c_str()));
-&#x2F;&#x2F;        cout &lt;&lt; print_re;
-        return;
-    &#125;
-    if (path.substr(0, root-&gt;path.length()) &#x3D;&#x3D; root-&gt;path) &#123; &#x2F;&#x2F;例如 cat &#x2F;NJU&#x2F;ROOT 进行部分对比相同则向下一个节点寻找
-&#x2F;&#x2F;        for (Node *q:root-&gt;next) &#123;
-&#x2F;&#x2F;            PrintCat(q, path);
-&#x2F;&#x2F;        &#125;
-        for (int i &#x3D; 0; i &lt; root-&gt;next.size(); ++i) &#123;
-            PrintCat(root-&gt;next[i],path);
-        &#125;
-    &#125;
-&#125;
+                        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>input<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'l'</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            string print_re <span class="token operator">=</span> <span class="token string">"Wrong Parameter!\n"</span><span class="token punctuation">;</span>
+                            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//                            cout &lt;&lt; print_re;</span>
+                            getError <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                            <span class="token keyword">break</span><span class="token punctuation">;</span>
+                        <span class="token punctuation">&#125;</span>
+                        findL <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>getError<span class="token punctuation">)</span> <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token keyword">bool</span> fa <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>findL <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span>findPath<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//ls -l</span>
+                    <span class="token function">PrintL</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    fa <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>findL <span class="token operator">&amp;&amp;</span> findPath<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//ls /Dir</span>
+                    <span class="token function">PrintLP</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> path<span class="token punctuation">,</span> findL<span class="token punctuation">,</span> fa<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>findL <span class="token operator">&amp;&amp;</span> findPath<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//ls /Dir -l</span>
+                    <span class="token function">PrintLP</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> path<span class="token punctuation">,</span> findL<span class="token punctuation">,</span> fa<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                    <span class="token function">PrintAll</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword">continue</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span>fa<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+                    string print_re <span class="token operator">=</span> <span class="token string">"No such Dir!\n"</span><span class="token punctuation">;</span>
+                <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//                    cout&lt;&lt;print_re;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>input<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">==</span> <span class="token string">"cat"</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>input<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">&amp;&amp;</span> input<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token string">'-'</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                string path<span class="token punctuation">;</span>
+                string temp <span class="token operator">=</span> input<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//第一次找到 / 的不在0位置</span>
+                    temp <span class="token operator">=</span> <span class="token string">"/"</span> <span class="token operator">+</span> temp<span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>temp<span class="token punctuation">.</span><span class="token function">rfind</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span> <span class="token operator">!=</span> temp<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//最后一次找到 / 不在最后位置</span>
+                    temp <span class="token operator">+=</span> <span class="token string">"/"</span><span class="token punctuation">;</span>
+                <span class="token punctuation">&#125;</span>
+                path <span class="token operator">=</span> temp<span class="token punctuation">;</span>
+                <span class="token function">PrintCat</span><span class="token punctuation">(</span>root<span class="token punctuation">,</span> path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                string print_re <span class="token operator">=</span> <span class="token string">"Wrong Parameter!\n"</span><span class="token punctuation">;</span>
+                <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            string print_re <span class="token operator">=</span> <span class="token string">"Wrong Instructions!\n"</span><span class="token punctuation">;</span>
+            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span><span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//            cout&lt;&lt;print_re;</span>
 
-string getVec(int be, int af, string ss) &#123;
-    string temp &#x3D; &quot;&quot;;
-    for (int i &#x3D; be; i &lt;&#x3D; af; ++i) &#123;
-        temp +&#x3D; ss[i];
-    &#125;
-    return temp;
-&#125;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">PrintAll</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    Node <span class="token operator">*</span>p <span class="token operator">=</span> root<span class="token punctuation">;</span>
+    string print_re<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token operator">-></span>isFile<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    print_re <span class="token operator">=</span> p<span class="token operator">-></span>path <span class="token operator">+</span> <span class="token string">":\n"</span><span class="token punctuation">;</span>
+    <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//    cout &lt;&lt; print_re;</span>
+    Node <span class="token operator">*</span>q<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> p<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        q <span class="token operator">=</span> p<span class="token operator">-></span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>q<span class="token operator">-></span>isFile<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            print_re <span class="token operator">=</span> q<span class="token operator">-></span>name <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//            cout &lt;&lt; print_re;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            print_re <span class="token operator">=</span> <span class="token string">"\033[31m"</span> <span class="token operator">+</span> q<span class="token operator">-></span>name <span class="token operator">+</span> <span class="token string">"\033[0m"</span> <span class="token operator">+</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//            cout &lt;&lt; print_re;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">myprint</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//    cout &lt;&lt; "\n";</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> p<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>isVal<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">PrintAll</span><span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">PrintL</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    Node <span class="token operator">*</span>p <span class="token operator">=</span> root<span class="token punctuation">;</span>
+    string print_re<span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token operator">-></span>isFile<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    print_re <span class="token operator">=</span> p<span class="token operator">-></span>path <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token function">to_string</span><span class="token punctuation">(</span>p<span class="token operator">-></span>dir_count<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span> <span class="token function">to_string</span><span class="token punctuation">(</span>p<span class="token operator">-></span>file_count<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">":\n"</span><span class="token punctuation">;</span>
+    <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//    cout &lt;&lt; print_re;</span>
+    Node <span class="token operator">*</span>q<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> p<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        q <span class="token operator">=</span> p<span class="token operator">-></span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>q<span class="token operator">-></span>isFile<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            print_re <span class="token operator">=</span> q<span class="token operator">-></span>name <span class="token operator">+</span> <span class="token string">"  "</span> <span class="token operator">+</span> <span class="token function">to_string</span><span class="token punctuation">(</span>q<span class="token operator">-></span>FileSize<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//            cout &lt;&lt; print_re;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>q<span class="token operator">-></span>isVal<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                print_re <span class="token operator">=</span>
+                        <span class="token string">"\033[31m"</span> <span class="token operator">+</span> q<span class="token operator">-></span>name <span class="token operator">+</span> <span class="token string">"\033[0m"</span> <span class="token operator">+</span> <span class="token string">"  "</span> <span class="token operator">+</span> <span class="token function">to_string</span><span class="token punctuation">(</span>q<span class="token operator">-></span>dir_count<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">" "</span> <span class="token operator">+</span>
+                        <span class="token function">to_string</span><span class="token punctuation">(</span>q<span class="token operator">-></span>file_count<span class="token punctuation">)</span> <span class="token operator">+</span>
+                        <span class="token string">"\n"</span><span class="token punctuation">;</span>
+<span class="token comment">//                cout &lt;&lt; print_re;</span>
+                <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                print_re <span class="token operator">=</span> <span class="token string">"\033[31m"</span> <span class="token operator">+</span> q<span class="token operator">-></span>name <span class="token operator">+</span> <span class="token string">"\033[0m"</span> <span class="token operator">+</span> <span class="token string">"  \n"</span><span class="token punctuation">;</span>
+                <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//                cout &lt;&lt; print_re;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">myprint</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"\n"</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> p<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">-></span>isVal<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">PrintL</span><span class="token punctuation">(</span>p<span class="token operator">-></span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">PrintLP</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">,</span> string path<span class="token punctuation">,</span> <span class="token keyword">bool</span> findL<span class="token punctuation">,</span><span class="token keyword">bool</span> <span class="token operator">&amp;</span>fa<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>path <span class="token operator">==</span> root<span class="token operator">-></span>path<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//路径相同</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>isFile<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            string print_re <span class="token operator">=</span> <span class="token string">"File can not open!\n"</span><span class="token punctuation">;</span>
+            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//            cout &lt;&lt; print_re;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            fa <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>findL<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">PrintL</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">PrintAll</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> root<span class="token operator">-></span>path<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> root<span class="token operator">-></span>path<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> root<span class="token operator">-></span>path<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//例如 ls /NJU/ROOT 进行部分对比相同则向下一个节点寻找</span>
+<span class="token comment">//        for (Node *q:root->next) &#123;</span>
+<span class="token comment">//            PrintLP(q, path, findL,fa);</span>
+<span class="token comment">//        &#125;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> root<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">PrintLP</span><span class="token punctuation">(</span>root<span class="token operator">-></span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>path<span class="token punctuation">,</span>findL<span class="token punctuation">,</span>fa<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">void</span> <span class="token function">PrintCat</span><span class="token punctuation">(</span>Node <span class="token operator">*</span>root<span class="token punctuation">,</span> string path<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>path <span class="token operator">==</span> root<span class="token operator">-></span>path<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>isFile<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>root<span class="token operator">-></span>content<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token function">myprint</span><span class="token punctuation">(</span>root<span class="token operator">-></span>content<span class="token punctuation">,</span><span class="token function">strlen</span><span class="token punctuation">(</span>root<span class="token operator">-></span>content<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token function">myprint</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//                cout &lt;&lt; root->content;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+            string print_re <span class="token operator">=</span> <span class="token string">"File can not open!\n"</span><span class="token punctuation">;</span>
+            <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&lt;=</span> root<span class="token operator">-></span>path<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        string print_re <span class="token operator">=</span> <span class="token string">"No such Dir!\n"</span><span class="token punctuation">;</span>
+        <span class="token function">myprint</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">strlen</span><span class="token punctuation">(</span>print_re<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        cout &lt;&lt; print_re;</span>
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">substr</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> root<span class="token operator">-></span>path<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> root<span class="token operator">-></span>path<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//例如 cat /NJU/ROOT 进行部分对比相同则向下一个节点寻找</span>
+<span class="token comment">//        for (Node *q:root->next) &#123;</span>
+<span class="token comment">//            PrintCat(q, path);</span>
+<span class="token comment">//        &#125;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> root<span class="token operator">-></span>next<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">PrintCat</span><span class="token punctuation">(</span>root<span class="token operator">-></span>next<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+string <span class="token function">getVec</span><span class="token punctuation">(</span><span class="token keyword">int</span> be<span class="token punctuation">,</span> <span class="token keyword">int</span> af<span class="token punctuation">,</span> string ss<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    string temp <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> be<span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> af<span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        temp <span class="token operator">+=</span> ss<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> temp<span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h3 id="参考目录"><a href="#参考目录" class="headerlink" title="参考目录"></a>参考目录</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/judyge/article/details/52373751">FAT12文件系统</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.sylvan.plus/posts/dc579b7a.html#toc-heading-4">FAT12文件操作系统仿真实现</a></p>
@@ -1609,6 +1608,7 @@ string getVec(int be, int af, string ss) &#123;
 </script>
 
 
+
 <!-- 代码块功能依赖 -->
 <script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
@@ -1619,13 +1619,10 @@ string getVec(int be, int af, string ss) &#123;
 
 <!-- 代码块复制 -->
 
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
 
 <!-- 代码块收缩 -->
 
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
 
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
@@ -1743,7 +1740,7 @@ string getVec(int be, int af, string ss) &#123;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">18.2k</span>&nbsp;
+                class="white-color">17.5k</span>&nbsp;
             
             
             
