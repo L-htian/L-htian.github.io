@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="操作系统第三次问答, Erio">
+    <meta name="keywords" content="操作系统第四次问答, Erio">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>操作系统第三次问答 | Erio</title>
+    <title>操作系统第四次问答 | Erio</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -215,12 +215,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">操作系统第三次问答</h1>
+                    <h1 class="description center-align post-title">操作系统第四次问答</h1>
                 </div>
             </div>
         </div>
@@ -375,14 +375,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    680
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    2 分
                 </div>
                 
 
@@ -405,139 +405,57 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="操作系统第三次问答"><a href="#操作系统第三次问答" class="headerlink" title="操作系统第三次问答"></a>操作系统第三次问答</h2><h4 id="1、解释中断向量"><a href="#1、解释中断向量" class="headerlink" title="1、解释中断向量"></a>1、解释中断向量</h4><ul>
-<li>中断源的识别标志，可用来形成相应的中断服务程序的入口地址或存放中断服务程序的首地址称为中断向量。</li>
-<li>一个中断向量占据4字节空间，包含中断服务程序入口地址的偏移量与段基址。</li>
-<li>低地址两个Byte放偏移量</li>
-<li>高地址两个Byte放段描述符</li>
+                <h2 id="操作系统第四次问答"><a href="#操作系统第四次问答" class="headerlink" title="操作系统第四次问答"></a>操作系统第四次问答</h2><h4 id="1、进程是什么"><a href="#1、进程是什么" class="headerlink" title="1、进程是什么"></a>1、进程是什么</h4><ul>
+<li>从原理角度看，进程是支持程序执行的一种系统机制，它对处理器上运行程序的活动规律进行抽象。</li>
+<li>从实现角度看，进程是一种数据结构，用来准确地刻画运行程序的状态和系统动态变化状况。</li>
 </ul>
-<h4 id="2、解释中断类型码"><a href="#2、解释中断类型码" class="headerlink" title="2、解释中断类型码"></a>2、解释中断类型码</h4><ul>
-<li>我们把每个中断服务程序进行编号，这个号就代表一个中断服务程序，就是中断类型码。</li>
-<li>这个中断类型码是计算机用来查找中断向量用的。</li>
+<h4 id="2、进程表是什么"><a href="#2、进程表是什么" class="headerlink" title="2、进程表是什么"></a>2、进程表是什么</h4><p>进程表，也称进程控制块（PCB），是由操作系统维护的，每个进程占用其中一个表项。该表项包含了操作系统对进程进行描述和控制的全部信息，从而保证该进程换出后再次启动时，就像从未中断过一样。在典型的系统中包含如下关键字段:</p>
+<ol>
+<li><p>存储管理相关</p>
+<ul>
+<li>正文段指针</li>
+<li>数据段指针</li>
+<li>堆栈段指针</li>
 </ul>
-<h4 id="3、解释中断向量表"><a href="#3、解释中断向量表" class="headerlink" title="3、解释中断向量表"></a>3、解释中断向量表</h4><ul>
-<li>中断向量表是指中断服务程序入口地址的偏移量与段基值，一个中断向量占据4字节空间。中断向量表是8086系统内存中最低端1K字节空间，它的作用就是按照中断类型号从小到大的顺序存储对应的中断向量，总共存储256个中断向量。</li>
-<li>中断向量表在内存单元的最低处，地址空间为00000H—-003FFH(0-1024B)</li>
-<li>这个地址正好和中断类型码有一种对应的关系：中断类型码*4(一个中断向量所占的空间) 就等于这个中断向量的首地址。</li>
+</li>
+<li><p>文件管理相关</p>
+<p>根目录、工作目录、文件描述符、用户ID、组ID等</p>
+</li>
+<li><p>进程管理相关，包含三大类信息：</p>
+<ul>
+<li>标识信息：用于唯一地标识一个进程，包括进程ID、父进程、进程组等。</li>
+<li>现场信息：用于保留一个进程在运行时存放在处理器现场中的各种信息。它们用于在进程切换是保存处理器现场和恢复处理器现场。包括通用寄存器、PSW、堆栈指针、程序计数器等。</li>
+<li>控制信息：用于管理和调度一个进程。包括进程开始时间、使用CPU的时间等。</li>
 </ul>
-<h4 id="4、实模式下中断程序地址如何得到？"><a href="#4、实模式下中断程序地址如何得到？" class="headerlink" title="4、实模式下中断程序地址如何得到？"></a>4、实模式下中断程序地址如何得到？</h4><ul>
-<li>根据中断源提供的中断类型号，中断号×4KB，查找中断向量表，获取中断程序入口地址。</li>
-<li>段描述符查GDT获得段基址加上偏移量</li>
-</ul>
-<h4 id="5、保护模式下中断程序地址如何得到？"><a href="#5、保护模式下中断程序地址如何得到？" class="headerlink" title="5、保护模式下中断程序地址如何得到？"></a>5、保护模式下中断程序地址如何得到？</h4><ol>
-<li>中断向量×8，访问IDT</li>
-<li>找到对应的描述符</li>
-<li>是中断门或陷阱门描述符（先不讨论任务门，可以看最下面的补充）<br>当描述符是任务门时，处理的不是简单的中断处理程序，而是任务切换。</li>
-<li>获取其中的选择子，访问GDT或者LDT</li>
-<li>从中在获得目标段的描述符，从中得到目标段基地址</li>
-<li>基地址与门描述符中的偏移量相加的到中断处的程序的32位线性地址</li>
-<li>若未开启分页，线性地址就是物理地址</li>
+</li>
 </ol>
-<h4 id="6、中断向量的地址如何得到？"><a href="#6、中断向量的地址如何得到？" class="headerlink" title="6、中断向量的地址如何得到？"></a>6、中断向量的地址如何得到？</h4><ul>
-<li>中断类型码*4就等于这个中断向量的首地址。</li>
+<h4 id="3、进程栈是什么"><a href="#3、进程栈是什么" class="headerlink" title="3、进程栈是什么"></a>3、进程栈是什么</h4><ul>
+<li>进程运行时自身的堆栈</li>
 </ul>
-<h4 id="7、实模式下如何根据中断向量的地址得到中断程序地址？"><a href="#7、实模式下如何根据中断向量的地址得到中断程序地址？" class="headerlink" title="7、实模式下如何根据中断向量的地址得到中断程序地址？"></a>7、实模式下如何根据中断向量的地址得到中断程序地址？</h4><ul>
-<li>段描述符查GDT获得段基址加上偏移量</li>
+<h4 id="4、当寄存器的值已经被保存到进程表内，esp应指向何处来避免破坏进程表的值"><a href="#4、当寄存器的值已经被保存到进程表内，esp应指向何处来避免破坏进程表的值" class="headerlink" title="4、当寄存器的值已经被保存到进程表内，esp应指向何处来避免破坏进程表的值"></a>4、当寄存器的值已经被保存到进程表内，esp应指向何处来避免破坏进程表的值</h4><ul>
+<li>专门的内核栈区域</li>
 </ul>
-<h4 id="8、解释中断描述符"><a href="#8、解释中断描述符" class="headerlink" title="8、解释中断描述符"></a>8、解释中断描述符</h4><ul>
-<li>低地址的0和1两个字节是中断代码的偏移量A15～A0； 高地址的6和7两个字节是中断代码的偏移量A31～A16；</li>
-<li>2和3两个字节是段选择符，段选择符和偏移量用来形成中断服务子程序的入口地址； </li>
-<li>4和5两个字节称为访问权限字节，它标识该中断描述符是否有效、服务程序的特权级和描述符的类型等信息；</li>
+<h4 id="5、tty是什么"><a href="#5、tty是什么" class="headerlink" title="5、tty是什么"></a>5、tty是什么</h4><ul>
+<li>全程为TeleTYpe，Linux或者unix中的终端</li>
 </ul>
-<h4 id="9、保护模式下中断描述符表如何得到？"><a href="#9、保护模式下中断描述符表如何得到？" class="headerlink" title="9、保护模式下中断描述符表如何得到？"></a>9、保护模式下中断描述符表如何得到？</h4><ul>
-<li>引入一个48位的全地址寄存器（即中断描述符表寄存器IDTR）存放IDT的内存地址，和GDTR一样，IDTR包含32位的基地址和16位段限，基地址定义中断描述符表IDT在存储器中的起始点，段限定义中断描述符表所占的字节个数</li>
+<h4 id="6、不同的tty为什么输出不同的画面在同一个显示器上"><a href="#6、不同的tty为什么输出不同的画面在同一个显示器上" class="headerlink" title="6、不同的tty为什么输出不同的画面在同一个显示器上"></a>6、不同的tty为什么输出不同的画面在同一个显示器上</h4><ul>
+<li>不同的tty显示了显存的不同位置</li>
 </ul>
-<h4 id="10、保护模式下中断门如何得到？"><a href="#10、保护模式下中断门如何得到？" class="headerlink" title="10、保护模式下中断门如何得到？"></a>10、保护模式下中断门如何得到？</h4><ul>
-<li>查中断描述符表以IDTR指定的中断描述符表的基地址为起始地址，用调用号N×8算出偏移量，即为N号中断门描述符的首地址</li>
+<h4 id="7、解释tty任务执行的过程"><a href="#7、解释tty任务执行的过程" class="headerlink" title="7、解释tty任务执行的过程"></a>7、解释tty任务执行的过程</h4><ul>
+<li>在TTY任务中执行一个循环，这个循环将轮询每一个TTY，处理它的事件，包括从键盘缓冲区读取数据、显示字符等内容。</li>
 </ul>
-<h4 id="11、保护模式下如何根据中断门得到中断处理程序地址？"><a href="#11、保护模式下如何根据中断门得到中断处理程序地址？" class="headerlink" title="11、保护模式下如何根据中断门得到中断处理程序地址？"></a>11、保护模式下如何根据中断门得到中断处理程序地址？</h4><ul>
-<li>查全局或局部描述符表根据中断门中的选择子（段选择符）和偏移量得到中断处理程序入口</li>
+<h4 id="8、tty结构体中大概包括哪些内容"><a href="#8、tty结构体中大概包括哪些内容" class="headerlink" title="8、tty结构体中大概包括哪些内容"></a>8、tty结构体中大概包括哪些内容</h4><ul>
+<li>tty输入缓冲区</li>
+<li>指向缓冲区下一个空闲位置的指针</li>
+<li>指向键盘任务应处理的键值的指针</li>
+<li>缓冲区已经填充了多少</li>
+<li>该tty对应的console的指针</li>
 </ul>
-<h4 id="12、中断的分类，举例不同类型的中断"><a href="#12、中断的分类，举例不同类型的中断" class="headerlink" title="12、中断的分类，举例不同类型的中断"></a>12、中断的分类，举例不同类型的中断</h4><ul>
-<li><p>从中断源的角度分类</p>
-<ul>
-<li>由计算机硬件异常或故障引起的中断，也称为内部异常中断。</li>
-<li>由程序中执行了中断指令引起的中断，也称为软中断。由程序员通过INT或INT3指令触发，通常当做trap处理，用处：实现系统调用。</li>
-<li>外部设备（如输入输出设备）请求引起的中断，也称为外部中断或Ｉ／Ｏ中断。</li>
-</ul>
-</li>
-<li><p><strong>主要分类</strong>：</p>
-<ul>
-<li><p>中断：由CPU以外的事件引起的中断</p>
-<p>如：IO中断、时钟中断、控制台中断等</p>
-</li>
-<li><p>异常：来自CPU的内部事件或程序执行中的事件引起的过程</p>
-<p>如：由于CPU本身故障、程序故障、请求系统服务的指令引起的中断等</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="13、中断和异常的区别？"><a href="#13、中断和异常的区别？" class="headerlink" title="13、中断和异常的区别？"></a>13、中断和异常的区别？</h4><ul>
-<li><p>中断，是CPU所具备的功能。通常因为“硬件”而随机发生。</p>
-<p>异常，是“软件”运行过程中的一种开发过程中没有考虑到的程序错误。 </p>
-</li>
-<li><p>中断是CPU暂停当前工作，有计划地去处理其他的事情。中断的发生一般是可以预知的，处理的过程也是事先制定好的。处理中断时程序是正常运行的。</p>
-<p>异常是CPU遇到了无法响应的工作，而后进入一种非正常状态。异常的出现表明程序有缺陷。</p>
-</li>
-<li><p>中断是异步的，异常是同步的。</p>
-<ul>
-<li>中断是来自处理器外部的I/O设备的信号的结果，它不是由指令流中某条指令执行引起的，从这个意义上讲，它是异步的，是来自指令流之外的。</li>
-<li>异常是执行当前指令流中的某条指令的结果，是来自指令流内部的，从这个意义上讲它们都是同步的。</li>
-</ul>
-</li>
-<li><p>中断或异常的返回点</p>
-<ul>
-<li>良性的如中断和trap，只是在正常的工作流之外执行额外的操作，然后继续干没干完的活。因此处理程序完了后返回到原指令流的下一条指令，继续执行。</li>
-<li>恶性的如fault和abort，对于可修复fault，由于是在上一条指令执行过程中发生（是由正在执行的指令引发的）的，在修复fault之后，会重新执行该指令；至于不可修复fault或abort，则不会再返回。</li>
-</ul>
-</li>
-<li><p>中断是由于当前程序无关的中断信号触发的，CPU对中断的响应是被动的，且与CPU模式无关。既可以发生在用户态，又可以发生在核心态。</p>
-<p>异常是由CPU控制单元产生的，大部分异常发生在用户态。</p>
-</li>
-</ul>
-<h4 id="14、实模式和保护模式下的中断处理差别"><a href="#14、实模式和保护模式下的中断处理差别" class="headerlink" title="14、实模式和保护模式下的中断处理差别"></a>14、实模式和保护模式下的中断处理差别</h4><ul>
-<li>实模式使用中断向量表获得中断程序入口地址；保护模式使用中断描述符表</li>
-<li>实模式下中断向量表地址从0开始；保护模式中中断描述符表地址不确定，需要靠IDTR记录</li>
-<li>实模式通过中断向量中的基址加偏移量寻址；保护模式通过中断描述符中的段选择符加偏移量，再通过查全局或局部描述符表寻址</li>
-</ul>
-<h4 id="15、如何识别键盘组合键（如shift-a）是否还有其他解决方案？"><a href="#15、如何识别键盘组合键（如shift-a）是否还有其他解决方案？" class="headerlink" title="15、如何识别键盘组合键（如shift+a）是否还有其他解决方案？"></a>15、如何识别键盘组合键（如shift+a）是否还有其他解决方案？</h4><p>建⽴扫描码的解析数组记录⼀个键在组合及⾮组合状态下的实际值并设置缓冲区；声明了组合键中前者（shift、ctrl 等）相应变量，若出现其make code或break code，设置其标志位以便与其他⾮组合键组合在解析数组中找到相应实际值</p>
-<h4 id="16、IDT是什么，有什么作用？"><a href="#16、IDT是什么，有什么作用？" class="headerlink" title="16、IDT是什么，有什么作用？"></a>16、IDT是什么，有什么作用？</h4><ul>
-<li>中断描述符表</li>
-<li>存放中断描述符，中断描述符记录着偏移量、段选择符、访问权限。</li>
-</ul>
-<h4 id="17、IDT中有几种描述符？"><a href="#17、IDT中有几种描述符？" class="headerlink" title="17、IDT中有几种描述符？"></a>17、IDT中有几种描述符？</h4><ul>
-<li>任务门、中断门和自陷门</li>
-</ul>
-<h4 id="18、异常的分类？"><a href="#18、异常的分类？" class="headerlink" title="18、异常的分类？"></a>18、异常的分类？</h4><ul>
-<li>Fault：可被更正的异常，一旦被更正程序可以不失连续性地继续执行。返回地址是产生fault的指令。</li>
-<li>Trap：一种在发生trap的指令执行之后立即被报告的异常，它也允许程序或任务不失连续性地继续执行。返回地址是产生trap的指令之后的那条指令。</li>
-<li>Abort：不总是报告精确异常发生位置的异常，不允许程序或任务继续执行，而是用来报告严重错误的</li>
-</ul>
-<h4 id="19、用户态和内核态的特权级分别是多少？"><a href="#19、用户态和内核态的特权级分别是多少？" class="headerlink" title="19、用户态和内核态的特权级分别是多少？"></a>19、用户态和内核态的特权级分别是多少？</h4><ul>
-<li>用户3</li>
-<li>内核0</li>
-</ul>
-<h4 id="20、中断向量表中，每个中断有几个字节？里面的结构是什么？"><a href="#20、中断向量表中，每个中断有几个字节？里面的结构是什么？" class="headerlink" title="20、中断向量表中，每个中断有几个字节？里面的结构是什么？"></a>20、中断向量表中，每个中断有几个字节？里面的结构是什么？</h4><ul>
-<li>4</li>
-<li>低地址两个Byte放偏移量</li>
-<li>高地址两个Byte放段描述符</li>
-</ul>
-<h4 id="21、中断异常共同点（至少两点），不同点（至少三点）"><a href="#21、中断异常共同点（至少两点），不同点（至少三点）" class="headerlink" title="21、中断异常共同点（至少两点），不同点（至少三点）"></a>21、中断异常共同点（至少两点），不同点（至少三点）</h4><p><strong>共同点</strong>：</p>
-<ul>
-<li>都是程序执行过程中的强制性转移，转移到相应的处理程序</li>
-<li>都是软件或者硬件发生了某种情形而通知处理器的行为</li>
-</ul>
-<p><strong>不同点</strong>：</p>
-<ul>
-<li><p>中断，是CPU所具备的功能。通常因为“硬件”而随机发生。</p>
-<p>异常，是“软件”运行过程中的一种开发过程中没有考虑到的程序错误。 </p>
-</li>
-<li><p>中断是CPU暂停当前工作，有计划地去处理其他的事情。中断的发生一般是可以预知的，处理的过程也是事先制定好的。处理中断时程序是正常运行的。</p>
-<p>异常是CPU遇到了无法响应的工作，而后进入一种非正常状态。异常的出现表明程序有缺陷。</p>
-</li>
-<li><p>中断是由于当前程序无关的中断信号触发的，CPU对中断的响应是被动的，且与CPU模式无关。既可以发生在用户态，又可以发生在核心态。</p>
-<p>异常是由CPU控制单元产生的，大部分异常发生在用户态。</p>
-</li>
+<h4 id="9、console结构体中大概包括哪些内容"><a href="#9、console结构体中大概包括哪些内容" class="headerlink" title="9、console结构体中大概包括哪些内容"></a>9、console结构体中大概包括哪些内容</h4><ul>
+<li>当前显示到了显存的什么位置</li>
+<li>当前控制台占的显存的起始位置</li>
+<li>当前控制台占的显存大小</li>
+<li>当前光标位置</li>
 </ul>
 
                 
@@ -565,7 +483,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://l-htian.github.io/posts/12b71a91/">https://l-htian.github.io/posts/12b71a91/</a>
+                    <a href="https://l-htian.github.io/posts/b537eefd/">https://l-htian.github.io/posts/b537eefd/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -648,9 +566,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/posts/b537eefd/">
                     <div class="card-image">
@@ -668,9 +587,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -683,6 +602,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -701,19 +621,19 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/acf26814/">
+                <a href="/posts/12b71a91/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="操作系统第二次问答">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="操作系统第三次问答">
                         
-                        <span class="card-title">操作系统第二次问答</span>
+                        <span class="card-title">操作系统第三次问答</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第二次问答相关整理
+                            第三次问答相关整理
                         
                     </div>
                     <div class="publish-info">
