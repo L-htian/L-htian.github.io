@@ -421,17 +421,17 @@
 <p><strong>SS</strong>：堆栈段寄存器</p>
 <p><strong>ES</strong>：附加段寄存器</p>
 <h5 id="控制寄存器："><a href="#控制寄存器：" class="headerlink" title="控制寄存器："></a>控制寄存器：</h5><p><strong>IP</strong>：指令指针寄存器，16位专用寄存器，指向当前需要取出的指令字节。当总线接口单元从内存中取出一个指令字节后，IP自动加一，指向下一个指令字节。IP指向的是指令地址的段内地址偏移量。</p>
-<p><strong>flags</strong>：标志寄存器，又包括CF,SF,ZF,OF,AF,PF,DF,TF,IF</p>
+<p><strong>flags</strong>：标志寄存器，又包括<strong>CF,SF,ZF,OF,AF,PF,DF,TF,IF</strong></p>
 <ul>
-<li>进位标志CF：记录运算时最高有效位产生的进位值</li>
-<li>符号标志SF：记录运算结果的符号，结果为负时置1，否则置0</li>
-<li>零标志ZF：运算结果为0时置1，否则置0</li>
-<li>溢出标志OF：操作数超过了机器可表示的范围称为溢出。溢出置1，否则置0</li>
-<li>辅助进位标志AF：记录运算时第3位（半个字节）产生的进位值、</li>
-<li>奇偶标志PF：用来为机器中传送信息时可能产生的代码出错情况提供检验条件。操作数1的个数为偶数时置1，否则置0</li>
-<li>方向标志DF：串处理指令时控制处理信息的方向。DF为1时，串处理从高地址向低地址方向处理。为0时，从低地址向高地址方向处理。</li>
-<li>陷阱标志TF：调试时的单步方式操作。TF为1，每条指令执行完产生陷阱，系统控制计算机。TF为0，CPU正常工作，不产生陷阱</li>
-<li>中断标志IF：控制可屏蔽硬件中断。IF为1时，允许8086处理器响应中断请求。</li>
+<li>进位标志<strong>CF</strong>：记录运算时最高有效位产生的进位值</li>
+<li>符号标志<strong>SF</strong>：记录运算结果的符号，结果为负时置1，否则置0</li>
+<li>零标志<strong>ZF</strong>：运算结果为0时置1，否则置0</li>
+<li>溢出标志<strong>OF</strong>：操作数超过了机器可表示的范围称为溢出。溢出置1，否则置0</li>
+<li>辅助进位标志<strong>AF</strong>：记录运算时第3位（半个字节）产生的进位值、</li>
+<li>奇偶标志<strong>PF</strong>：用来为机器中传送信息时可能产生的代码出错情况提供检验条件。操作数1的个数为偶数时置1，否则置0</li>
+<li>方向标志<strong>DF</strong>：串处理指令时控制处理信息的方向。DF为1时，串处理从高地址向低地址方向处理。为0时，从低地址向高地址方向处理。</li>
+<li>陷阱标志<strong>TF</strong>：调试时的单步方式操作。TF为1，每条指令执行完产生陷阱，系统控制计算机。TF为0，CPU正常工作，不产生陷阱</li>
+<li>中断标志<strong>IF</strong>：控制可屏蔽硬件中断。IF为1时，允许8086处理器响应中断请求。</li>
 </ul>
 <h5 id="指针寄存器："><a href="#指针寄存器：" class="headerlink" title="指针寄存器："></a>指针寄存器：</h5><p><strong>SP</strong>：堆栈寄存器，指定栈顶的段偏移地址和SS决定的栈段地址，一起决定了栈顶元素的地址</p>
 <p><strong>BP</strong>：基址寄存器，给出堆栈中数据区基址的偏移、</p>
@@ -444,12 +444,12 @@
 <h4 id="什么是寻址？立即寻址和直接寻址的区别是什么？"><a href="#什么是寻址？立即寻址和直接寻址的区别是什么？" class="headerlink" title="什么是寻址？立即寻址和直接寻址的区别是什么？"></a>什么是寻址？立即寻址和直接寻址的区别是什么？</h4><p><strong>寻址</strong>：找到操作数的地址</p>
 <p><strong>立即寻址</strong>：直接给出了操作数，事实上没有寻址</p>
 <p><strong>直接寻址</strong>：直接给出了地址，用[]取操作数</p>
-<h4 id="请举例说明寄存器间接寻址、寄存器相对寻址、基址加变址寻址、相对基址加变址寻址四种方式的区别"><a href="#请举例说明寄存器间接寻址、寄存器相对寻址、基址加变址寻址、相对基址加变址寻址四种方式的区别" class="headerlink" title="请举例说明寄存器间接寻址、寄存器相对寻址、基址加变址寻址、相对基址加变址寻址四种方式的区别"></a>请举例说明寄存器间接寻址、寄存器相对寻址、基址加变址寻址、相对基址加变址寻址四种方式的区别</h4><p><strong>寄存器间接寻址</strong>：操作数有效地址存在寄存器中 MOV AX [BX]</p>
-<p><strong>寄存器相对寻址</strong>：以指定的寄存器内容加上指令给出的位移量MOV AX [SI+3]</p>
-<p><strong>基址加变址寻址</strong>：把一个基址寄存器的内容，加上变址寄存器的内容，并以一个段寄存器为地址基准 MOV AX [BX+DI]</p>
+<h4 id="请举例说明寄存器间接寻址、寄存器相对寻址、基址加变址寻址、相对基址加变址寻址四种方式的区别"><a href="#请举例说明寄存器间接寻址、寄存器相对寻址、基址加变址寻址、相对基址加变址寻址四种方式的区别" class="headerlink" title="请举例说明寄存器间接寻址、寄存器相对寻址、基址加变址寻址、相对基址加变址寻址四种方式的区别"></a>请举例说明寄存器间接寻址、寄存器相对寻址、基址加变址寻址、相对基址加变址寻址四种方式的区别</h4><p><strong>寄存器间接寻址</strong>：操作数有效地址存在寄存器中 <code>MOV AX [BX]</code></p>
+<p><strong>寄存器相对寻址</strong>：以指定的寄存器内容加上指令给出的位移量<code>MOV AX [SI+3]</code></p>
+<p><strong>基址加变址寻址</strong>：把一个基址寄存器的内容，加上变址寄存器的内容，并以一个段寄存器为地址基准<code> MOV AX [BX+DI]</code></p>
 <p><strong>相对基址加变址</strong>：在基址加变址的基础上再加上指令给出的位移量</p>
 <h4 id="请分别简述MOV-指令和LEA-指令的用法和作用？"><a href="#请分别简述MOV-指令和LEA-指令的用法和作用？" class="headerlink" title="请分别简述MOV 指令和LEA 指令的用法和作用？"></a>请分别简述MOV 指令和LEA 指令的用法和作用？</h4><p><strong>MOV指令</strong>：MOV指令是数据传送指令，也是最基本的编程指令，用于将一个数据从源地址传送到目标地址</p>
-<p><strong>LEA指令</strong>：有效地址传送指令，LEA 目的，源  ；取源操作数地址的偏移量，并把它传送到目的操作数所在的单元。</p>
+<p><strong>LEA指令</strong>：有效地址传送指令，<code>LEA 目的，源 </code> ；取源操作数地址的偏移量，并把它传送到目的操作数所在的单元。</p>
 <p>MOV取的是内容，LEA取的是地址</p>
 <h4 id="请说出主程序与子程序之间至少三种参数传递方式"><a href="#请说出主程序与子程序之间至少三种参数传递方式" class="headerlink" title="请说出主程序与子程序之间至少三种参数传递方式"></a>请说出主程序与子程序之间至少三种参数传递方式</h4><ul>
 <li><strong>利用寄存器传递参数</strong></li>
@@ -603,30 +603,29 @@ int <span class="token number">80h</span> <span aria-hidden="true" class="line-n
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/posts/eea2315b/">
+                <a href="/posts/acf26814/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="操作系统第一次问答">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="操作系统第二次问答">
                         
-                        <span class="card-title">操作系统第一次问答</span>
+                        <span class="card-title">操作系统第二次问答</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第一次问答相关整理
+                            第二次问答相关整理
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-29
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-29
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -639,7 +638,6 @@ int <span class="token number">80h</span> <span aria-hidden="true" class="line-n
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -887,7 +885,7 @@ int <span class="token number">80h</span> <span aria-hidden="true" class="line-n
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">7.2k</span>&nbsp;
+                class="white-color">9k</span>&nbsp;
             
             
             
