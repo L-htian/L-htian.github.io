@@ -1,0 +1,2009 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="操作系统复习, Erio">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>操作系统复习 | Erio</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="https://v1.hitokoto.cn/?c=d&encode=js&select=%23hitokoto" defer></script>
+<!--    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>-->
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+    .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+        .loading-text{
+            font-size: 1.5rem;
+        }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+</style>
+<script>
+    (function () {
+        const loaded = function(){
+            setTimeout(function(){
+                const loader = document.getElementById("loading-container");
+                loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+                // document.getElementById("body-wrap").style.display="flex";
+                setTimeout(function(){
+                    loader.style.display="none";
+                },2500);
+            },1000);//强制显示loading page 1s
+        };
+        loaded();
+    })()
+</script>
+
+
+   <style>
+    body{
+       background-image: url(https://s3.ax1x.com/2020/12/09/rCtuWQ.png);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    
+        <div id="loading-container">
+            <p class="loading-text">Loading . . . </p>
+        <div class="loading-image">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        </div>
+    
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Erio</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Erio</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">操作系统复习</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                                <span class="chip bg-color">复习</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                操作系统
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-01-16
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-01-16
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    7.3k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    26 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="操作系统PPT部分"><a href="#操作系统PPT部分" class="headerlink" title="操作系统PPT部分"></a>操作系统PPT部分</h1><h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><h3 id="1-3-计算机软件系统"><a href="#1-3-计算机软件系统" class="headerlink" title="1.3 计算机软件系统"></a>1.3 计算机软件系统</h3><h4 id="软件系统的组成"><a href="#软件系统的组成" class="headerlink" title="软件系统的组成"></a>软件系统的组成</h4><ul>
+<li><p><strong>系统软件</strong>：操作系统、实用程序、语言处理程序、数据库管理系统</p>
+<ul>
+<li>操作系统实施对各种软硬件资源的管理控制</li>
+<li>实用程序为方便用户所设，如文本编辑等</li>
+<li>语言处理程序把用汇编语言/高级语言编写的程序，翻译成可执行的机器语言程序</li>
+</ul>
+</li>
+<li><p><strong>支撑软件</strong>：接口软件、工具软件、环境数据库</p>
+</li>
+<li><p><strong>应用软件</strong>：用户按其需要自行编写的专用程序</p>
+</li>
+</ul>
+<p><img src="image-20210106134338632.png"></p>
+<h3 id="1-5-计算机操作系统"><a href="#1-5-计算机操作系统" class="headerlink" title="1.5 计算机操作系统"></a>1.5 计算机操作系统</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ul>
+<li>从用户角度看，OS管理计算机系统的各种资源，扩充硬件的功能，控制程序的执行</li>
+<li>从人机交互看，OS是用户与机器的接口，提供良好的人机界面，方便用户使用计算机，在整个计算机系统中具有承上启下的地位。</li>
+<li>从系统结构看，OS是一个大型软件系统，其功能复杂，体系庞大，采用层次是、模块化的程序结构</li>
+</ul>
+<h4 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h4><ul>
+<li><p>从操作控制方式看</p>
+<ul>
+<li>多道批处理操作系统，脱机控制方式</li>
+<li>分时操作系统，交互式控制方式</li>
+<li>实时操作系统</li>
+</ul>
+</li>
+<li><p>从应用领域看</p>
+<ul>
+<li>服务器操作系统、并行操作系统</li>
+<li>网络操作系统、分布式操作系统</li>
+<li>个人机操作系统、手机操作系统</li>
+<li>嵌入式操作系统、传感器操作系统</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-6-从资源管理的角度"><a href="#1-6-从资源管理的角度" class="headerlink" title="1.6 从资源管理的角度"></a>1.6 从资源管理的角度</h3><h4 id="计算机系统的资源"><a href="#计算机系统的资源" class="headerlink" title="计算机系统的资源"></a>计算机系统的资源</h4><ul>
+<li><p>硬件资源</p>
+<ul>
+<li>处理器：哪个程序占用处理器运行？</li>
+<li>内存：程序/数据在内存中如何分布？</li>
+<li>外设：如何分配、去配和使用设备？</li>
+</ul>
+</li>
+<li><p>信息资源：如何去访问文件信息？如何管理进程之间的通信？</p>
+<ul>
+<li>数据、程序</li>
+</ul>
+</li>
+</ul>
+<h4 id="资源的共享与分配方式"><a href="#资源的共享与分配方式" class="headerlink" title="资源的共享与分配方式"></a>资源的共享与分配方式</h4><ul>
+<li><p>共享方式</p>
+<ul>
+<li>独占使用</li>
+<li>并发使用</li>
+</ul>
+</li>
+<li><p>分配策略</p>
+<ul>
+<li>静态分配</li>
+<li>动态分配</li>
+<li>资源抢占</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-7-从控制程序执行的视角"><a href="#1-7-从控制程序执行的视角" class="headerlink" title="1.7 从控制程序执行的视角"></a>1.7 从控制程序执行的视角</h3><h4 id="多道程序设计"><a href="#多道程序设计" class="headerlink" title="多道程序设计"></a>多道程序设计</h4><p>让多个程序同时进入计算机的主存储器进行计算</p>
+<h4 id="多道程序设计的优点"><a href="#多道程序设计的优点" class="headerlink" title="多道程序设计的优点"></a>多道程序设计的优点</h4><ul>
+<li>CPU与外部设备充分并行</li>
+<li>外部设备之间充分并行</li>
+<li>发挥CPU的使用效率</li>
+<li>提高单位时间的算题量</li>
+</ul>
+<h4 id="多道程序系统的实现"><a href="#多道程序系统的实现" class="headerlink" title="多道程序系统的实现"></a>多道程序系统的实现</h4><ul>
+<li>为进入内存执行的程序建立管理实体：<strong>进程</strong></li>
+<li>OS应能管理与控制进程程序的执行</li>
+<li>OS协调管理各类资源在进程间的使用<ul>
+<li>处理器的管理和调度</li>
+<li>主存储器的管理和调度</li>
+<li>其他资源的管理和调度</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-8-从操作系统控制计算机的角度"><a href="#1-8-从操作系统控制计算机的角度" class="headerlink" title="1.8 从操作系统控制计算机的角度"></a>1.8 从操作系统控制计算机的角度</h3><h4 id="命令解释程序的处理过程"><a href="#命令解释程序的处理过程" class="headerlink" title="命令解释程序的处理过程"></a>命令解释程序的处理过程</h4><ul>
+<li>OS启动命令解释程序，输出命令提示符，等待键盘中断/鼠标点击/多通道识别</li>
+<li>每当用户输入一条命令（暂存在命令缓冲区）并按回车换行时，申请中断</li>
+<li>CPU响应后，将控制权交给命令解释程序，接着读入命令缓冲区内容，分析命令、接受参数，执行处理代码</li>
+<li>前台命令执行结束后，再次输出命令提示符，等待下一条命令</li>
+<li>后台命令处理启动后，即可接受下条命令</li>
+</ul>
+<h3 id="1-10-从程序接口的角度"><a href="#1-10-从程序接口的角度" class="headerlink" title="1.10 从程序接口的角度"></a>1.10 从程序接口的角度</h3><h4 id="操作系统的程序接口"><a href="#操作系统的程序接口" class="headerlink" title="操作系统的程序接口"></a>操作系统的程序接口</h4><ul>
+<li>系统调用</li>
+<li>操作系统实现的完成某种特定功能的过程</li>
+<li>为所有运行程序提供访问操作系统的接口</li>
+</ul>
+<h4 id="系统调用实现机制"><a href="#系统调用实现机制" class="headerlink" title="系统调用实现机制"></a>系统调用实现机制</h4><ul>
+<li><strong>陷入处理机制</strong>：计算机系统中控制和实现系统调用的机制</li>
+<li><strong>陷入指令</strong>：也称访管指令，或异常中断指令，计算机系统为实现系统调用而引起处理器中断的指令</li>
+<li>每个系统调用都事先规定了编号，并在约定寄存器中规定了传递给内部处理程序的参数</li>
+</ul>
+<h4 id="系统调用的实现要点"><a href="#系统调用的实现要点" class="headerlink" title="系统调用的实现要点"></a>系统调用的实现要点</h4><ul>
+<li>编写系统调用处理程序</li>
+<li>设计一张系统调用入口地址表，每个入口地址指向一个系统调用的处理程序，并包含系统调用自带参数的个数</li>
+<li>陷入处理机制需开辟现场保护区，以保存发生系统调用时的处理器现场</li>
+</ul>
+<h3 id="1-11-系统结构的视角"><a href="#1-11-系统结构的视角" class="headerlink" title="1.11 系统结构的视角"></a>1.11 系统结构的视角</h3><h4 id="操作系统软件的结构设计"><a href="#操作系统软件的结构设计" class="headerlink" title="操作系统软件的结构设计"></a>操作系统软件的结构设计</h4><ul>
+<li><strong>OS构件</strong>：内核、进程、线程、管程等</li>
+<li><strong>设计概念</strong>：模块化、层次式、虚拟化</li>
+<li><strong>内核设计</strong>是OS设计中最为复杂的部分</li>
+</ul>
+<p><img src="image-20210106143353457.png"></p>
+<p><img src="image-20210106143735888.png"></p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><h3 id="2-1-处理器与寄存器"><a href="#2-1-处理器与寄存器" class="headerlink" title="2.1 处理器与寄存器"></a>2.1 处理器与寄存器</h3><h4 id="用户可见寄存器"><a href="#用户可见寄存器" class="headerlink" title="用户可见寄存器"></a>用户可见寄存器</h4><p>可以使程序员减少访问主存储器的次数，提高指令执行的效率</p>
+<ul>
+<li><strong>数据寄存器</strong></li>
+<li><strong>地址寄存器</strong>：索引、栈指针、段地址等寄存器</li>
+</ul>
+<h4 id="控制与状态寄存器"><a href="#控制与状态寄存器" class="headerlink" title="控制与状态寄存器"></a>控制与状态寄存器</h4><p> 用于控制处理器的操作；主要被具有特权的操作系统程序使用，以控制程序的执行</p>
+<ul>
+<li><strong>程序计数器PC</strong>：存储将取指令的地址</li>
+<li><strong>指令寄存器IR</strong>：存储最近使用的指令</li>
+<li><strong>条件码CC</strong>：CPU为指令操作结果设置的位，标志正/负/零/溢出等结果</li>
+<li><strong>标志位</strong>：中断位、中断允许位、中断屏蔽位、处理器模式位、内存保护位等</li>
+</ul>
+<h4 id="程序状态字PSW"><a href="#程序状态字PSW" class="headerlink" title="程序状态字PSW"></a>程序状态字PSW</h4><ul>
+<li><p>PSW既是操作系统的概念，指记录当前程序运行的动态信息，通常包含：</p>
+<ul>
+<li>程序计数器，指令寄存器，条件码</li>
+<li>中断字，中断允许/禁止，中断屏蔽，处理器模式，内存保护、调试控制</li>
+</ul>
+</li>
+<li><p>PSW也是计算机系统的寄存器</p>
+<ul>
+<li>通常设置一组控制与状态寄存器</li>
+<li>也可以专设一个PSW寄存器</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-指令与处理器模式"><a href="#2-2-指令与处理器模式" class="headerlink" title="2.2 指令与处理器模式"></a>2.2 指令与处理器模式</h3><h4 id="处理器模式"><a href="#处理器模式" class="headerlink" title="处理器模式"></a>处理器模式</h4><ul>
+<li>0-操作系统内核    <strong>内核态</strong></li>
+<li>1-系统调用</li>
+<li>2-共享库程序</li>
+<li>3-用户指令等保护级别  <strong>用户态</strong></li>
+</ul>
+<h4 id="处理器模式的切换"><a href="#处理器模式的切换" class="headerlink" title="处理器模式的切换"></a>处理器模式的切换</h4><p>中断、异常、系统异常等事件导致用户程序向OS内核切换，触发用户模式向内核模式的切换</p>
+<ul>
+<li>程序请求操作系统服务</li>
+<li>程序运行时发生异常</li>
+<li>程序运行时发生并响应中断</li>
+</ul>
+<p>处理完成后，调用中断返回指令，触发内核模式向用户模式的切换</p>
+<h3 id="2-3-中断与中断源"><a href="#2-3-中断与中断源" class="headerlink" title="2.3 中断与中断源"></a>2.3 中断与中断源</h3><h4 id="中断概念"><a href="#中断概念" class="headerlink" title="中断概念"></a>中断概念</h4><p><strong>广义</strong>：中断是指程序执行过程中，遇到急需处理的事件时，暂时中止CPU上现行程序的运行，转去执行相应的事件处理程序，待处理完成后再返回原程序被中断处或调度其他程序执行的过程</p>
+<p><strong>狭义</strong>：来源于处理器之外的中断事件，即与当前运行指令无关的中断事件，如I/O中断、时钟中断、外部信号中断等</p>
+<p><em>中断是激活操作系统的唯一方式</em></p>
+<h4 id="异常概念"><a href="#异常概念" class="headerlink" title="异常概念"></a>异常概念</h4><p>指当前运行指令引起的中断事件，如地址异常、算术异常、处理器硬件故障等</p>
+<h4 id="系统异常概念"><a href="#系统异常概念" class="headerlink" title="系统异常概念"></a>系统异常概念</h4><p>指执行陷入指令而触发系统调用引起的中断事件，如请求设备、请求I/O、创建进程等</p>
+<h4 id="中断源"><a href="#中断源" class="headerlink" title="中断源"></a>中断源</h4><h5 id="处理器硬件故障中断事件"><a href="#处理器硬件故障中断事件" class="headerlink" title="处理器硬件故障中断事件"></a>处理器硬件故障中断事件</h5><p><strong>原因</strong>：由处理器、内存储器、总线等硬件故障引起</p>
+<p><strong>处理原则</strong>：保护现场、停止设备、停止CPU、向操作员报告，等待人工干预</p>
+<h5 id="程序性中断事件"><a href="#程序性中断事件" class="headerlink" title="程序性中断事件"></a>程序性中断事件</h5><p><strong>原因</strong>：处理器执行机器指令引起</p>
+<ul>
+<li><p>除数为0、操作数溢出等算术异常</p>
+<p><strong>处理原则</strong>：简单处理，报告用户；也可以用户编写中断续元程序处理</p>
+</li>
+<li><p>非法指令、用户态使用特权指令、地址越界、非法存取等指令异常</p>
+<p><strong>处理原则</strong>：终止指令</p>
+</li>
+<li><p>终止进程指令</p>
+<p><strong>处理原则</strong>：终止指令</p>
+</li>
+<li><p>虚拟地址异常</p>
+<p><strong>处理原则</strong>：调整内存后重新执行指令</p>
+</li>
+</ul>
+<h5 id="自愿性中断事件"><a href="#自愿性中断事件" class="headerlink" title="自愿性中断事件"></a>自愿性中断事件</h5><p><strong>原因</strong>：处理器执行陷入指令请求OS服务引起；一般被称作系统调用</p>
+<ul>
+<li>请求分配外设、请求I/O等待</li>
+</ul>
+<p><strong>处理原则</strong>：陷入OS，保护现场，根据功能号查入口地址，跳转具体处理程序</p>
+<h5 id="I-O中断事件"><a href="#I-O中断事件" class="headerlink" title="I/O中断事件"></a>I/O中断事件</h5><p><strong>原因</strong>：来源于外围设备报告I/O状态的中断事件</p>
+<ul>
+<li><p>I/O完成</p>
+<p><strong>处理原则</strong>：调整进程状态，释放等待进程</p>
+</li>
+<li><p>I/O出错</p>
+<p><strong>处理原则</strong>：等待人工干预</p>
+</li>
+<li><p>I/O异常</p>
+<p><strong>处理原则</strong>：等待人工干预</p>
+</li>
+</ul>
+<h5 id="外部中断事件"><a href="#外部中断事件" class="headerlink" title="外部中断事件"></a>外部中断事件</h5><p><strong>原因</strong>：由外围设备发出的信号引起的中断事件</p>
+<ul>
+<li><p>时钟中断、间隔时钟中断</p>
+<p><strong>处理原则</strong>：计时与时间片处理</p>
+</li>
+<li><p>设备报到与结束中断</p>
+<p><strong>处理原则</strong>：调整设备表</p>
+</li>
+<li><p>键盘/鼠标信号中断</p>
+<p><strong>处理原则</strong>：根据信号做出相应反应</p>
+</li>
+<li><p>关机/重启动中断</p>
+<p><strong>处理原则</strong>：写回文件，停止设备与CPU</p>
+</li>
+</ul>
+<h3 id="2-5-中断系统"><a href="#2-5-中断系统" class="headerlink" title="2.5 中断系统"></a>2.5 中断系统</h3><h4 id="中断系统"><a href="#中断系统" class="headerlink" title="中断系统"></a>中断系统</h4><h5 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h5><p>是计算机系统中响应和处理中断的系统包括硬件子系统和软件子系统</p>
+<ul>
+<li>中断响应由硬件子系统完成</li>
+<li>中断处理由软件子系统完成</li>
+</ul>
+<h4 id="中断装置"><a href="#中断装置" class="headerlink" title="中断装置"></a>中断装置</h4><h5 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h5><p>计算机系统中发现并响应中断/异常的硬件装置</p>
+<h5 id="类型-1"><a href="#类型-1" class="headerlink" title="类型"></a>类型</h5><ul>
+<li>处理器外的中断：由中断控制器发现和响应</li>
+<li>处理器内的异常：由指令的控制逻辑和实现线路发现和响应，响应机制称为陷阱</li>
+<li>请求OS服务的系统异常：处理器执行陷入指令时直接触发，响应机制称为系统陷阱</li>
+</ul>
+<h4 id="中断控制器"><a href="#中断控制器" class="headerlink" title="中断控制器"></a>中断控制器</h4><h5 id="概念-3"><a href="#概念-3" class="headerlink" title="概念"></a>概念</h5><p>CPU中的一个控制部件，包括中断控制逻辑线路和中断寄存器</p>
+<ul>
+<li>外部设备向其发出中断请求IRQ，在中断寄存器中设置已发生的中断</li>
+<li>指令处理结束前，会检查中断寄存器，若由不被屏蔽的中断产生，则改变处理器内操作的顺序，引出操作系统中的中断处理程序</li>
+</ul>
+<h4 id="陷阱与系统陷阱"><a href="#陷阱与系统陷阱" class="headerlink" title="陷阱与系统陷阱"></a>陷阱与系统陷阱</h4><h5 id="概念-4"><a href="#概念-4" class="headerlink" title="概念"></a>概念</h5><p>指令的逻辑和实现线路的一部分，陷阱指令可以使执行流程从用户态陷入内核并把控制权转移给操作系统，使得用户程序可以调用内核函数和使用硬件从而获得操作系统所提供的服务</p>
+<h4 id="中断响应过程"><a href="#中断响应过程" class="headerlink" title="中断响应过程"></a>中断响应过程</h4><ul>
+<li>发现中断源</li>
+<li>中断当前程序的执行</li>
+<li>转向操作系统的中断处理程序</li>
+</ul>
+<p><img src="image-20210106162746637.png"></p>
+<h3 id="2-8-进程及其状态"><a href="#2-8-进程及其状态" class="headerlink" title="2.8 进程及其状态"></a>2.8 进程及其状态</h3><h4 id="进程的提出"><a href="#进程的提出" class="headerlink" title="进程的提出"></a>进程的提出</h4><ul>
+<li>操作系统必须全方位的管理计算机系统中运行的程序</li>
+<li>因此，操作系统为正在运行的程序建立了一个管理实体：<strong>进程</strong></li>
+</ul>
+<h4 id="进程的概念"><a href="#进程的概念" class="headerlink" title="进程的概念"></a>进程的概念</h4><ul>
+<li>进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动</li>
+<li>进程是操作系统进行资源分配和调度的一个独立单位</li>
+</ul>
+<h4 id="进程组成"><a href="#进程组成" class="headerlink" title="进程组成"></a>进程组成</h4><ul>
+<li>数据结构P（OS管理运行程序的）</li>
+<li>内存代码C（运行程序的）</li>
+<li>内存数据D（运行程序的）</li>
+<li>通用寄存器信息R（运行程序的）</li>
+<li>程序状态字信息PSW（OS控制程序执行的）</li>
+</ul>
+<h4 id="概念级的进程状态"><a href="#概念级的进程状态" class="headerlink" title="概念级的进程状态"></a>概念级的进程状态</h4><p><strong>运行态</strong>：进程占有处理器运行</p>
+<p><strong>就绪态</strong>：进程具备运行条件等待处理器运行</p>
+<p><strong>等待态</strong>：进程由于等待资源、输入输出、信号等而不具备运行条件</p>
+<p><img src="image-20210106164538262.png"></p>
+<p><strong>运行态→等待态</strong>：等待资源、I/O、信号</p>
+<p><strong>等待态→就绪态</strong>：资源满足、I/O结束、信号完成</p>
+<p><strong>就绪态→运行态</strong>：处理器空闲时选择更高优先级进程抢占</p>
+<p><strong>运行态→就绪态</strong>：运行时间片到、有更高优先级进程</p>
+<h4 id="进程挂起"><a href="#进程挂起" class="headerlink" title="进程挂起"></a>进程挂起</h4><h5 id="概念-5"><a href="#概念-5" class="headerlink" title="概念"></a>概念</h5><p>计算机系统运行过程中出现资源不足的情况（性能低、死锁）</p>
+<h5 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h5><p>剥夺某些今晨给的内存及其他资源，调入OS管理的对换区，不参与进程调度，待适当时候再调入内存、恢复资源、参与运行</p>
+<h5 id="与等待态的区别"><a href="#与等待态的区别" class="headerlink" title="与等待态的区别"></a>与等待态的区别</h5><p>等待态仍然占有已申请到的资源，而挂起态没有任何资源</p>
+<p><img src="image-20210106170845756.png"></p>
+<h4 id="进程调度算法"><a href="#进程调度算法" class="headerlink" title="进程调度算法"></a>进程调度算法</h4><h5 id="FCFS-（先来先服务）"><a href="#FCFS-（先来先服务）" class="headerlink" title="FCFS （先来先服务）"></a>FCFS （先来先服务）</h5><ul>
+<li>当某个进程就绪时，都加入就绪队列(readyqueue)</li>
+<li>当前正在运行的进程停止执行时，选择在就绪队列到存在时间最长的进程运行</li>
+<li>对短进程不利</li>
+<li>偏袒计算为主的进程</li>
+</ul>
+<h5 id="RR-（时间片轮转）"><a href="#RR-（时间片轮转）" class="headerlink" title="RR （时间片轮转）"></a>RR （时间片轮转）</h5><ul>
+<li>基于时钟做抢占式调度</li>
+<li>以一个周期性间隔产生时钟中断，当中断发生时，当前正在运行的进程被置于就绪队列中，然后基于FCFS策略选择下一个就绪进程运行</li>
+</ul>
+<h5 id="SPN-最短进程优先"><a href="#SPN-最短进程优先" class="headerlink" title="SPN (最短进程优先)"></a>SPN (最短进程优先)</h5><ul>
+<li>非抢占式调度</li>
+<li>选择所需处理时间最短的进程</li>
+<li>短进程将会越过长进程，优先获得调度</li>
+<li>只要持续不断地提供更短的进程，长进程就有可能饿死。</li>
+</ul>
+<h5 id="SRTF-（最短剩余时间优先）"><a href="#SRTF-（最短剩余时间优先）" class="headerlink" title="SRTF （最短剩余时间优先）"></a>SRTF （最短剩余时间优先）</h5><ul>
+<li>抢占式调度</li>
+<li>调度器总是选择预期剩余时间更短的进程</li>
+<li>当一个新进程加入就绪队列，他可能比当前运行的进程具有更短的剩余时间，只要该新进就绪，调度器就可能抢占当前正在运行的进程</li>
+</ul>
+<h5 id="HRRF-（最高相应比优先）"><a href="#HRRF-（最高相应比优先）" class="headerlink" title="HRRF （最高相应比优先）"></a>HRRF （最高相应比优先）</h5><ul>
+<li><p>选择响应比最高的</p>
+<p><img src="image-20210109164020574.png"></p>
+</li>
+</ul>
+<h5 id="Feedback-（多级反馈调度）"><a href="#Feedback-（多级反馈调度）" class="headerlink" title="Feedback （多级反馈调度）"></a>Feedback （多级反馈调度）</h5><ul>
+<li>建立多个不同优先级的就绪进程队列</li>
+<li>多个就绪进程队列之间按照优先数调度</li>
+<li>高优先级的就绪进程, 分配的时间片短</li>
+<li>单个就绪进程队列中的进程的优先数和时间片相同，按照先来先服务算法调度</li>
+<li>每当进程被抢占时便降入下一个优先级队列</li>
+</ul>
+<h3 id="2-9-进程的数据描述"><a href="#2-9-进程的数据描述" class="headerlink" title="2.9 进程的数据描述"></a>2.9 进程的数据描述</h3><h4 id="进程控制块（PCB）"><a href="#进程控制块（PCB）" class="headerlink" title="进程控制块（PCB）"></a>进程控制块（PCB）</h4><p>是OS用于记录和刻画进程状态及环境信息的数据结构</p>
+<p><img src="image-20210106172638025.png"></p>
+<h4 id="进程映像（PI）"><a href="#进程映像（PI）" class="headerlink" title="进程映像（PI）"></a>进程映像（PI）</h4><p>某一时刻进程的内容及其执行状态集合</p>
+<ul>
+<li>进程控制块：保存进程的标识信息、状态信息和控制信息</li>
+<li>进程程序块：进程执行的程序空间</li>
+<li>进程数据块：进程处理的数据空间</li>
+<li>核心栈：进程在内核模式下运行时使用的堆栈</li>
+</ul>
+<h4 id="进程上下文（Process-context）"><a href="#进程上下文（Process-context）" class="headerlink" title="进程上下文（Process context）"></a>进程上下文（Process context）</h4><ul>
+<li>用户级上下文：用户程序块/用户数据区/用户栈/用户共享内存</li>
+<li>寄存器上下文：PSW/栈指针/通用寄存器</li>
+<li>系统级上下文：PCB/内存区表/核心栈</li>
+</ul>
+<h3 id="2-10-进程的管理"><a href="#2-10-进程的管理" class="headerlink" title="2.10 进程的管理"></a>2.10 进程的管理</h3><ul>
+<li>进程创建：进程表加一项，申请PCB并初始化，生成标识，建立映像，分配资源，移入就绪队列</li>
+<li>进程撤销：从队列中移除，归还资源，撤销标识，回收PCB，移除进程表项</li>
+<li>进程阻塞：保存现场信息，修改PCB，移入等待队列，调度其他进程执行</li>
+<li>进程唤醒：等待队列中移出，修改PCB，移入就绪队列（该进程优先级高于运行进程触发抢占）</li>
+<li>进程挂起：修改状态并出入相关队列，收回内存等资源送至对换区</li>
+<li>进程激活：分配内存，修改状态并出入相关队列</li>
+</ul>
+<h3 id="2-12-多线程技术概览"><a href="#2-12-多线程技术概览" class="headerlink" title="2.12 多线程技术概览"></a>2.12 多线程技术概览</h3><h4 id="多线程环境下进程的概念"><a href="#多线程环境下进程的概念" class="headerlink" title="多线程环境下进程的概念"></a>多线程环境下进程的概念</h4><p>是操作系统中进行保护和资源分配的独立单位</p>
+<h4 id="多线程环境下线程的概念"><a href="#多线程环境下线程的概念" class="headerlink" title="多线程环境下线程的概念"></a>多线程环境下线程的概念</h4><p>是进程的一条执行路径，是调度的基本单位，同一个进程中的所有线程共享进程获得的主存空间和资源</p>
+<h3 id="2-13-KLT和ULT"><a href="#2-13-KLT和ULT" class="headerlink" title="2.13 KLT和ULT"></a>2.13 KLT和ULT</h3><h4 id="KLT-内核级线程"><a href="#KLT-内核级线程" class="headerlink" title="KLT 内核级线程"></a>KLT 内核级线程</h4><ul>
+<li>线程管理的所有工作由OS内核来做</li>
+<li>OS提供了一个应用程序设计接口API，供开发者使用KLT</li>
+<li>OS直接调度KLT</li>
+</ul>
+<h4 id="ULT-用户级线程"><a href="#ULT-用户级线程" class="headerlink" title="ULT 用户级线程"></a>ULT 用户级线程</h4><ul>
+<li>用户空间的线程库提供多线程应用程序的开发和运行支撑环境</li>
+<li>任何应用程序均需通过线程库进行程序设计，再与线程库连接后运行</li>
+<li>线程管理的所有工作都由应用程序完成，内核没有意识到线程的存在</li>
+</ul>
+<p><img src="image-20210107111444397.png"></p>
+<h3 id="2-15-处理器调度的层次"><a href="#2-15-处理器调度的层次" class="headerlink" title="2.15 处理器调度的层次"></a>2.15 处理器调度的层次</h3><ul>
+<li><p><strong>高级调度</strong>：长程调度，作业调度（是否构成进程）</p>
+<ul>
+<li>决定能否加入到执行的进程池</li>
+</ul>
+</li>
+<li><p><strong>中级调度</strong>：平衡负载调度（哪些进程被允许驻留在主存中参与资源竞争）</p>
+<ul>
+<li>决定主存中的可用进程集合</li>
+</ul>
+</li>
+<li><p><strong>低级调度</strong>：短程调度，进程调度（把处理器分配给就绪态进程或内核级线程）</p>
+<ul>
+<li>决定哪个可用进程占用处理器执行</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20210107112035521.png"></p>
+<h3 id="2-16-处理器调度算法"><a href="#2-16-处理器调度算法" class="headerlink" title="2.16 处理器调度算法"></a>2.16 处理器调度算法</h3><h4 id="时间片轮转调度"><a href="#时间片轮转调度" class="headerlink" title="时间片轮转调度"></a>时间片轮转调度</h4><p>各个进程进入就绪队列的时间先后轮流占用CPU一个时间片</p>
+<h4 id="分级调度"><a href="#分级调度" class="headerlink" title="分级调度"></a>分级调度</h4><p>建立多个不同优先级的就绪进程队列，高优先级的分配时间片短，低优先级的时间片长</p>
+<h4 id="彩票调度"><a href="#彩票调度" class="headerlink" title="彩票调度"></a>彩票调度</h4><p>每个进程有张彩票，调度程序随机选择一张彩票调度</p>
+<h2 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h2><h3 id="3-1-存储器管理的主要模式"><a href="#3-1-存储器管理的主要模式" class="headerlink" title="3.1 存储器管理的主要模式"></a>3.1 存储器管理的主要模式</h3><h4 id="地址"><a href="#地址" class="headerlink" title="地址"></a>地址</h4><ul>
+<li><p><strong>逻辑地址</strong>：相对地址，用户编程所用的地址空间</p>
+<ul>
+<li>从0开始编号<ul>
+<li>一维逻辑地址（地址）</li>
+<li>二维逻辑地址（段号：段内地址）<ul>
+<li>段式程序：把一个程序设计成多个段（代码段、数据段、堆栈段等）</li>
+<li>不是OS存储管理的功能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>物理地址</strong>：绝对地址，程序执行所使用的地址空间</p>
+<ul>
+<li>处理器执行指令按照物理地址进行</li>
+</ul>
+</li>
+</ul>
+<h4 id="基本模式"><a href="#基本模式" class="headerlink" title="基本模式"></a>基本模式</h4><ul>
+<li><strong>单连续存储管理</strong>：一维逻辑地址空间的程序占用一个主存固定分区或可变分区</li>
+<li><strong>段式存储管理</strong>：段式二维逻辑地址空间的程序占用多个主存可变分区</li>
+<li><strong>页式存储管理</strong>：一维逻辑地址空间的程序占用多个主存页架区</li>
+<li><strong>段页式存储管理</strong>：段式二维逻辑地址空间的程序占用多个主存页架区</li>
+</ul>
+<p><img src="image-20210107133113477.png"></p>
+<h3 id="3-7-页式存储管理"><a href="#3-7-页式存储管理" class="headerlink" title="3.7 页式存储管理"></a>3.7 页式存储管理</h3><h4 id="地址-1"><a href="#地址-1" class="headerlink" title="地址"></a>地址</h4><h5 id="逻辑地址"><a href="#逻辑地址" class="headerlink" title="逻辑地址"></a>逻辑地址</h5><p><strong>页号+单元号</strong></p>
+<p><img src="image-20210107135539933.png"></p>
+<h5 id="物理地址"><a href="#物理地址" class="headerlink" title="物理地址"></a>物理地址</h5><p><strong>页架号+单元号</strong></p>
+<p><img src="image-20210107135736318.png"></p>
+<h4 id="转换思路"><a href="#转换思路" class="headerlink" title="转换思路"></a>转换思路</h4><p><img src="image-20210107135830766.png"></p>
+<p><img src="image-20210107140331129.png"></p>
+<h3 id="3-9-页式虚拟存储管理"><a href="#3-9-页式虚拟存储管理" class="headerlink" title="3.9 页式虚拟存储管理"></a>3.9 页式虚拟存储管理</h3><h4 id="地址转换"><a href="#地址转换" class="headerlink" title="地址转换"></a>地址转换</h4><p><img src="image-20210107140620360.png"></p>
+<p><img src="image-20210107140642759.png"></p>
+<h3 id="3-10-页面调度"><a href="#3-10-页面调度" class="headerlink" title="3.10 页面调度"></a>3.10 页面调度</h3><h4 id="OPT页面调度算法"><a href="#OPT页面调度算法" class="headerlink" title="OPT页面调度算法"></a>OPT页面调度算法</h4><p>当要调入新页面时，首先淘汰以后不再访问的页，然后选择距离现在最长时间后再访问的页</p>
+<h4 id="先进先出FIFO页面调度算法"><a href="#先进先出FIFO页面调度算法" class="headerlink" title="先进先出FIFO页面调度算法"></a>先进先出FIFO页面调度算法</h4><p>总是淘汰最先调入主存的那一页，或者说在主存驻留时间最长的那一页</p>
+<h4 id="最近最少用LRU页面调度算法"><a href="#最近最少用LRU页面调度算法" class="headerlink" title="最近最少用LRU页面调度算法"></a>最近最少用LRU页面调度算法</h4><p>淘汰最近一段时间较久未被访问的那一页，即那些刚被使用过的页面可能马上还要被用到</p>
+<h4 id="最不常用LFU页面调度算法"><a href="#最不常用LFU页面调度算法" class="headerlink" title="最不常用LFU页面调度算法"></a>最不常用LFU页面调度算法</h4><p>淘汰最近一段时间访问次数较少的页面</p>
+<h4 id="时钟CLOCK页面调度算法"><a href="#时钟CLOCK页面调度算法" class="headerlink" title="时钟CLOCK页面调度算法"></a>时钟CLOCK页面调度算法</h4><ul>
+<li><p>采用循环队列机制构造页面队列，形成类似于钟表面的环形表</p>
+</li>
+<li><p>队列指针指向要淘汰的页面</p>
+</li>
+</ul>
+<h3 id="3-12-段式存储管理"><a href="#3-12-段式存储管理" class="headerlink" title="3.12 段式存储管理"></a>3.12 段式存储管理</h3><h4 id="概念-6"><a href="#概念-6" class="headerlink" title="概念"></a>概念</h4><ul>
+<li>每个程序可由若干段组成，每一段都是从0开始编址，段内地址连续</li>
+<li>段号：单元号</li>
+</ul>
+<h4 id="地址转换流程"><a href="#地址转换流程" class="headerlink" title="地址转换流程"></a>地址转换流程</h4><p><img src="image-20210107141920485.png"></p>
+<h3 id="3-13-段式虚拟存储管理"><a href="#3-13-段式虚拟存储管理" class="headerlink" title="3.13 段式虚拟存储管理"></a>3.13 段式虚拟存储管理</h3><p><img src="image-20210107142107289.png"></p>
+<h3 id="3-14-段页式存储管理"><a href="#3-14-段页式存储管理" class="headerlink" title="3.14 段页式存储管理"></a>3.14 段页式存储管理</h3><h4 id="地址转换-1"><a href="#地址转换-1" class="headerlink" title="地址转换"></a>地址转换</h4><p><img src="image-20210107142217792.png"></p>
+<h4 id="虚拟存储管理地址转换"><a href="#虚拟存储管理地址转换" class="headerlink" title="虚拟存储管理地址转换"></a>虚拟存储管理地址转换</h4><p><img src="image-20210107142339984.png"></p>
+<h2 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h2><h3 id="4-2-I-O控制方式"><a href="#4-2-I-O控制方式" class="headerlink" title="4.2 I/O控制方式"></a>4.2 I/O控制方式</h3><h4 id="轮询方式"><a href="#轮询方式" class="headerlink" title="轮询方式"></a>轮询方式</h4><p>处理器发送I/O命令，一直等待设备就绪后才开始I/O操作，操作完成后继续其他操作</p>
+<h4 id="中断方式"><a href="#中断方式" class="headerlink" title="中断方式"></a>中断方式</h4><p>发出I/O请求的进程如果不需要等待I/O执行则继续，需要等待则挂起自己等待执行结束后恢复</p>
+<h4 id="DMA"><a href="#DMA" class="headerlink" title="DMA"></a>DMA</h4><p>处理器将I/O操作下放给DMA处理，处理器只发出命令不插手后续</p>
+<h3 id="4-10-磁盘的驱动调度"><a href="#4-10-磁盘的驱动调度" class="headerlink" title="4.10 磁盘的驱动调度"></a>4.10 磁盘的驱动调度</h3><h4 id="调度策略"><a href="#调度策略" class="headerlink" title="调度策略"></a>调度策略</h4><h5 id="移动臂调度"><a href="#移动臂调度" class="headerlink" title="移动臂调度"></a>移动臂调度</h5><ul>
+<li><p>先进先出</p>
+</li>
+<li><p>最短查找时间优先</p>
+</li>
+<li><p>单向扫描</p>
+<ul>
+<li>总向一个方向扫面，归途不提供服务</li>
+</ul>
+</li>
+<li><p>双向扫描</p>
+<ul>
+<li>每次向一个方向移动，遇到I/O请求便处理</li>
+</ul>
+</li>
+<li><p>电梯调度</p>
+<ul>
+<li>每次移动选择沿移动臂移动方向最近的柱面</li>
+<li>移动方向上无请求时改变方向</li>
+</ul>
+</li>
+<li><p>scan</p>
+<ul>
+<li>到头</li>
+</ul>
+</li>
+</ul>
+<h5 id="旋转调度"><a href="#旋转调度" class="headerlink" title="旋转调度"></a>旋转调度</h5><h3 id="4-11-SPOOLing系统"><a href="#4-11-SPOOLing系统" class="headerlink" title="4.11 SPOOLing系统"></a>4.11 SPOOLing系统</h3><h4 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h4><ul>
+<li>预输入程序：将程序从输入设备传送到磁盘输入井</li>
+<li>缓输出程序：将程序从磁盘输出井传送到输出设备</li>
+<li>井管理程序：控制作业和井之间的数据交换</li>
+</ul>
+<h2 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h2><h3 id="5-1-文件的概念"><a href="#5-1-文件的概念" class="headerlink" title="5.1 文件的概念"></a>5.1 文件的概念</h3><h4 id="引入文件的优点"><a href="#引入文件的优点" class="headerlink" title="引入文件的优点"></a>引入文件的优点</h4><ul>
+<li>用户使用方便</li>
+<li>文件安全可靠</li>
+<li>文件可备份</li>
+<li>文件可共享</li>
+</ul>
+<h3 id="5-3-文件的存储"><a href="#5-3-文件的存储" class="headerlink" title="5.3 文件的存储"></a>5.3 文件的存储</h3><h4 id="卷和块"><a href="#卷和块" class="headerlink" title="卷和块"></a>卷和块</h4><ul>
+<li><strong>卷</strong>是存储介质的物理单位，对应一盘磁带、一个硬盘分区、一块软盘、一个光盘片</li>
+<li><strong>块</strong>是存储介质上连续信息所组成的一个区域，也叫物理记录<ul>
+<li>主存储器和辅助存储器每次交换一块或整数块信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-4-文件的逻辑结构"><a href="#5-4-文件的逻辑结构" class="headerlink" title="5.4 文件的逻辑结构"></a>5.4 文件的逻辑结构</h3><h4 id="流式文件"><a href="#流式文件" class="headerlink" title="流式文件"></a>流式文件</h4><ul>
+<li>文件内的数据不再组成记录，只是由一串依次的字节组成的信息流序列</li>
+<li>常常按长度来读取所需信息，也可以用插入的特殊字符作为分界</li>
+</ul>
+<h4 id="记录式文件"><a href="#记录式文件" class="headerlink" title="记录式文件"></a>记录式文件</h4><p>一种有结构的文件，它是若干逻辑记录信息所组成的记录流文件</p>
+<h3 id="5-5-记录的成组与分解"><a href="#5-5-记录的成组与分解" class="headerlink" title="5.5 记录的成组与分解"></a>5.5 记录的成组与分解</h3><h4 id="成组-（提前读）"><a href="#成组-（提前读）" class="headerlink" title="成组 （提前读）"></a>成组 （提前读）</h4><ul>
+<li>若干个逻辑记录合并成一组，写入一个块</li>
+<li>在输出缓冲区内进行，凑满一块后才将缓冲区内的信息写到存储介质上</li>
+</ul>
+<h4 id="分解-（推迟写）"><a href="#分解-（推迟写）" class="headerlink" title="分解 （推迟写）"></a>分解 （推迟写）</h4><p>当存储介质上的一个物理记录读进输入缓冲区后，把逻辑记录从块中分离出来</p>
+<h3 id="5-6-文件的物理结构"><a href="#5-6-文件的物理结构" class="headerlink" title="5.6 文件的物理结构"></a>5.6 文件的物理结构</h3><h4 id="顺序文件（连续文件）"><a href="#顺序文件（连续文件）" class="headerlink" title="顺序文件（连续文件）"></a>顺序文件（连续文件）</h4><p>将一个文件中逻辑上连续的信息存放到存储介质的依次相邻的块中便形成顺序结构</p>
+<p>eg：磁带文件、光盘文件</p>
+<p><strong>优点</strong>：顺序存取记录时速度较快</p>
+<p><strong>缺点</strong>：建立文件前需要能预先确定文件长度，以便分配存储空间；修改、插入和增加文件记录有困难</p>
+<h4 id="连接文件-（串联文件）"><a href="#连接文件-（串联文件）" class="headerlink" title="连接文件 （串联文件）"></a>连接文件 （串联文件）</h4><p>使用连接字来表示文件中各个物理块之间的先后次序，第一块文件信息的物理地址由文件目录给出，而每一块的连接字指出了文件的下一个物理块位置，连接字为0表示结束</p>
+<p>eg：输入井、输出井</p>
+<p><strong>优点</strong>：易于对文件记录做增、删、改，易于动态增长记录；不必预先确知文件长度；存储空间利用<br>率高</p>
+<p><strong>缺点</strong>：存放指针需额外的存储空间；由于存取须通过缓冲区，待获得连接字后，才能找到下一物理块的地址，因而，仅适用于顺序存取</p>
+<h4 id="直接文件-（散列文件）"><a href="#直接文件-（散列文件）" class="headerlink" title="直接文件 （散列文件）"></a>直接文件 （散列文件）</h4><p>通过计算记录的关键字建立与其物理存储地址之间的对应关系</p>
+<h4 id="索引文件-（索引区-数据区）"><a href="#索引文件-（索引区-数据区）" class="headerlink" title="索引文件 （索引区+数据区）"></a>索引文件 （索引区+数据区）</h4><p>索引文件为每个文件建立了一张索引表，其中，每个表目包含一个记录的键(或逻辑记录号)及其存储地址</p>
+<h3 id="5-13-辅助空间管理"><a href="#5-13-辅助空间管理" class="headerlink" title="5.13 辅助空间管理"></a>5.13 辅助空间管理</h3><h4 id="位示图"><a href="#位示图" class="headerlink" title="位示图"></a>位示图</h4><p>使用若干字节构成一张表，表中每一字位对应一个物理块，字位的次序与块的相对次序一致。字位为“1”表示相应块已占用，字位为“0”状态表示该块空闲</p>
+<h2 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h2><h3 id="6-14-死锁的产生"><a href="#6-14-死锁的产生" class="headerlink" title="6.14 死锁的产生"></a>6.14 死锁的产生</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>一组进程处于死锁状态是指：每一个进程都在等待被另一个进程所占有的、不能抢占的资源。</p>
+<h3 id="6-15-死锁的防止"><a href="#6-15-死锁的防止" class="headerlink" title="6.15 死锁的防止"></a>6.15 死锁的防止</h3><h4 id="死锁产生的必要条件"><a href="#死锁产生的必要条件" class="headerlink" title="死锁产生的必要条件"></a>死锁产生的必要条件</h4><ul>
+<li><strong>互斥条件</strong>：进程应互斥使用资源，任一时刻一个资源仅为一个进程独占<ul>
+<li>独占型改为共享性资源可破</li>
+</ul>
+</li>
+<li><strong>占有和等待条件</strong>：一个进程请求资源得不到满足而等待时，不释放已占有的资源</li>
+<li><strong>不剥夺条件</strong>：任一进程不能从另一进程那里抢夺资源<ul>
+<li>采用剥夺式调度可破</li>
+</ul>
+</li>
+<li><strong>循环等待条件：</strong>存在一个循环等待链，每一个进程分别等待它前一个进程所持有的资源<ul>
+<li>层次分配可破</li>
+</ul>
+</li>
+</ul>
+<h2 id="历年考试知识点整理"><a href="#历年考试知识点整理" class="headerlink" title="历年考试知识点整理"></a>历年考试知识点整理</h2><ol>
+<li><p>分段式存储管理不会产生内部碎片</p>
+<ul>
+<li>需要多少分多少，不会多分</li>
+<li>分页式会因为页的大小而导致分了页没用完，产生内部碎片</li>
+</ul>
+</li>
+<li><p>Linux系统中的slab分配器，采用<strong>伙伴系统</strong>内存管理方式</p>
+</li>
+<li><p>不会发生死锁， 从进程同时申请的角度出发，至少满足一个</p>
+</li>
+<li><p>操作系统中，临界区指<strong>在每个进程中访问临界资源的程序代码</strong></p>
+</li>
+<li><p>实模式下16位CPU使用段偏移方式寻址能力为 1M</p>
+<ul>
+<li>8086系列16位CPU使用20位地址线</li>
+</ul>
+</li>
+<li><p>循环扫描也称单向扫描</p>
+<ul>
+<li>FIFO</li>
+<li>电梯调度</li>
+<li>SSTF 最短寻道</li>
+<li>循环扫描</li>
+<li>分布电梯调度</li>
+</ul>
+</li>
+<li><p>操作系统中三个最基础的抽象是</p>
+<ul>
+<li>进程抽象</li>
+<li>虚存抽象</li>
+<li>文件抽象</li>
+</ul>
+<p>引入他们，是为了方便对物理资源的管理和控制</p>
+</li>
+<li><p>进程映像</p>
+<ul>
+<li>进程控制块：保存进程的标识信息、状态信息和控制信息</li>
+<li>进程程序块：进程执行的程序空间</li>
+<li>进程数据块：进程处理的数据空间</li>
+<li>核心栈：进程在内核模式下运行时使用的堆栈</li>
+</ul>
+</li>
+<li><p>进程七状态图</p>
+<p><img src="image-20210110132710251.png"></p>
+</li>
+<li><p>作业周转时间：从作业提交到作业完成的时间间隔</p>
+</li>
+<li><p>平均有效访问时间 T=(1-缺页率) * 不缺页的有效访问时间+缺页率 * 缺页异常耗时</p>
+</li>
+</ol>
+<h4 id="PV相关"><a href="#PV相关" class="headerlink" title="PV相关"></a>PV相关</h4><h5 id="哲学家就餐问题1"><a href="#哲学家就餐问题1" class="headerlink" title="哲学家就餐问题1"></a>哲学家就餐问题1</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c">semaphore fork<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">5</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>fork<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+semaphore room<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">;</span>
+cobegin
+process <span class="token function">philosopher_i</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">think</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>room<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>room<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+coend<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="哲学家就餐问题2"><a href="#哲学家就餐问题2" class="headerlink" title="哲学家就餐问题2"></a>哲学家就餐问题2</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c">semaphore fork<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span><span class="token number">5</span><span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>fork<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">&#125;</span>
+cobegin
+process <span class="token function">philosopher_i</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>i<span class="token operator">%</span><span class="token number">2</span><span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+            <span class="token function">P</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       		<span class="token function">P</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        	<span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        	<span class="token function">V</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        	<span class="token function">V</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+        	<span class="token function">P</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        	<span class="token function">P</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        	<span class="token function">eat</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        	<span class="token function">V</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span><span class="token punctuation">(</span>i<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       		<span class="token function">V</span><span class="token punctuation">(</span>fork<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>        
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+coend<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="生产者-消费者问题"><a href="#生产者-消费者问题" class="headerlink" title="生产者/消费者问题"></a>生产者/消费者问题</h5><p><strong>一个生产者/一个消费者/一个缓冲单元</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> B<span class="token punctuation">;</span>
+semaphore sput<span class="token punctuation">,</span>sget<span class="token punctuation">;</span>
+sput<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+sget<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+process <span class="token function">producer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        produce a product<span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>sput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        B<span class="token operator">=</span>product<span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>sget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+process <span class="token function">consumer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>sget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product<span class="token operator">=</span>B<span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>sput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        consume a product<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>一个生产者/一个消费者/多个缓冲单元</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> B<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+semaphore sput<span class="token punctuation">,</span>sget<span class="token punctuation">;</span>
+sput<span class="token operator">=</span>k<span class="token punctuation">;</span>
+sget<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> putptr<span class="token punctuation">,</span>getptr<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+process <span class="token function">producer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    	produce a product<span class="token punctuation">;</span>
+    	<span class="token function">P</span><span class="token punctuation">(</span>sput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	B<span class="token punctuation">[</span>putptr<span class="token punctuation">]</span> <span class="token operator">=</span> product<span class="token punctuation">;</span>
+    	putptr<span class="token operator">=</span><span class="token punctuation">(</span>putptr<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> k<span class="token punctuation">;</span>
+    	<span class="token function">V</span><span class="token punctuation">(</span>sget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+process <span class="token function">consumer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>sget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product <span class="token operator">=</span> B<span class="token punctuation">[</span>getptr<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        getptr<span class="token operator">=</span><span class="token punctuation">(</span>getptr<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span>k<span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>sput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        consume a product<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>多个生产者/多个消费者/多个缓冲单元</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> B<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">;</span>
+semaphore sput<span class="token punctuation">,</span>sget<span class="token punctuation">,</span>s<span class="token punctuation">;</span>
+sput<span class="token operator">=</span>k<span class="token punctuation">;</span>
+sget<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> putptr<span class="token punctuation">,</span>getptr<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+s<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+process <span class="token function">producer_i</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    	produce a product<span class="token punctuation">;</span>
+    	<span class="token function">P</span><span class="token punctuation">(</span>sput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	B<span class="token punctuation">[</span>putptr<span class="token punctuation">]</span> <span class="token operator">=</span> product<span class="token punctuation">;</span>
+    	putptr<span class="token operator">=</span><span class="token punctuation">(</span>putptr<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> k<span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    	<span class="token function">V</span><span class="token punctuation">(</span>sget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+process <span class="token function">consumer_j</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>sget<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        product <span class="token operator">=</span> B<span class="token punctuation">[</span>getptr<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        getptr<span class="token operator">=</span><span class="token punctuation">(</span>getptr<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span>k<span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>sput<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        consume a product<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="读者-写者问题"><a href="#读者-写者问题" class="headerlink" title="读者/写者问题"></a>读者/写者问题</h5><p><strong>读者优先</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">semaphore rmutex<span class="token punctuation">,</span>wmutex<span class="token punctuation">;</span>
+rmutex<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+wmutex<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> readcount<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+process <span class="token function">reader_i</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>rmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>readcount<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token function">P</span><span class="token punctuation">(</span>wmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        readcount<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>rmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        读文件<span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>rmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        readcount<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>readcount<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token function">V</span><span class="token punctuation">(</span>wmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>rmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+process <span class="token function">writer_i</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>wmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        写文件<span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>Wmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>写者优先</strong></p>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">semaphore rmutex<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>wmutex<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+semaphore x<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>y<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span>z<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> readcount<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>writecount<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+process <span class="token function">reader</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">P</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">P</span><span class="token punctuation">(</span>rmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">P</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    readcount<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>readcount<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token function">P</span><span class="token punctuation">(</span>wmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">V</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">V</span><span class="token punctuation">(</span>rmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">V</span><span class="token punctuation">(</span>z<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    读文件<span class="token punctuation">;</span>
+    
+    <span class="token function">P</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    readcount<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>readcount<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token function">V</span><span class="token punctuation">(</span>wmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">V</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span>
+process <span class="token function">writer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">P</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    writecount<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>writecount<span class="token operator">==</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token function">P</span><span class="token punctuation">(</span>rmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">V</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token function">P</span><span class="token punctuation">(</span>wmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    写文件<span class="token punctuation">;</span>
+    
+    <span class="token function">V</span><span class="token punctuation">(</span>wmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token function">P</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    writecount<span class="token operator">--</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>writecount<span class="token operator">==</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token function">V</span><span class="token punctuation">(</span>rmutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">V</span><span class="token punctuation">(</span>y<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="理发师问题"><a href="#理发师问题" class="headerlink" title="理发师问题"></a>理发师问题</h5><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> waiting<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> CHAIRS<span class="token operator">=</span>N<span class="token punctuation">;</span>
+semophore customers<span class="token punctuation">,</span>barbers<span class="token punctuation">,</span>mutex<span class="token punctuation">;</span>
+customers<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>barbers<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>mutex<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+process <span class="token function">barber</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>true<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>customers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        waiting<span class="token operator">--</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>barbers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">cut_hair</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+process <span class="token function">customer_i</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">P</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>waiting<span class="token operator">&lt;</span>CHAIRS<span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+        waiting<span class="token operator">++</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>customers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">P</span><span class="token punctuation">(</span>barbers<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">get_haircut</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span><span class="token keyword">else</span><span class="token punctuation">&#123;</span>
+        <span class="token function">V</span><span class="token punctuation">(</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Lhtian</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://l-htian.github.io/posts/cd647b6c/">https://l-htian.github.io/posts/cd647b6c/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Lhtian</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                                    <span class="chip bg-color">复习</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/e2fc761/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="商务智能复习整理">
+                        
+                        <span class="card-title">商务智能复习整理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            商务智能面向考试整理
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-01-16
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%95%86%E5%8A%A1%E6%99%BA%E8%83%BD/" class="post-category">
+                                    商务智能
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                        <span class="chip bg-color">复习</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%95%86%E5%8A%A1%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">商务智能</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/1546100b/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="FAT12文件相关">
+                        
+                        <span class="card-title">FAT12文件相关</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            第二次操作系统实验相关
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
+                                    操作系统
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                    <a href="/tags/FAT12/">
+                        <span class="chip bg-color">FAT12</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Erio<br />'
+            + '文章作者: Lhtian<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="1997830041"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.6'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2020-2021</span>
+            
+<!--            <span id="year">2020</span>-->
+            <a href="/about" target="_blank">Lhtian</a>
+<!--            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>-->
+<!--            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
+                class="white-color">31.5k</span>&nbsp;
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;times
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;users
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "12";
+                    var startDate = "8";
+                    var startHour = "21";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "Erio: " + diffDays + " days " + diffHours +
+                            " hours " + diffMinutes + " minutes " + diffSeconds + " seconds";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "Erio " + diffYears + " years " + diffDays +
+                            " days " + diffHours + " hours " + diffMinutes + " minutes " + diffSeconds + " seconds";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/L-htian" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1425112581@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1425112581" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1425112581" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <!--动态线条背景-->
+    <script type="text/javascript"
+            color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+</body>
+
+</html>
