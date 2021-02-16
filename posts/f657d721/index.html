@@ -524,7 +524,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    484
+                    532
                 </div>
                 
 
@@ -561,17 +561,22 @@
 <p><img src="2.png"></p>
 <h3 id="域名解析问题"><a href="#域名解析问题" class="headerlink" title="域名解析问题"></a>域名解析问题</h3><p>因为我之前自己瞎玩的时候，在腾讯云那里注册了一个域名，趁着还没过期，就直接拿来用了。不过阿里云对非阿里方注册的域名解析不是很友好，更改完dns服务器之后的一段时间，还是会出现域名未解析的情况，这时候只能等上一段时间。</p>
 <h3 id="chown命令报错问题"><a href="#chown命令报错问题" class="headerlink" title="chown命令报错问题"></a><code>chown</code>命令报错问题</h3><p>在进行更改权限，输入如下命令时</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell"><span class="token function">chown</span> -R git:git /var/repo/
-<span class="token function">chown</span> -R git:git /var/hexo/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">chown -R git:git &#x2F;var&#x2F;repo&#x2F;
+chown -R git:git &#x2F;var&#x2F;hexo&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>可能会有如下报错</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">chown: changing ownership of <span class="token string">'/var/hexo/.user.ini'</span><span class="token builtin class-name">:</span> Operation not permitted<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">chown: changing ownership of &#39;&#x2F;var&#x2F;hexo&#x2F;.user.ini&#39;: Operation not permitted<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>解决方法为，输入命令</p>
-<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">chattr -i /var/hexo/.user.ini<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">chattr -i &#x2F;var&#x2F;hexo&#x2F;.user.ini<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>然后重新输入命令即可。</p>
-<h3 id="宝塔面板打开问题"><a href="#宝塔面板打开问题" class="headerlink" title="宝塔面板打开问题"></a>宝塔面板打开问题</h3><p>第一次使用宝塔面板，并不是很熟练。关掉之后遇到了不会打开的窘境，最后发现进入root权限然后运行</p>
+<h3 id="宝塔面板打开问题"><a href="#宝塔面板打开问题" class="headerlink" title="宝塔面板打开问题"></a>宝塔面板打开问题</h3><p>第一次使用宝塔面板，并不是很熟练。关掉之后遇到了不会打开的窘境，最后发现需要进入root权限然后运行如下命令</p>
+<pre class="line-numbers language-shell" data-language="shell"><code class="language-shell">bt start
+&#x2F;etc&#x2F;init.d&#x2F;bt default<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>成功后便会显示面板地址和账户密码，如下</p>
+<p><img src="3.png"></p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>总的来说遇到的问题并不是很多，跟着大佬的教程走基本上没什么问题，虽然会有一些因人而异的小问题，不过上网搜搜就能解决，赞美大佬！</p>
 
                 
@@ -1022,7 +1027,7 @@
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">31.9k</span>&nbsp;
+                class="white-color">32k</span>&nbsp;
             
             
             
