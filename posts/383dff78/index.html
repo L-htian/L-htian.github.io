@@ -524,14 +524,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    2.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    11 分
+                    9 分
                 </div>
                 
 
@@ -558,118 +558,118 @@
 <h3 id="软工三经历"><a href="#软工三经历" class="headerlink" title="软工三经历"></a>软工三经历</h3><p>上边的比方其实就是昨天下午写软工三大作业遇到的问题，我们软工三做的是知识图谱的编辑器，前端vue组件重要的也就是上传组件、编辑器组件。我需要实现在用户点击上传文件并且成功上传之后隐藏上传组件显示编辑器组件，并且完成对上传的文件的数据进行读取进行图谱的生成。同时，给用户提供不上传文件的选项，如果选择创建新的图谱，那么也是隐藏上传组件并显示编辑器组件，只不过是空的一张图。这个过程就涉及到了组件传值，编辑器需要知道上传组件是否上传了文件，上传组件是否选择的是创建新的图谱，上传文件是否成功。下面展示一下前端的目录结构。</p>
 <p><img src="QQ%E6%88%AA%E5%9B%BE20210319131850.png"></p>
 <p>从图中可以看出编辑器组件和上传组件是兄弟组件，二者其实互不相关联。显示都交给了view层来进行。而<code>KGBuilder.vue</code>正是对这两个组件进行展示的文件，下面放一下<code>KGBuilder.vue</code>的内容（css部分省略）。</p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;div id&#x3D;&quot;kg_container&quot;&gt;
-      &lt;KGBuilder class&#x3D;&quot;kgBuilder&quot; pid&#x3D;&quot;kg_container&quot; v-if&#x3D;&quot;showKGBuilder&quot; :wantNew&#x3D;&quot;getNew&quot;
-                 :hasUploaded&#x3D;&quot;upLoaded&quot; :fileList&#x3D;&quot;uploadFileList&quot;&gt;&lt;&#x2F;KGBuilder&gt;
-      &lt;Uploader class&#x3D;&quot;uploader&quot; v-show&#x3D;&quot;showUploader&quot;&gt;&lt;&#x2F;Uploader&gt;
-    &lt;&#x2F;div&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>template<span class="token operator">></span>
+  <span class="token operator">&lt;</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div id<span class="token operator">=</span><span class="token string">"kg_container"</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>KGBuilder <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"kgBuilder"</span> pid<span class="token operator">=</span><span class="token string">"kg_container"</span> v<span class="token operator">-</span><span class="token keyword">if</span><span class="token operator">=</span><span class="token string">"showKGBuilder"</span> <span class="token operator">:</span>wantNew<span class="token operator">=</span><span class="token string">"getNew"</span>
+                 <span class="token operator">:</span>hasUploaded<span class="token operator">=</span><span class="token string">"upLoaded"</span> <span class="token operator">:</span>fileList<span class="token operator">=</span><span class="token string">"uploadFileList"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>KGBuilder<span class="token operator">></span>
+      <span class="token operator">&lt;</span>Uploader <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"uploader"</span> v<span class="token operator">-</span>show<span class="token operator">=</span><span class="token string">"showUploader"</span><span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>Uploader<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
 
-&lt;script&gt;
-import KGBuilder from &quot;@&#x2F;components&#x2F;KGBuilder&quot;;
-import Uploader from &quot;@&#x2F;components&#x2F;Uploader&quot;;
-import &#123;Loading&#125; from &#39;element-ui&#39;;
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token keyword">import</span> KGBuilder <span class="token keyword">from</span> <span class="token string">"@/components/KGBuilder"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> Uploader <span class="token keyword">from</span> <span class="token string">"@/components/Uploader"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token punctuation">&#123;</span>Loading<span class="token punctuation">&#125;</span> <span class="token keyword">from</span> <span class="token string">'element-ui'</span><span class="token punctuation">;</span>
 
-export default &#123;
-  name: &quot;KGEditor&quot;,
-  components: &#123;
-    Uploader,
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token string">"KGEditor"</span><span class="token punctuation">,</span>
+  components<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    Uploader<span class="token punctuation">,</span>
     KGBuilder
-  &#125;,
-  data() &#123;
-    return &#123;
-      showKGBuilder: false,
-      showUploader: true,
-      getNew: false,
-      upLoaded: false,
-      uploadFileList: []
-    &#125;
-  &#125;,
-  mounted() &#123;
-    let loadingInstance &#x3D; Loading.service(&#123;fullscreen: true&#125;);
-    setTimeout(() &#x3D;&gt; &#123;
-      loadingInstance.close();
-      window.Event.$on(&#39;getNewGraph&#39;, val &#x3D;&gt; &#123;
-        if (val) &#123;
-          &#x2F;&#x2F; console.log(val)
-          this.getNew &#x3D; val
-          this.showKGBuilder &#x3D; true
-          this.showUploader &#x3D; false
-        &#125;
-      &#125;)
-      window.Event.$on(&#39;UploadFile&#39;, val &#x3D;&gt; &#123;
-        this.upLoaded &#x3D; val
-        this.showKGBuilder &#x3D; true
-        this.showUploader &#x3D; false
-      &#125;)
-      window.Event.$on(&#39;transferFileArray&#39;, val &#x3D;&gt; &#123;
-        this.uploadFileList &#x3D; val
-      &#125;)
-    &#125;, 1000)
-  &#125;
-&#125;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+      showKGBuilder<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      showUploader<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+      getNew<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      upLoaded<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      uploadFileList<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">mounted</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> loadingInstance <span class="token operator">=</span> Loading<span class="token punctuation">.</span><span class="token function">service</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span>fullscreen<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+      loadingInstance<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      window<span class="token punctuation">.</span>Event<span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'getNewGraph'</span><span class="token punctuation">,</span> <span class="token parameter">val</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>val<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+          <span class="token comment">// console.log(val)</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>getNew <span class="token operator">=</span> val
+          <span class="token keyword">this</span><span class="token punctuation">.</span>showKGBuilder <span class="token operator">=</span> <span class="token boolean">true</span>
+          <span class="token keyword">this</span><span class="token punctuation">.</span>showUploader <span class="token operator">=</span> <span class="token boolean">false</span>
+        <span class="token punctuation">&#125;</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      window<span class="token punctuation">.</span>Event<span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'UploadFile'</span><span class="token punctuation">,</span> <span class="token parameter">val</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>upLoaded <span class="token operator">=</span> val
+        <span class="token keyword">this</span><span class="token punctuation">.</span>showKGBuilder <span class="token operator">=</span> <span class="token boolean">true</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>showUploader <span class="token operator">=</span> <span class="token boolean">false</span>
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+      window<span class="token punctuation">.</span>Event<span class="token punctuation">.</span><span class="token function">$on</span><span class="token punctuation">(</span><span class="token string">'transferFileArray'</span><span class="token punctuation">,</span> <span class="token parameter">val</span> <span class="token operator">=></span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>uploadFileList <span class="token operator">=</span> val
+      <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>可以看到这里对上传组件有<code>v-show</code>属性来保证是否展示，对于编辑器组件则是使用<code>v-if</code>来保证是否渲染。</p>
 <p>从代码来看，这里用了两种组件传值的方法。分别为子向父传值与父向子传值，其中，<code>window.Event.$on</code>就属于子向父传值，用于监听上传组件传来的值。下面就说子向父传值的常用方法。</p>
 <h4 id="子组件向父组件传值"><a href="#子组件向父组件传值" class="headerlink" title="子组件向父组件传值"></a>子组件向父组件传值</h4><p>最常用的便是<code>$emit</code>方法。还是用本次软工三迭代一的代码做示例。从上边view层的代码可以看出，我使用<code>window.Event.$on</code>监听了三个事件，分别为<code>getNewGraph</code>、<code>uploadFile</code>、<code>transferFileArray</code>。这三个事件都是我从子组件<code>Uploader</code>内传来的。下面贴一下<code>Uploader</code>的代码（css部分省略）。</p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div class&#x3D;&quot;Uploader&quot;&gt;
-    &lt;el-upload
-        class&#x3D;&quot;uploadFile&quot;
+<pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token operator">&lt;</span>template<span class="token operator">></span>
+  <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"Uploader"</span><span class="token operator">></span>
+    <span class="token operator">&lt;</span>el<span class="token operator">-</span>upload
+        <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"uploadFile"</span>
         drag
-        action&#x3D;&quot;#&quot;
-        :limit&#x3D;&quot;1&quot;
-        :on-change&#x3D;&quot;jumpToEditor&quot;
-        accept&#x3D;&quot;application&#x2F;json&quot;
-        :file-list&#x3D;&quot;fileList&quot;&gt;
-      &lt;div class&#x3D;&quot;el-upload__text&quot;&gt;将文件拖到此处，或&lt;em&gt;点击上传&lt;&#x2F;em&gt;&lt;&#x2F;div&gt;
-      &lt;div class&#x3D;&quot;el-upload__tip&quot; slot&#x3D;&quot;tip&quot;&gt;只能上传Json文件&lt;&#x2F;div&gt;
-    &lt;&#x2F;el-upload&gt;
-    &lt;div class&#x3D;&quot;orText&quot;&gt;或者您可以&lt;&#x2F;div&gt;
-    &lt;el-button class&#x3D;&quot;newGraphButton&quot; type&#x3D;&quot;info&quot; round @click&#x3D;&quot;getNewGraph&quot;&gt;创建新的图谱&lt;&#x2F;el-button&gt;
-  &lt;&#x2F;div&gt;
+        action<span class="token operator">=</span><span class="token string">"#"</span>
+        <span class="token operator">:</span>limit<span class="token operator">=</span><span class="token string">"1"</span>
+        <span class="token operator">:</span>on<span class="token operator">-</span>change<span class="token operator">=</span><span class="token string">"jumpToEditor"</span>
+        accept<span class="token operator">=</span><span class="token string">"application/json"</span>
+        <span class="token operator">:</span>file<span class="token operator">-</span>list<span class="token operator">=</span><span class="token string">"fileList"</span><span class="token operator">></span>
+      <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"el-upload__text"</span><span class="token operator">></span>将文件拖到此处，或<span class="token operator">&lt;</span>em<span class="token operator">></span>点击上传<span class="token operator">&lt;</span><span class="token operator">/</span>em<span class="token operator">></span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+      <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"el-upload__tip"</span> slot<span class="token operator">=</span><span class="token string">"tip"</span><span class="token operator">></span>只能上传Json文件<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>upload<span class="token operator">></span>
+    <span class="token operator">&lt;</span>div <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"orText"</span><span class="token operator">></span>或者您可以<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
+    <span class="token operator">&lt;</span>el<span class="token operator">-</span>button <span class="token keyword">class</span><span class="token operator">=</span><span class="token string">"newGraphButton"</span> type<span class="token operator">=</span><span class="token string">"info"</span> round @click<span class="token operator">=</span><span class="token string">"getNewGraph"</span><span class="token operator">></span>创建新的图谱<span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>button<span class="token operator">></span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">></span>
 
-&lt;&#x2F;template&gt;
+<span class="token operator">&lt;</span><span class="token operator">/</span>template<span class="token operator">></span>
 
-&lt;script&gt;
-import Vue from &#39;vue&#39;
-window.Event &#x3D; new Vue()
+<span class="token operator">&lt;</span>script<span class="token operator">></span>
+<span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
+window<span class="token punctuation">.</span>Event <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Vue</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
     
-export default &#123;
-  name: &quot;Uploader&quot;,
-  data() &#123;
-    return &#123;
-      fileList: [],
-      getUpload: false,
-      getGraphNew: false,
-    &#125;
-  &#125;,
-  provide() &#123;
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">&#123;</span>
+  name<span class="token operator">:</span> <span class="token string">"Uploader"</span><span class="token punctuation">,</span>
+  <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token punctuation">&#123;</span>
+      fileList<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+      getUpload<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+      getGraphNew<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    <span class="token punctuation">&#125;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">provide</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 
-  &#125;,
-  beforeDestroy() &#123;
-  &#125;,
-  methods: &#123;
-    jumpToEditor(file, fileList) &#123;
-      &#x2F;&#x2F; this.$router.push(&#123;name: &#39;&#x2F;Kojima-Coin&#x2F;KGEditor&#39;&#125;)
-      this.fileList &#x3D; fileList
-      if (!this.getUpload) &#123;
-        this.getUpload &#x3D; !this.getUpload
-      &#125;
-      window.Event.$emit(&#39;UploadFile&#39;, this.getUpload)
-      window.Event.$emit(&#39;transferFileArray&#39;, this.fileList)
-    &#125;,
-    getNewGraph() &#123;
-      this.getGraphNew &#x3D; true
-      window.Event.$emit(&#39;getNewGraph&#39;, this.getGraphNew)
-    &#125;,
-  &#125;
-&#125;
-&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token function">beforeDestroy</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+  <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  methods<span class="token operator">:</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">jumpToEditor</span><span class="token punctuation">(</span><span class="token parameter">file<span class="token punctuation">,</span> fileList</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token comment">// this.$router.push(&#123;name: '/Kojima-Coin/KGEditor'&#125;)</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>fileList <span class="token operator">=</span> fileList
+      <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>getUpload<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>getUpload <span class="token operator">=</span> <span class="token operator">!</span><span class="token keyword">this</span><span class="token punctuation">.</span>getUpload
+      <span class="token punctuation">&#125;</span>
+      window<span class="token punctuation">.</span>Event<span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'UploadFile'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>getUpload<span class="token punctuation">)</span>
+      window<span class="token punctuation">.</span>Event<span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'transferFileArray'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>fileList<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+    <span class="token function">getNewGraph</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+      <span class="token keyword">this</span><span class="token punctuation">.</span>getGraphNew <span class="token operator">=</span> <span class="token boolean">true</span>
+      window<span class="token punctuation">.</span>Event<span class="token punctuation">.</span><span class="token function">$emit</span><span class="token punctuation">(</span><span class="token string">'getNewGraph'</span><span class="token punctuation">,</span> <span class="token keyword">this</span><span class="token punctuation">.</span>getGraphNew<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>script<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>看到代码之后，可能就会比较明朗了。<code>Uploader</code>中使用<code>$emit</code>分别传了三个事件的值，而父组件只需要用<code>$on</code>对相应的事件进行监听便可得到事件相应的传值。注意，代码中有这么两行</p>
 <pre class="line-numbers language-js" data-language="js"><code class="language-js"><span class="token keyword">import</span> Vue <span class="token keyword">from</span> <span class="token string">'vue'</span>
@@ -678,15 +678,15 @@ window<span class="token punctuation">.</span>Event <span class="token operator"
 <p>这是新建一个vue对象当作中转站。专门用于监听与发送。</p>
 <h5 id="碎碎念"><a href="#碎碎念" class="headerlink" title="碎碎念"></a>碎碎念</h5><p>这个传值的方法，是我之前设置全屏隐藏<code>header</code>组件用的传值方法，然而当时用着并没有父组件与子组件的概念，实现的稀里糊涂的。因此昨天下午想要实现<code>KGBuilder</code>与<code>Uploader</code>之间的传值的时候，首先想到的便是这个方法，但是，无论如何尝试都没有成功，本来我以为是vue生命周期的问题，为此还特地去了解了这方面的问题。但是很遗憾并不是，一番尝试之后这个方法并没有行得通，遂决定另辟蹊径，换一种传值方式。然后便是接下来要说的方法。</p>
 <h4 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h4><p>因为我尝试使用<code>$emit</code>与<code>on</code>在两个组件之间直接通信失败，我便打算绕个路。即子A传值给父亲，父亲将子A的传值传给子B。使用父亲组件当作中转站。这里使用父组件向子组件传值的方法便是<code>prop</code>。为了省的往上翻，我先再贴一下父组件的代码的<code>&lt;Template&gt;</code></p>
-<pre class="line-numbers language-vue" data-language="vue"><code class="language-vue">&lt;template&gt;
-  &lt;div&gt;
-    &lt;div id&#x3D;&quot;kg_container&quot;&gt;
-      &lt;KGBuilder class&#x3D;&quot;kgBuilder&quot; pid&#x3D;&quot;kg_container&quot; v-if&#x3D;&quot;showKGBuilder&quot; :wantNew&#x3D;&quot;getNew&quot;
-                 :hasUploaded&#x3D;&quot;upLoaded&quot; :fileList&#x3D;&quot;uploadFileList&quot;&gt;&lt;&#x2F;KGBuilder&gt;
-      &lt;Uploader class&#x3D;&quot;uploader&quot; v-show&#x3D;&quot;showUploader&quot;&gt;&lt;&#x2F;Uploader&gt;
-    &lt;&#x2F;div&gt;
-  &lt;&#x2F;div&gt;
-&lt;&#x2F;template&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>kg_container<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>KGBuilder</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>kgBuilder<span class="token punctuation">"</span></span> <span class="token attr-name">pid</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>kg_container<span class="token punctuation">"</span></span> <span class="token attr-name">v-if</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>showKGBuilder<span class="token punctuation">"</span></span> <span class="token attr-name">:wantNew</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>getNew<span class="token punctuation">"</span></span>
+                 <span class="token attr-name">:hasUploaded</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>upLoaded<span class="token punctuation">"</span></span> <span class="token attr-name">:fileList</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>uploadFileList<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>KGBuilder</span><span class="token punctuation">></span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Uploader</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>uploader<span class="token punctuation">"</span></span> <span class="token attr-name">v-show</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>showUploader<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Uploader</span><span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>有没有发现，在我打算传值的子组件多了很多属性值<code>:wantNew=&quot;getNew&quot; :hasUploaded=&quot;upLoaded&quot; :fileList=&quot;uploadFileList&quot;</code></p>
 <p>这便是给子组件传值的一种方式，引号内的是父组件的变量，冒号后的是子组件内的值。下面贴一下父组件的<code>data</code>和子组件的<code>prop</code></p>
@@ -1219,7 +1219,7 @@ window<span class="token punctuation">.</span>Event <span class="token operator"
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
-                class="white-color">38.2k</span>&nbsp;
+                class="white-color">37.9k</span>&nbsp;
             
             
             
