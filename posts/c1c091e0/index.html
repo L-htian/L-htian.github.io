@@ -1,0 +1,2336 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="软件系统设计复习, Erio">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>软件系统设计复习 | Erio</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="https://v1.hitokoto.cn/?c=d&encode=js&select=%23hitokoto" defer></script>
+<!--    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>-->
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+    .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+        .loading-text{
+            font-size: 1.5rem;
+        }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+</style>
+<script>
+    (function () {
+        const loaded = function(){
+            setTimeout(function(){
+                const loader = document.getElementById("loading-container");
+                loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+                // document.getElementById("body-wrap").style.display="flex";
+                setTimeout(function(){
+                    loader.style.display="none";
+                },2500);
+            },1000);//强制显示loading page 1s
+        };
+        loaded();
+    })()
+</script>
+
+
+   <style>
+    body{
+       background-image: url(https://s3.ax1x.com/2020/12/09/rCtuWQ.png);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    
+        <div id="loading-container">
+            <p class="loading-text">Loading . . . </p>
+        <div class="loading-image">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        </div>
+    
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Erio</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Erio</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">软件系统设计复习</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                                <span class="chip bg-color">复习</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                                <span class="chip bg-color">架构</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%8E%82/">
+                                <span class="chip bg-color">软件工厂</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                架构
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-06-29
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-06-29
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    10.2k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    35 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="软件系统设计"><a href="#软件系统设计" class="headerlink" title="软件系统设计"></a>软件系统设计</h2><h3 id="潘氏"><a href="#潘氏" class="headerlink" title="潘氏"></a>潘氏</h3><h3 id="01-软件设计原则"><a href="#01-软件设计原则" class="headerlink" title="01 软件设计原则"></a>01 软件设计原则</h3><h4 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h4><ul>
+<li><p><strong>需求</strong>定义了系统需要满足的目标</p>
+</li>
+<li><p><strong>规约</strong>定义了系统的外部可观察到的行为</p>
+</li>
+<li><p><strong>架构</strong>定义了</p>
+<ul>
+<li>系统一级的主要组成部分</li>
+<li>各部分的交互方法</li>
+<li>使用的技术</li>
+</ul>
+</li>
+<li><p><strong>设计</strong>定义了</p>
+<ul>
+<li>如何完成任务</li>
+<li>需要写的代码</li>
+<li>我们将专门关注OO设计</li>
+</ul>
+</li>
+</ul>
+<h4 id="面向对象设计原则"><a href="#面向对象设计原则" class="headerlink" title="面向对象设计原则"></a>面向对象设计原则</h4><p><img src="image-20210624155146012.png"></p>
+<h5 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h5><p>类的职责要单一，不能将太多的职责放在一个类中</p>
+<ul>
+<li>一个类承担的职责越多，被复用的可能性越小</li>
+<li>数据职责、行为职责</li>
+<li>是实现高内聚、低耦合的指导方针</li>
+</ul>
+<h5 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h5><p>一个软件实体应当对扩展开放，对修改关闭。</p>
+<ul>
+<li>抽象化是开闭原则的关键</li>
+</ul>
+<h5 id="里氏代换原则"><a href="#里氏代换原则" class="headerlink" title="里氏代换原则"></a>里氏代换原则</h5><p>所有应用基类（父类）的地方必须能透明地使用其子类的对象。</p>
+<ul>
+<li>是实现开闭原则的重要方式之一。</li>
+</ul>
+<h5 id="依赖倒转原则"><a href="#依赖倒转原则" class="headerlink" title="依赖倒转原则"></a>依赖倒转原则</h5><p>要针对接口编程，不要针对实现编程。</p>
+<ul>
+<li>关键是抽象化</li>
+<li>是面向对象设计的主要手段</li>
+</ul>
+<h5 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h5><p>一旦一个接口太大，则需要将它分割成一些更细小的接口，使用该接口的客户端仅需知道与之相关的方法即可。</p>
+<ul>
+<li>一个接口就只代表一个角色，每个角色都有它特定的一个接口。</li>
+<li>接口仅仅提供客户端需要的行为。</li>
+<li>必须满足单一职责原则</li>
+<li>可以为不同的客户端提供宽窄不同的接口</li>
+</ul>
+<h5 id="合成复用原则"><a href="#合成复用原则" class="headerlink" title="合成复用原则"></a>合成复用原则</h5><p>尽量使用对象组合，而不是继承来达到复用的目的</p>
+<ul>
+<li>尽量使用组合/聚合关系，少使用继承</li>
+<li>可以使系统更灵活</li>
+</ul>
+<h5 id="迪米特法则"><a href="#迪米特法则" class="headerlink" title="迪米特法则"></a>迪米特法则</h5><p>对其他实体引用越少越好，不要和“陌生人”讲话</p>
+<p>朋友包含</p>
+<ul>
+<li>当前对象</li>
+<li>以参数形式传入当前对象方法中的对象</li>
+<li>当前对象的成员对象</li>
+<li>若当前对象的成员对象是一个集合，集合中的元素都是朋友</li>
+<li>当前对象创建的对象</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>目标：开闭原则</p>
+<p>指导：迪米特法则</p>
+<p>基础：单一职责原则、可变性封闭原则</p>
+<p>实现：依赖倒转原则、合成复用原则、里氏替换原则、接口隔离原则</p>
+<p><img src="image-20210627142143935.png"></p>
+<h3 id="02-策略模式"><a href="#02-策略模式" class="headerlink" title="02 策略模式"></a>02 策略模式</h3><h4 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h4><h5 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h5><ul>
+<li><p>应对可能会发生的变化</p>
+<ul>
+<li>一方面来自需求，另一方面来自内驱</li>
+</ul>
+</li>
+<li><p>去除易于变化的一部分，封装可变性</p>
+</li>
+</ul>
+<h5 id="UML图"><a href="#UML图" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210624171904257.png"></p>
+<h5 id="模式衍生"><a href="#模式衍生" class="headerlink" title="模式衍生"></a>模式衍生</h5><ul>
+<li>消除硬编码导致的过长if-else语句</li>
+</ul>
+<h5 id="模式实例"><a href="#模式实例" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210626211510192.png"></p>
+<h5 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h5><ul>
+<li>许多相似的类只是在行为上有所不同</li>
+<li>需要一个算法的不同变体</li>
+<li>某个类有许多行为，并且这些行为通过很多条件控制语句执行</li>
+<li>避免用户知道复杂算法使用的数据/结构</li>
+</ul>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>策略类定义了一组基于上下文的算法</li>
+<li>替代了子类</li>
+<li>消除了大量的条件分支语句</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>客户端必须知道不同策略之间的差异</li>
+<li>上下文与策略之间的通信开销</li>
+<li>增加了类的个数</li>
+</ul>
+<h3 id="03-工厂模式"><a href="#03-工厂模式" class="headerlink" title="03 工厂模式"></a>03 工厂模式</h3><h4 id="简单工厂模式"><a href="#简单工厂模式" class="headerlink" title="简单工厂模式"></a>简单工厂模式</h4><h5 id="模式动机"><a href="#模式动机" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>基于同一行为创建不同的实体</li>
+<li>可能根据参数的不同返回不同的对象</li>
+</ul>
+<h5 id="UML图-1"><a href="#UML图-1" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210624173428640.png"></p>
+<h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>实现了对职责的分割，提供专门工厂类负责对象创建，与对象本身业务处理分离，降低了系统的耦合度</li>
+<li>客户端无需知道所创建的具体产品类的类名，只需要知道具体产品类所知道的参数即可</li>
+<li>通过引入配置文件可以在不修改任何客户端代码的情况下更换和增加新的具体产品</li>
+</ul>
+<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>工厂类集中了所有的产品创建逻辑</li>
+<li>增加了类的个数</li>
+<li>系统扩展有点困难，一旦增加新产品不得不修改工厂逻辑，产品较多难以维护</li>
+</ul>
+<h5 id="适用环境"><a href="#适用环境" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>工厂类负责创建对象较少</li>
+<li>客户端只知道传入的参数，对创建过程不关心</li>
+</ul>
+<h4 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h4><h5 id="模式动机-1"><a href="#模式动机-1" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>解决当有产品加入时就要修改工厂类的代码，违反开闭原则的问题</li>
+</ul>
+<h5 id="UML图-2"><a href="#UML图-2" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210624195237619.png"></p>
+<h5 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h5><p><img src="image-20210624200057274.png"></p>
+<h5 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>用户只需要关心所需产品对应的工厂，无需关心细节</li>
+<li>工厂可以自主确定创建何种产品，创建过程封闭在具体工厂内部</li>
+<li>符合开闭原则</li>
+</ul>
+<h5 id="缺点-2"><a href="#缺点-2" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>需编写新的具体产品类的同时要提供与之对应的具体工厂，系统中类的个数成对增加。增加系统复杂度</li>
+<li>增加了系统抽象性和理解难度</li>
+</ul>
+<h5 id="适用环境-1"><a href="#适用环境-1" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>一个类不知道它所需要的对象的类</li>
+<li>一个类通过其子类来指定创建哪个对象</li>
+<li>客户端无需关心是哪个工厂子类创建产品子类，需要时动态指定</li>
+</ul>
+<h4 id="抽象工厂"><a href="#抽象工厂" class="headerlink" title="抽象工厂"></a>抽象工厂</h4><h5 id="模式动机-2"><a href="#模式动机-2" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>提供多个产品对象</li>
+</ul>
+<h5 id="UML图-3"><a href="#UML图-3" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210624203208219.png"></p>
+<h5 id="模式示例"><a href="#模式示例" class="headerlink" title="模式示例"></a>模式示例</h5><p><img src="image-20210624203428819.png"></p>
+<h5 id="优点-3"><a href="#优点-3" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>隔离具体类生成，改变具体工厂示例就可以在某种程度上改变整个软件系统行为</li>
+<li>可以实现高内聚低耦合</li>
+<li>保证客户端用的都是同一产品族内的对象</li>
+</ul>
+<h5 id="缺点-3"><a href="#缺点-3" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>难以扩展抽象工厂用来生产新品种的产品</li>
+<li>开闭原则的倾斜性</li>
+</ul>
+<h5 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h5><ul>
+<li>系统不依赖于产品示例创建、组合表达的细节</li>
+<li>有多个产品族</li>
+<li>属于同个产品族的产品将在一起使用</li>
+<li>所有产品以相同接口出现</li>
+</ul>
+<h3 id="04-创建型模式"><a href="#04-创建型模式" class="headerlink" title="04 创建型模式"></a>04 创建型模式</h3><h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><h5 id="模式动机-3"><a href="#模式动机-3" class="headerlink" title="模式动机"></a>模式动机</h5><p>将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示</p>
+<h5 id="UML图-4"><a href="#UML图-4" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210624204134537.png"></p>
+<h5 id="模式实例-1"><a href="#模式实例-1" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210624204342755.png"></p>
+<h5 id="优点-4"><a href="#优点-4" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>客户端不必知道产品内部组成的细节，将产品本身与产品的创建过程解耦，使得相同的创建过程可以创建不同的产品对象 。</li>
+<li>用户使用不同的具体建造者即可得到不同的产品对象 。</li>
+<li>可以更加精细地控制产品的创建过程。</li>
+<li>增加新的具体建造者无须修改原有类库的代码，指挥者类针对抽象建造者类编程，系统扩展方便，符合“开闭原则”。</li>
+</ul>
+<h5 id="缺点-4"><a href="#缺点-4" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>如果产品之间的差异性很大，则不适合使用建造者模式，因此其使用范围受到一定的限制</li>
+<li>如果产品的内部变化复杂，可能会导致需要定义很多具体建造者类来实现这种变化，导致系统变得很庞大 。</li>
+</ul>
+<h5 id="适用环境-2"><a href="#适用环境-2" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>需要生成的产品对象有复杂的内部结构，这些产品对象通常包含多个成员属性。</li>
+<li>需要生成的产品对象的属性相互依赖，需要指定其生成顺序。</li>
+<li>对象的创建过程独立于创建该对象的类。在建造者模式中引入了指挥者类，将创建过程封装在指挥者类中，而不在建造者类中。</li>
+<li>隔离复杂对象的创建和使用，并使得相同的创建过程可以创建不同的产品。</li>
+</ul>
+<h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><h5 id="模式动机-4"><a href="#模式动机-4" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>克隆出多个与原型对象一模一样的对象</li>
+<li>原型模式通过给出一个原型对象来指明所要创建的对象的类型 然后用复制这个原型对象的办法创建出更多同类型的对象</li>
+</ul>
+<h5 id="UML图-5"><a href="#UML图-5" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210624205207163.png"></p>
+<h5 id="模式实例-2"><a href="#模式实例-2" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210624205335899.png"></p>
+<h5 id="优点-5"><a href="#优点-5" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>简化对象的创建过程 ，通过一个已有实例可以提高新实例的创建效率</li>
+<li>动态增加或减少产品类</li>
+<li>简化的创建结构</li>
+<li>可以使用深克隆的方式 保存对象的状态</li>
+</ul>
+<h5 id="缺点-5"><a href="#缺点-5" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>需要为每一个类配备一个克隆方法</li>
+<li>实现深克隆时需要编写较为复杂的代码</li>
+</ul>
+<h5 id="适用环境-3"><a href="#适用环境-3" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>创建新对象成本较大</li>
+<li>系统要保存对象的状态</li>
+<li>避免使用分层次的工厂类来创建分层次的对象</li>
+</ul>
+<h3 id="05-状态与命令模式"><a href="#05-状态与命令模式" class="headerlink" title="05 状态与命令模式"></a>05 状态与命令模式</h3><h4 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h4><h5 id="模式动机-5"><a href="#模式动机-5" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>一个对象的行为取决于一个或多个动态变化的属性</li>
+</ul>
+<h5 id="UML图-6"><a href="#UML图-6" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625152146640.png"></p>
+<h5 id="模式实例-3"><a href="#模式实例-3" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625152219506.png"></p>
+<h5 id="优点-6"><a href="#优点-6" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>封装了转换规则。</li>
+<li>枚举可能的状态，在枚举状态之前需要确定状态种类。</li>
+<li>将所有与某个状态有关的行为放到一个类中，并且可以方便地增加新的状态，只需要改变对象状态即可改变对象的行为。</li>
+<li>允许状态转换逻辑与状态对象合成一体，而不是某一个巨大的条件语句块。</li>
+<li>可以让多个环境对象共享一个状态对象，从而减少系统中对象的个数。</li>
+</ul>
+<h5 id="缺点-6"><a href="#缺点-6" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>状态模式的使用必然会增加系统类和对象的个数。</li>
+<li>状态模式的结构与实现都较为复杂，如果使用不当将导致程序结构和代码的混乱。</li>
+<li>状态模式对“开闭原则”的支持并不太好</li>
+</ul>
+<h5 id="适用环境-4"><a href="#适用环境-4" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>对象行为依赖状态</li>
+<li>代码包含大量与状态有关的条件语句</li>
+</ul>
+<h5 id="模式应用"><a href="#模式应用" class="headerlink" title="模式应用"></a>模式应用</h5><ul>
+<li><p>工作流（批文状态：：尚未办理；正在办理；正在批示；正在审核；已经完成）</p>
+</li>
+<li><p>RPG游戏程序（开始、运行、结束）</p>
+</li>
+</ul>
+<h4 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h4><h5 id="模式动机-6"><a href="#模式动机-6" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>请求发送者与请求接收者消除彼此之间的耦合</li>
+<li>发送者与接收者之间没有直接引用关系，发送请求的对象只需要知道如何发送请求，而不必知道如何完成请求。</li>
+</ul>
+<h5 id="UML图-7"><a href="#UML图-7" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625153333444.png"></p>
+<h5 id="模式实例-4"><a href="#模式实例-4" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625153648637.png"></p>
+<p><img src="image-20210625153742673.png"></p>
+<h5 id="优点-7"><a href="#优点-7" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>降低系统耦合度</li>
+<li>新的命令可以很容易地加入系统中</li>
+<li>可以比较容易地设计一个命令队列和宏命令</li>
+<li>可以方便地实现对请求的Undo和Redo</li>
+</ul>
+<h5 id="缺点-7"><a href="#缺点-7" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>导致某些系统有过多的具体命令类</li>
+</ul>
+<h5 id="适用环境-5"><a href="#适用环境-5" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>需要请求调用者和请求接收者解耦</li>
+<li>需要在不同的时间指定请求、将请求排队和执行请求</li>
+<li>需要支持命令的撤销和恢复</li>
+<li>需要将一组操作组合在一起</li>
+</ul>
+<h5 id="模式扩展"><a href="#模式扩展" class="headerlink" title="模式扩展"></a>模式扩展</h5><p><img src="image-20210625154340913.png"></p>
+<h3 id="06-行为型模式"><a href="#06-行为型模式" class="headerlink" title="06 行为型模式"></a>06 行为型模式</h3><h4 id="观察者模式-（一对多）"><a href="#观察者模式-（一对多）" class="headerlink" title="观察者模式 （一对多）"></a>观察者模式 （一对多）</h4><h5 id="模式动机-7"><a href="#模式动机-7" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>建立一种对象与对象之间的依赖关系，一个对象发生改变时将自动通知其他对象，其他对象将相应做出反应</li>
+<li>发生改变的对象称为观察目标，而被通知的对象称为观察者，一个观察目标可以对应多个观察者</li>
+</ul>
+<h5 id="UML图-8"><a href="#UML图-8" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625154822673.png"></p>
+<h5 id="模式实例-5"><a href="#模式实例-5" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625155105706.png"></p>
+<h5 id="优点-8"><a href="#优点-8" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>可以实现表示层和数据逻辑层的分离</li>
+<li>建立一个抽象的耦合</li>
+<li>支持广播通信</li>
+<li>符合“开闭原则”</li>
+</ul>
+<h5 id="缺点-8"><a href="#缺点-8" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>将所有的观察者都通知到会花费很多时间</li>
+<li>循环依赖可能导致系统崩溃</li>
+<li>没有相应的机制让观察者知道所观察的目标对象是怎么发生变化的</li>
+</ul>
+<h5 id="适用环境-6"><a href="#适用环境-6" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>一个抽象模型有两个方面，其中一个方面依赖于另一个方面。将这些方面封装在独立的对象中使它们可以各自独立地改变和复用。</li>
+<li>一个对象的改变将导致其他一个或多个对象也发生改变，而不知道具体有多少对象将发生改变，可以降低对象之间的耦合度。</li>
+<li>一个对象必须通知其他对象，而并不知道这些对象是谁。</li>
+<li>需要在系统中创建一个触发链</li>
+</ul>
+<h4 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h4><h5 id="模式动机-8"><a href="#模式动机-8" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>减少对象两两之间复杂的引用关系，使之成为一个松耦合的系统</li>
+</ul>
+<h5 id="UML图-9"><a href="#UML图-9" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625160022826.png"></p>
+<h5 id="模式实例-6"><a href="#模式实例-6" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625160309191.png"></p>
+<h5 id="优点-9"><a href="#优点-9" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>简化了对象之间的交互。</li>
+<li>将各同事解耦。</li>
+<li>减少子类生成。</li>
+<li>可以简化各同事类的设计和实现。</li>
+</ul>
+<h5 id="缺点-9"><a href="#缺点-9" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>具体中介类可能会非常复杂，难以维护</li>
+</ul>
+<h5 id="适用环境-7"><a href="#适用环境-7" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>对象之间存在复杂的引用关系</li>
+<li>难以复用某个对象</li>
+<li>想通过一个中间类来封装多个类中的行为，又不想生成太多的子类</li>
+</ul>
+<h4 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h4><h5 id="模式动机-9"><a href="#模式动机-9" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>将相同的代码放在父类，不同的方法实现放在不同的子类中</li>
+</ul>
+<h5 id="UML图-10"><a href="#UML图-10" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625161130911.png"></p>
+<h5 id="模式实例-7"><a href="#模式实例-7" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625161242691.png"></p>
+<p><img src="image-20210625161308029.png"></p>
+<h5 id="优点-10"><a href="#优点-10" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>是一种代码复用的基本技术</li>
+<li>符合“开闭原则”</li>
+</ul>
+<h5 id="缺点-10"><a href="#缺点-10" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>导致类的个数增加</li>
+</ul>
+<h5 id="适用环境-8"><a href="#适用环境-8" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>一次性实现不变的行为，可变的行为留给子类</li>
+<li>公共的行为应该提取出来集中到一个公共父类</li>
+<li>对一些复杂的算法分割</li>
+<li>控制子类的扩展</li>
+</ul>
+<h3 id="07-适配器和组合"><a href="#07-适配器和组合" class="headerlink" title="07 适配器和组合"></a>07 适配器和组合</h3><h4 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h4><h5 id="模式动机-10"><a href="#模式动机-10" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>客户端可以通过目标类的接口访问它所提供的服务</li>
+<li>适配器可以使由于接口不兼容而不能交互的类可以一起工作</li>
+</ul>
+<h5 id="UML图-11"><a href="#UML图-11" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625163801843.png"></p>
+<p><img src="image-20210625163808348.png"></p>
+<h5 id="模式实例-8"><a href="#模式实例-8" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625163918307.png"></p>
+<p><img src="image-20210625163944343.png"></p>
+<h5 id="优点-11"><a href="#优点-11" class="headerlink" title="优点"></a>优点</h5><ul>
+<li><p>将目标类和适配者类解耦</p>
+</li>
+<li><p>增加了类的透明性和复用性</p>
+</li>
+<li><p>灵活性和扩展性都非常好</p>
+<p>类适配器</p>
+<ul>
+<li>可以在适配器类中置换一些适配者的方法，使得适配器的灵活性更强</li>
+</ul>
+<p>对象适配器</p>
+<ul>
+<li>同一个适配器可以把适配者类和他的子类都适配到目标接口</li>
+</ul>
+</li>
+</ul>
+<h5 id="缺点-11"><a href="#缺点-11" class="headerlink" title="缺点"></a>缺点</h5><p>类适配器</p>
+<ul>
+<li>Java, C#等不支持多重继承的语言，使用有一定局限性</li>
+</ul>
+<p>对象适配器</p>
+<ul>
+<li>相比类适配器，想要置换适配者类的方法就不容易。需要先定义-个子类，再置换掉适配者类的方法，用子类当做真正适配者</li>
+</ul>
+<h5 id="适用环境-9"><a href="#适用环境-9" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>系统需要使用现有类，这些类的接口不符合系统的需要</li>
+<li>想建立一个可以重复使用的类,用于与-些彼此之间没有太大关联的类一起工作</li>
+</ul>
+<h5 id="模式扩展-1"><a href="#模式扩展-1" class="headerlink" title="模式扩展"></a>模式扩展</h5><p><img src="image-20210625164601829.png"></p>
+<h4 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h4><h5 id="模式动机-11"><a href="#模式动机-11" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>组合模式描述了如何将容器对象和叶子对象进行递归组合，使用户在使用时无需对他们进行区分，一致对待容器对象和叶子对象</li>
+<li>组合多个对象形成树形结构，对单个对象“叶子对象”和多个对象”容器对象”的使用具有一致性</li>
+</ul>
+<h5 id="UML图-12"><a href="#UML图-12" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625165240101.png"></p>
+<h5 id="模式实例-9"><a href="#模式实例-9" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625170008329.png"></p>
+<p><img src="image-20210625170018591.png"></p>
+<h5 id="优点-12"><a href="#优点-12" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>可以定义分层次的复杂对象</li>
+<li>客户端可以一致的使用组合结构或其中单个对象。</li>
+<li>可以形成复杂的树形结构</li>
+<li>更容易在组合体内加入对象构件</li>
+</ul>
+<h5 id="缺点-12"><a href="#缺点-12" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>设计变得更加抽象</li>
+<li>很难对容器中的构件类型进行限制</li>
+</ul>
+<h5 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h5><ul>
+<li>需要表示一个对象整体或部分层次</li>
+<li>客户端可以针对抽象构建编程，无须关心对象层次结构的细节</li>
+<li>对象的结构是动态的并且复杂程度不一样，但客户需要一致地处理它们。</li>
+</ul>
+<h3 id="08-桥接与装饰者"><a href="#08-桥接与装饰者" class="headerlink" title="08 桥接与装饰者"></a>08 桥接与装饰者</h3><h4 id="桥接模式"><a href="#桥接模式" class="headerlink" title="桥接模式"></a>桥接模式</h4><h5 id="模式动机-12"><a href="#模式动机-12" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>桥接模式将继承关系转换为关联关系，从而降低了类与类之间的耦合，减少了代码编写量。</li>
+<li>两个变化维度</li>
+</ul>
+<h5 id="UML图-13"><a href="#UML图-13" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625172305393.png"></p>
+<h5 id="模式实例-10"><a href="#模式实例-10" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625200112641.png"></p>
+<p><img src="image-20210625200133731.png"></p>
+<h5 id="优点-13"><a href="#优点-13" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>分离抽象接口及其实现部分。</li>
+<li>桥接模式是比多继承方案更好的解决方法。</li>
+<li>提高了系统的可扩充性</li>
+<li>实现细节对客户透明，可以对用户隐藏实现细节</li>
+</ul>
+<h5 id="缺点-13"><a href="#缺点-13" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>增加系统的理解与设计难度</li>
+<li>其使用范围具有一定的局限性</li>
+</ul>
+<h5 id="适用环境-10"><a href="#适用环境-10" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系。</li>
+<li>抽象化角色和实现化角色可以以继承的方式独立扩展而互不影响</li>
+<li>存在两个独立变化的维度</li>
+<li>不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统</li>
+</ul>
+<h4 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h4><h5 id="模式动机-13"><a href="#模式动机-13" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>装饰模式可以在不需要创造更多子类的情况下，将对象的功能加以扩展。</li>
+</ul>
+<h5 id="UML图-14"><a href="#UML图-14" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625201054391.png"></p>
+<h5 id="模式实例-11"><a href="#模式实例-11" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625201358193.png"></p>
+<p><img src="image-20210625201413753.png"></p>
+<h5 id="优点-14"><a href="#优点-14" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>装饰者模式可以提供比继承更多的灵活性</li>
+<li>可以通过一种动态的方式来扩展一个对象的功能</li>
+<li>通过使用不同的具体装饰类以及这些装饰类的排列组合，可以创造出很多不同行为的组合。</li>
+<li>具体构件类与具体装饰类可以独立变化</li>
+</ul>
+<h5 id="缺点-14"><a href="#缺点-14" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>将产生很多小对象</li>
+<li>比继承更加易于出错，排错也很困难，对于多次装饰的对象，调试时寻找错误可能需要逐级排查，较为烦琐。</li>
+</ul>
+<h5 id="适用环境-11"><a href="#适用环境-11" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>以动态、透明的方式给单个对象添加职责。</li>
+<li>需要动态地给一个对象增加功能，这些功能也可以动态地被撤销。</li>
+<li>当不能采用继承的方式对系统进行扩充或者采用继承不利于系统扩展和维护时</li>
+</ul>
+<h3 id="09-结构型模式"><a href="#09-结构型模式" class="headerlink" title="09 结构型模式"></a>09 结构型模式</h3><h4 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h4><h5 id="模式动机-14"><a href="#模式动机-14" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>引入外观角色之后，用户只需要直接与外观角色交互，用户与子系统之间的复杂关系由外观角色来实现，从而降低了系统的耦合度。</li>
+</ul>
+<h5 id="UML图-15"><a href="#UML图-15" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625203218516.png"></p>
+<h5 id="模式实例-12"><a href="#模式实例-12" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625203413531.png"></p>
+<p><img src="image-20210625203502606.png"></p>
+<h5 id="优点-15"><a href="#优点-15" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>对客户屏蔽子系统组件，减少了客户处理的对象数目并使得子系统使用起来更加容易</li>
+<li>实现了子系统与客户之间的松耦合关系</li>
+<li>降低了大型软件系统中的编译依赖性，并简化了系统在不同平台之间的移植过程</li>
+<li>只是提供了一个访问子系统的统一入口，并不影响用户直接使用子系统类</li>
+</ul>
+<h5 id="缺点-15"><a href="#缺点-15" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>不能很好地限制客户使用子系统类</li>
+<li>在不引入抽象外观类的情况下，增加新的子系统可能需要修改外观类或客户端的源代码，违背了“开闭原则“</li>
+</ul>
+<h5 id="适用环境-12"><a href="#适用环境-12" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>当要为一个复杂子系统提供一个简单接口时可以使用外观模式</li>
+<li>客户程序与多个子系统之间存在很大的依赖性</li>
+<li>在层次化结构中，可以使用外观模式定义系统中每一层的入口，层与层之间不直接产生联系，而通过外观类建立联系，降低层之间的耦合度。</li>
+</ul>
+<h5 id="模式扩展-2"><a href="#模式扩展-2" class="headerlink" title="模式扩展"></a>模式扩展</h5><p><img src="image-20210625204453215.png"></p>
+<h4 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h4><h5 id="模式动机-15"><a href="#模式动机-15" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>当对象数量太多时，将导致运行代价过高，带来性能下降等问题</li>
+<li>享元模式通过共享技术实现相同或相似对象的重用。</li>
+<li>可以共享的相同内容称为内部状态(IntrinsicState)</li>
+<li>需要外部环境来设置的不能共享的内容称为外部状态(Extrinsic State)</li>
+</ul>
+<h5 id="UML图-16"><a href="#UML图-16" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625204759468.png"></p>
+<h5 id="模式实例-13"><a href="#模式实例-13" class="headerlink" title="模式实例"></a>模式实例</h5><p><img src="image-20210625211035775.png"></p>
+<p><img src="image-20210625211042513.png"></p>
+<h5 id="优点-16"><a href="#优点-16" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>极大减少内存中对象的数量</li>
+<li>享元对象可以在不同的环境中被共享</li>
+</ul>
+<h5 id="缺点-16"><a href="#缺点-16" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>享元模式使得系统更加复杂，需要分离出内部状态和外部状态，这使得程序的逻辑复杂化。</li>
+<li>为了使对象可以共享，享元模式需要将享元对象的状态外部化，而读取外部状态使得运行时间变长。</li>
+</ul>
+<h5 id="适用环境-13"><a href="#适用环境-13" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>有大量相同或者相似的对象</li>
+<li>大部分状态都可以外部化</li>
+<li>应当在多次重复使用享元对象时才值得使用享元模式。</li>
+</ul>
+<h4 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h4><h5 id="模式动机-16"><a href="#模式动机-16" class="headerlink" title="模式动机"></a>模式动机</h5><ul>
+<li>一个客户不想或不能直接引用一个对象，此时可以通过一个称为”代理”的第三者实现间接引用。</li>
+<li>代理对象可以在客户端和目标对象之间起到中介的作用，并且可以通过代理对象去掉客户<br>不能看到的内容和服务或者添加客户需要的额外服务。</li>
+</ul>
+<h5 id="UML图-17"><a href="#UML图-17" class="headerlink" title="UML图"></a>UML图</h5><p><img src="image-20210625212256948.png"></p>
+<h5 id="模式应用-1"><a href="#模式应用-1" class="headerlink" title="模式应用"></a>模式应用</h5><p><img src="image-20210625212847838.png"></p>
+<p><img src="image-20210625212930043.png"></p>
+<h5 id="优点-17"><a href="#优点-17" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>协调调用者和被调用者</li>
+<li>远程代理使得客户端可以访问在远程机器上的对象</li>
+<li>虚拟代理通过使用一个小对象来代表一个大对象，可以减少系统资源的消耗，对系统进行优化并提高运行速度</li>
+<li>保护代理可以控制对真实对象的使用权限。</li>
+</ul>
+<h5 id="缺点-17"><a href="#缺点-17" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>可能会造成请求的处理速度变慢。</li>
+<li>实现代理模式需要额外的工作，有些代理模式的实现非常复杂。</li>
+</ul>
+<h5 id="适用环境-14"><a href="#适用环境-14" class="headerlink" title="适用环境"></a>适用环境</h5><ul>
+<li>远程代理</li>
+<li>虚拟代理</li>
+<li>Copy-on-Write代理</li>
+<li>保护(Protect or Access)代理</li>
+<li>缓冲代理</li>
+<li>防火墙代理</li>
+<li>智能引用代理</li>
+</ul>
+<h3 id="10-防御式编程"><a href="#10-防御式编程" class="headerlink" title="10 防御式编程"></a>10 防御式编程</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>通过预见到（或至少预先推测到）问题所在，断定代码中每个阶段可能出现的错误，并做出相应的防范措施，来防止类似意外的发生</p>
+<h4 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h4><ul>
+<li>使用好的编码风格和合理的设计</li>
+<li>不要仓促地编写代码</li>
+<li>不要相信任何人</li>
+<li>编写清晰而非简洁的代码</li>
+<li>不让其他人做不该做的修补工作</li>
+<li>编译时打开所有警告开关</li>
+<li>检查所有的返回值</li>
+<li>在声明位置初始化所有变量</li>
+<li>尽可能推迟一些变量声明</li>
+<li>使用安全的数据结构</li>
+<li>使用标准语言工具</li>
+<li>审慎地进行强制转换</li>
+</ul>
+<h4 id="断言"><a href="#断言" class="headerlink" title="断言"></a>断言</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><ul>
+<li>在开发期间使用的、让程序在运行时进行自检的代码<ul>
+<li>作为对开发人员的警告</li>
+<li>通常是一个子程序或宏</li>
+<li>断言为真，表示程序运行正常；为假，表示代码中出现了意料之外的错误</li>
+</ul>
+</li>
+</ul>
+<h5 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h5><ul>
+<li>输入参数或输出参数的取值处于预期的范围内</li>
+<li>子程序开始（或结束）执行时，文件或流是处于打开（或关闭）的状态</li>
+<li>子程序开始（或结束）执行时，文件或流的读写位置处于开头（或结尾）处</li>
+<li>文件或流已用只读、只写或可读可写方式打开</li>
+<li>仅用于输入的变量的值没有被子程序所修改</li>
+<li>指针非空</li>
+<li>传入子程序的数组或其他容器至少能容纳X 个数据元素</li>
+<li>表已初始化，存储着真实的数值</li>
+<li>子程序开始（或结束）执行时，某个容器是空的（或满的）</li>
+<li>一个经过高度优化的复杂子程序的运算结果和相对缓慢但代码清晰的子程序的运算结果相一致</li>
+</ul>
+<h5 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h5><ul>
+<li>断言主要用于开发和维护阶段<ul>
+<li>帮助查清相互矛盾的假定</li>
+<li>预料之外的情况</li>
+<li>传给子程序的错误数据等</li>
+</ul>
+</li>
+</ul>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ul>
+<li><p>断言是提高软件质量技术的有益辅助手段</p>
+<ul>
+<li>可看作是可执行的注解</li>
+<li>相比注释，能更主动地对程序中的假定作出说明</li>
+</ul>
+</li>
+<li><p>不能依赖断言来让代码正常工作</p>
+<ul>
+<li>最佳方式是在一开始不要在代码中引入错误</li>
+</ul>
+</li>
+<li><p>断言不能有任何副作用</p>
+</li>
+</ul>
+<h5 id="断言-vs-错误处理"><a href="#断言-vs-错误处理" class="headerlink" title="断言 vs. 错误处理"></a>断言 vs. 错误处理</h5><ul>
+<li>断言处理代码中不应发生的错误</li>
+<li>错误处理处理那些预料中可能发生的错误</li>
+</ul>
+<h5 id="隔栏-vs-断言"><a href="#隔栏-vs-断言" class="headerlink" title="隔栏 vs. 断言"></a>隔栏 vs. 断言</h5><ul>
+<li>隔栏的使用使断言和错误处理有了清晰的区分</li>
+<li>隔栏部分包含了“脏数据”</li>
+<li>通过隔离部分之后的是”干净数据“</li>
+</ul>
+<h4 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h4><h5 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h5><p>错误处理技术用来处理那些预料中可能要发生的错误情况</p>
+<h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><ul>
+<li>返回中立值</li>
+<li>换用下一个正确的数据</li>
+<li>返回与上一次相同的数据</li>
+<li>换用最接近的合法值</li>
+<li>把警告信息记录到日志文件中</li>
+<li>返回一个错误码</li>
+<li>调用错误处理子程序或对象</li>
+<li>显示出错消息</li>
+<li>用最妥当的方法在局部处理错误</li>
+<li>关闭程序</li>
+</ul>
+<h5 id="健壮性与正确性"><a href="#健壮性与正确性" class="headerlink" title="健壮性与正确性"></a>健壮性与正确性</h5><ul>
+<li>正确性（correctness） <strong>人身安全攸关的软件</strong></li>
+<li>指软件按照需求正确执行任务的能力</li>
+<li>永不返回不准确的结果，哪怕不返回结果也比返回不准确的结果好</li>
+<li>健壮性（robustness）<strong>消费类应用软件</strong></li>
+<li>指软件对于规范要求以外的输入情况的处理能力</li>
+<li>要不断尝试采取某些措施，以保证软件可以持续地运转下去，哪怕有时做出一些不够准确的结果</li>
+</ul>
+<h4 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h4><h5 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h5><p>是把代码中的错误或异常事件传递给调用方代码的一种特殊手段</p>
+<h4 id="如何对待防御式编程"><a href="#如何对待防御式编程" class="headerlink" title="如何对待防御式编程"></a>如何对待防御式编程</h4><ul>
+<li>过度的防御式编程也会引起问题</li>
+<li>正确的态度</li>
+</ul>
+<h3 id="11-表驱动法"><a href="#11-表驱动法" class="headerlink" title="11 表驱动法"></a>11 表驱动法</h3><h4 id="概念-3"><a href="#概念-3" class="headerlink" title="概念"></a>概念</h4><ul>
+<li>表驱动法是一种编程模式（scheme）<ul>
+<li>从表里面查找信息而不使用逻辑语句（if 和 case）</li>
+</ul>
+</li>
+<li>表驱动法适用于复杂的逻辑</li>
+<li>表驱动法的另一个好处是可以将复杂逻辑从代码中独立出来，以便于单独维护</li>
+</ul>
+<h4 id="方式"><a href="#方式" class="headerlink" title="方式"></a>方式</h4><ul>
+<li>直接访问（ Direct access）</li>
+<li>索引访问（ Indexed access）<ul>
+<li>节省空间</li>
+<li>操作索引更廉价</li>
+</ul>
+</li>
+<li>阶梯访问（ Stair step access）</li>
+</ul>
+<h3 id="贺氏"><a href="#贺氏" class="headerlink" title="贺氏"></a>贺氏</h3><h3 id="2021Arch01-introdution"><a href="#2021Arch01-introdution" class="headerlink" title="2021Arch01-introdution"></a>2021Arch01-introdution</h3><h4 id="什么是软件架构"><a href="#什么是软件架构" class="headerlink" title="什么是软件架构"></a>什么是软件架构</h4><ul>
+<li><p>SEI</p>
+<ul>
+<li>是整个程序或计算系统的结构(Structure) ，包含了程序的元素(Software Elements)和那些外部能看见的元素属性(Properties) 和元素之间的关系(Relationship)</li>
+</ul>
+</li>
+<li><p>IEEE</p>
+<ul>
+<li>一个系统的基本组织，包含了它的所有组件(Components)、 组件之间的关系、 环境以及指导该系统的设计(Design)和演化(Evolution)的原则(Principle)</li>
+</ul>
+</li>
+</ul>
+<h4 id="Architecture-Vs-Design"><a href="#Architecture-Vs-Design" class="headerlink" title="Architecture Vs. Design"></a>Architecture Vs. Design</h4><ul>
+<li><p>架构是关于软件的设计</p>
+<ul>
+<li>所有的架构都是一种软件设计，但是并不是所有的设计都是软件架构</li>
+<li>架构是设计过程的一部分</li>
+</ul>
+</li>
+<li><p>其他视角</p>
+<ul>
+<li>高等级的设计</li>
+<li>一系列设计决策</li>
+<li>locality</li>
+</ul>
+</li>
+<li><p>系统的架构/组织</p>
+<ul>
+<li>元素：组件和连接器</li>
+<li>关系：动态&amp;静态关系</li>
+</ul>
+</li>
+<li><p>属性：元素、元素组和整体系统</p>
+</li>
+</ul>
+<h4 id="Architecture-Vs-Structure"><a href="#Architecture-Vs-Structure" class="headerlink" title="Architecture Vs. Structure"></a>Architecture Vs. Structure</h4><ul>
+<li>结构将系统分解为组件/模块/子系统</li>
+<li>架构定义了<ul>
+<li>组件接口</li>
+<li>组件交互与依赖</li>
+<li>组件责任</li>
+</ul>
+</li>
+</ul>
+<h4 id="架构指定交互"><a href="#架构指定交互" class="headerlink" title="架构指定交互"></a>架构指定交互</h4><ul>
+<li>交互包括<ul>
+<li>数据流动</li>
+<li>控制流动</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-1视图模型"><a href="#4-1视图模型" class="headerlink" title="4+1视图模型"></a>4+1视图模型</h4><ul>
+<li>逻辑视图：描述了关于架构的架构级别的重要元素和他们之间的关系</li>
+<li>过程视图：一个架构内的并发和交互元素</li>
+<li>物理视图：描述主要进程和组件如何被映射到应用程序硬件中</li>
+<li>开发视图：捕获软件组件的内部组织，例如一个配置管理工具</li>
+<li>用例视图：捕获架构的需求；不止和一个具体视图有关</li>
+</ul>
+<p><img src="image-20210626161202377.png"></p>
+<h4 id="软件架构师做什么"><a href="#软件架构师做什么" class="headerlink" title="软件架构师做什么"></a>软件架构师做什么</h4><ul>
+<li>联络</li>
+<li>软件工程</li>
+<li>技术知识</li>
+<li>危机管理</li>
+</ul>
+<h4 id="架构活动"><a href="#架构活动" class="headerlink" title="架构活动"></a>架构活动</h4><ul>
+<li>为系统创造业务用例</li>
+<li>理解需求</li>
+<li>创建并选择架构</li>
+<li>交流架构</li>
+<li>分析或评估架构</li>
+<li>实现架构</li>
+<li>确保架构的一致性</li>
+</ul>
+<h3 id="2021Arch02-quality-attributes"><a href="#2021Arch02-quality-attributes" class="headerlink" title="2021Arch02-quality attributes"></a>2021Arch02-quality attributes</h3><h4 id="软件架构为什么重要"><a href="#软件架构为什么重要" class="headerlink" title="软件架构为什么重要"></a>软件架构为什么重要</h4><ul>
+<li><p>软件架构提供了交互媒介</p>
+</li>
+<li><p>软件架构表现出最早的一系列设计决策</p>
+</li>
+<li><p>架构是可转移和可重用的抽象——一对多的映射(一个架构，多个系统)</p>
+</li>
+<li><p>架构是产品共性的基础。整个产品线共享一个体系结构</p>
+</li>
+<li><p>系统可以通过体系结构集成独立开发的组件来开发(基于组件的软件工程- CBSE)</p>
+</li>
+</ul>
+<h4 id="软件需求"><a href="#软件需求" class="headerlink" title="软件需求"></a>软件需求</h4><ul>
+<li>功能需求 Functional requirements<ul>
+<li>功能需求说明系统必须做什么，并说明系统如何为涉众提供价值</li>
+<li>功能需求是指系统的行为。</li>
+<li>功能是系统完成其预期工作的能力，例如，允许学生在线注册。</li>
+<li>功能可以通过使用任意数量的可能结构来实现。</li>
+<li>功能在很大程度上独立于结构，因为它可以作为一个单独的单片系统存在，而不需要任何内部结构。</li>
+</ul>
+</li>
+<li>质量需求 Quality requirements（NFRs）<ul>
+<li>质量要求是整个系统的理想特性。系统应该在其功能需求之上提供的质量属性。</li>
+<li>质量要求是功能需求或整个产品的资格。</li>
+<li>如果质量属性很重要，那么软件架构会限制将功能分配(映射)到各种结构上。</li>
+</ul>
+</li>
+<li>约束 Constraints<ul>
+<li>约束是零自由度的设计决策</li>
+<li>约束是预先指定的已经做出的设计决策。</li>
+<li>通过接受设计决策并将其与其他受影响的设计决策进行协调，可以满足约束。</li>
+</ul>
+</li>
+</ul>
+<h4 id="质量属性"><a href="#质量属性" class="headerlink" title="质量属性"></a>质量属性</h4><p><img src="image-20210626105131698.png"></p>
+<ul>
+<li>刺激源，Source of Stimulus：生成刺激的实体（人、系统或其它刺激器）</li>
+<li>刺激，Stimulus：是某事物，当其到达系统后需要对其加以考虑</li>
+<li>环境，Environment：刺激发生时的各种条件</li>
+<li>制品，Artifact：可能是整个系统，或系统的一部分</li>
+<li>响应，Response：刺激到达后采取的反应</li>
+<li>响应度量，Response Measure：能够以某种方式对响应进行度量</li>
+</ul>
+<h4 id="Tactics"><a href="#Tactics" class="headerlink" title="Tactics"></a>Tactics</h4><ul>
+<li>风格或模式应用策略来提供所承诺的好处。</li>
+<li>战术是一种设计决策（如冗余），影响质量属性响应的控制。</li>
+<li>战略的集合称为架构策略</li>
+<li>系统设计由一系列设计决策组成:其中一些决策有助于控制质量属性响应;其他确保系统功能的实现。</li>
+</ul>
+<h4 id="Availability"><a href="#Availability" class="headerlink" title="Availability"></a>Availability</h4><p>可用性。和整个程序的可靠性(Reliability) 有关，是系统修复故障的能力。通过减少故障来最小化服务中断时间。</p>
+<h5 id="刺激-响应图"><a href="#刺激-响应图" class="headerlink" title="刺激-响应图"></a>刺激-响应图</h5><p><img src="image-20210626111234262.png"></p>
+<h5 id="Tactics-1"><a href="#Tactics-1" class="headerlink" title="Tactics"></a>Tactics</h5><p><img src="image-20210626111447538.png"></p>
+<ul>
+<li><p>Ping/Echo</p>
+<ul>
+<li>一个组件发出一个ping，并期望在预定义的时间内从另一个组件得到回音。</li>
+<li>Ping/Echo可以在负责一个任务的一组组件中使用。</li>
+</ul>
+</li>
+<li><p>Heartbeat</p>
+<ul>
+<li>一个组件周期性地发出一个心跳消息(也可以携带数据)，另一个组件侦听它。</li>
+<li>如果心跳失败，则假定发起组件失败，并通知故障纠正组件。</li>
+</ul>
+</li>
+<li><p>Exception</p>
+<ul>
+<li>识别故障的一种方法是遇到异常。</li>
+<li>异常处理程序通常在引入异常的同一进程中执行。</li>
+</ul>
+</li>
+<li><p>Checkpoint/Rollback</p>
+<ul>
+<li>检查点记录周期性或响应特定事件而创建的一致状态。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Interoperability"><a href="#Interoperability" class="headerlink" title="Interoperability"></a>Interoperability</h4><p>交互操作性。描述多个系统通过接口交换信息的属性，包括交换和正确推断信息。</p>
+<h5 id="刺激-响应图-1"><a href="#刺激-响应图-1" class="headerlink" title="刺激-响应图"></a>刺激-响应图</h5><p><img src="image-20210626114330885.png"></p>
+<h5 id="Tactics-2"><a href="#Tactics-2" class="headerlink" title="Tactics"></a>Tactics</h5><p><img src="image-20210626114350848.png"></p>
+<ul>
+<li><p>发现服务</p>
+<ul>
+<li>通过搜索已知目录服务定位服务。</li>
+</ul>
+</li>
+<li><p>编排</p>
+<ul>
+<li>使用一种控制机制来协调、管理和排序特定的调用服务</li>
+</ul>
+</li>
+<li><p>定制接口</p>
+<ul>
+<li>向接口添加或删除功能。</li>
+</ul>
+</li>
+</ul>
+<h4 id="Modifiability"><a href="#Modifiability" class="headerlink" title="Modifiability"></a>Modifiability</h4><p>可修改性。用于评估一个更改所消耗的时间和金钱。</p>
+<h5 id="刺激-响应图-2"><a href="#刺激-响应图-2" class="headerlink" title="刺激-响应图"></a>刺激-响应图</h5><p><img src="image-20210626124646345.png"></p>
+<h5 id="Tactics-3"><a href="#Tactics-3" class="headerlink" title="Tactics"></a>Tactics</h5><p><img src="image-20210626124710653.png"></p>
+<ul>
+<li>分裂模块<ul>
+<li>被修改的模块包含了大量功能，修改成本会很高</li>
+</ul>
+</li>
+<li>增加语义一致性:<ul>
+<li>如果一个模块中的职责A和B没有达到相同的目的，那么应该通过创建一个新模块或将职责转移到现有模块中来将它们放在不同的模块中。</li>
+</ul>
+</li>
+<li>封装<ul>
+<li>为模块引入了显式接口，减少了对一个模块的更改传播到其他模块的可能性。</li>
+</ul>
+</li>
+<li>使用中介<ul>
+<li>打破依赖关系。</li>
+</ul>
+</li>
+<li>重构<ul>
+<li>当两个模块受到相同更改的影响时</li>
+</ul>
+</li>
+</ul>
+<h4 id="Performance"><a href="#Performance" class="headerlink" title="Performance"></a>Performance</h4><p>性能。关于时间和软件系统满足时间需求的能力。响应时间=处理时间和等待时间</p>
+<h5 id="刺激-响应图-3"><a href="#刺激-响应图-3" class="headerlink" title="刺激-响应图"></a>刺激-响应图</h5><p><img src="image-20210626125415858.png"></p>
+<h5 id="Tactics-4"><a href="#Tactics-4" class="headerlink" title="Tactics"></a>Tactics</h5><p><img src="image-20210626125559119.png"></p>
+<ul>
+<li><p>管理采样率(降低采样频率)</p>
+</li>
+<li><p>限制事件响应</p>
+</li>
+<li><p>按优先次序排列。</p>
+</li>
+<li><p>使用中介体</p>
+</li>
+<li><p>增加资源</p>
+</li>
+<li><p>引入并发性</p>
+</li>
+<li><p>维护数据的多个副本</p>
+</li>
+</ul>
+<h4 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h4><p>安全性。衡量系统在向合法用户提供服务的同时，阻止非授权使用的能力。</p>
+<h5 id="刺激-响应图-4"><a href="#刺激-响应图-4" class="headerlink" title="刺激-响应图"></a>刺激-响应图</h5><p><img src="image-20210626131612875.png"></p>
+<h5 id="Tactics-5"><a href="#Tactics-5" class="headerlink" title="Tactics"></a>Tactics</h5><p><img src="image-20210626132000511.png"></p>
+<ul>
+<li>检测入侵</li>
+<li>检测服务否认</li>
+<li>验证消息的完整性</li>
+<li>限制访问</li>
+<li>加密数据</li>
+</ul>
+<h4 id="Testability"><a href="#Testability" class="headerlink" title="Testability"></a>Testability</h4><p>可测试性。通过测试揭示软件缺陷的容易程度。</p>
+<h5 id="刺激-响应图-5"><a href="#刺激-响应图-5" class="headerlink" title="刺激-响应图"></a>刺激-响应图</h5><p><img src="image-20210626132849814.png"></p>
+<h5 id="Tactics-6"><a href="#Tactics-6" class="headerlink" title="Tactics"></a>Tactics</h5><p><img src="image-20210626132919561.png"></p>
+<ul>
+<li>专门的接口</li>
+<li>记录/回放</li>
+<li>限制结构的复杂性</li>
+<li>限制非确定性</li>
+</ul>
+<h4 id="Usability"><a href="#Usability" class="headerlink" title="Usability"></a>Usability</h4><p>易用性。用户去完成一个特定任务的容易性程度和系统所提供的用户支持的种类。</p>
+<h5 id="刺激-响应图-6"><a href="#刺激-响应图-6" class="headerlink" title="刺激-响应图"></a>刺激-响应图</h5><p><img src="image-20210626133450272.png"></p>
+<h5 id="Tactics-7"><a href="#Tactics-7" class="headerlink" title="Tactics"></a>Tactics</h5><p><img src="image-20210626133509425.png"></p>
+<ul>
+<li>拒绝</li>
+<li>不做</li>
+<li>暂停/重新开始</li>
+<li>维护任务模型</li>
+<li>维护用户模型</li>
+<li>维护系统模型</li>
+</ul>
+<h4 id="X-ability"><a href="#X-ability" class="headerlink" title="X-ability"></a>X-ability</h4><p>可变性、可移植性、可伸缩性、可部署性、可复用性.</p>
+<h4 id="ASRs"><a href="#ASRs" class="headerlink" title="ASRs"></a>ASRs</h4><h5 id="概念-4"><a href="#概念-4" class="headerlink" title="概念"></a>概念</h5><p>架构上的重要需求(ASR)是对架构有深刻影响的需求——如果没有这样的需求，架构可能会有很大的不同</p>
+<h5 id="如何获得"><a href="#如何获得" class="headerlink" title="如何获得"></a>如何获得</h5><ul>
+<li>需求文档</li>
+<li>访谈利益相关人员(涉众)</li>
+<li>理解业务目标</li>
+<li>效用树（utility tree）</li>
+</ul>
+<h3 id="2021Arch03-patterns"><a href="#2021Arch03-patterns" class="headerlink" title="2021Arch03-patterns"></a>2021Arch03-patterns</h3><h4 id="架构模式"><a href="#架构模式" class="headerlink" title="架构模式"></a>架构模式</h4><ul>
+<li><p>是在实践中反复发现的一系列设计决策，</p>
+</li>
+<li><p>已知允许重用的属性，并描述了一类体系结构。</p>
+</li>
+<li><p>在上下文、问题和解决方法之间建立关系</p>
+</li>
+</ul>
+<h4 id="分层模式"><a href="#分层模式" class="headerlink" title="分层模式"></a>分层模式</h4><p><img src="image-20210626135044288.png"></p>
+<h4 id="代理模式-1"><a href="#代理模式-1" class="headerlink" title="代理模式"></a>代理模式</h4><p><img src="image-20210626135114935.png"></p>
+<h4 id="MVC模式"><a href="#MVC模式" class="headerlink" title="MVC模式"></a>MVC模式</h4><p><img src="image-20210626135200072.png"></p>
+<h4 id="管道和过滤器模式"><a href="#管道和过滤器模式" class="headerlink" title="管道和过滤器模式"></a>管道和过滤器模式</h4><p><img src="image-20210626135222934.png"></p>
+<h4 id="客户端-服务端模式"><a href="#客户端-服务端模式" class="headerlink" title="客户端-服务端模式"></a>客户端-服务端模式</h4><p><img src="image-20210626135249706.png"></p>
+<h4 id="点对点模式"><a href="#点对点模式" class="headerlink" title="点对点模式"></a>点对点模式</h4><p><img src="image-20210626140538133.png"></p>
+<h4 id="面向服务的模式"><a href="#面向服务的模式" class="headerlink" title="面向服务的模式"></a>面向服务的模式</h4><p><img src="image-20210626140648617.png"></p>
+<h4 id="发布-订阅模式"><a href="#发布-订阅模式" class="headerlink" title="发布-订阅模式"></a>发布-订阅模式</h4><p><img src="image-20210626140810735.png"></p>
+<h4 id="数据共享模式"><a href="#数据共享模式" class="headerlink" title="数据共享模式"></a>数据共享模式</h4><p><img src="image-20210626140853224.png"></p>
+<h4 id="Map-Reduce模式"><a href="#Map-Reduce模式" class="headerlink" title="Map-Reduce模式"></a>Map-Reduce模式</h4><p><img src="image-20210626141114474.png"></p>
+<h4 id="多层模式（Multi-Tier-Pattern）"><a href="#多层模式（Multi-Tier-Pattern）" class="headerlink" title="多层模式（Multi-Tier Pattern）"></a>多层模式（Multi-Tier Pattern）</h4><p><img src="image-20210626141335855.png"></p>
+<h5 id="和分层的区别"><a href="#和分层的区别" class="headerlink" title="和分层的区别"></a>和分层的区别</h5><ul>
+<li>多层架构是一种客户端/服务器端架构。在该架构中，表现功能、应用处理和数据管理功能物理分离。</li>
+<li>Layer是水平方向的，tier是垂直方向的</li>
+<li>Tier表示物理分布，layer表示逻辑分布</li>
+</ul>
+<h4 id="模式vs-战术（Patterns-vs-Tactics）"><a href="#模式vs-战术（Patterns-vs-Tactics）" class="headerlink" title="模式vs.战术（Patterns vs. Tactics）"></a>模式vs.战术（Patterns vs. Tactics）</h4><ol>
+<li><p>战术比模式简单</p>
+</li>
+<li><p>战术是一种设计决策，而模式是一组设计决策的集合</p>
+</li>
+<li><p>都是架构师的基础工具</p>
+</li>
+<li><p>战术是设计的建筑基石</p>
+</li>
+<li><p>大多模式包含几个不同的战术。例如分层模式包含增加内聚，降低依赖的战术</p>
+</li>
+<li><p>大多数模式也会包含其他模式</p>
+</li>
+</ol>
+<h3 id="2021Arch04-design"><a href="#2021Arch04-design" class="headerlink" title="2021Arch04-design"></a>2021Arch04-design</h3><h4 id="通用设计策略"><a href="#通用设计策略" class="headerlink" title="通用设计策略"></a>通用设计策略</h4><p>抽象、分解、分治、生成和测试、迭代、重用</p>
+<h4 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h4><p>输入：功能需求、质量属性、约束</p>
+<p>输出：软件元素、角色、元素职责、元素属性、两个元素之间的关系</p>
+<ol>
+<li><p>确认需求</p>
+</li>
+<li><p>选择一个系统元素分解</p>
+</li>
+<li><p>为该元素确认架构必要需求</p>
+<ul>
+<li>H,M,L的二维数组（对利益相关者的重要性，对架构实现的影响）</li>
+</ul>
+</li>
+<li><p>选择一个符合架构必要需求的设计理念</p>
+<ol>
+<li>确认设计关注点</li>
+<li>为次要关注点列出不同的模式和策略</li>
+<li>选择合适的模式和策略</li>
+<li>决定架构必要需求和模式策略之间的关系</li>
+<li>得到架构视图</li>
+<li>评估并解决不一致问题</li>
+</ol>
+</li>
+<li><p>列出架构元素并分配职责</p>
+</li>
+<li><p>定义元素接口</p>
+</li>
+<li><p>确认需求、为元素构造约束</p>
+</li>
+<li><p>重复以上步骤直到所有架构必要需求都被满足</p>
+</li>
+</ol>
+<h3 id="2021Arch05-document"><a href="#2021Arch05-document" class="headerlink" title="2021Arch05-document"></a>2021Arch05-document</h3><h4 id="为什么记录软件架构"><a href="#为什么记录软件架构" class="headerlink" title="为什么记录软件架构"></a>为什么记录软件架构</h4><ul>
+<li>沟通和社会化架构设计决策</li>
+<li>帮助理解和评估体系结构设计决策</li>
+<li>更新设计师对某些决策的记忆</li>
+<li>培训架构设计人员</li>
+<li>支持地理分布的团队</li>
+</ul>
+<h3 id="Styles-vs-Patterns-vs-Views"><a href="#Styles-vs-Patterns-vs-Views" class="headerlink" title="Styles vs. Patterns vs. Views"></a>Styles vs. Patterns vs. Views</h3><ul>
+<li>Style：关注组件和组件之间的交互和职责限制。更关注架构方法，不包含具体的上下文和问题。</li>
+<li>Pattern：体现软件系统基本的结构组织模式。关注上下文和问题，以及如何解决。</li>
+<li>View：是系统中特定类型的元素及其关系的表示。不同的视图支持不同的目标和用户，强调不同的系统元素和关系，同时在不同程度上表示不同的质量属性。</li>
+</ul>
+<h4 id="为什么文档中使用不同视图"><a href="#为什么文档中使用不同视图" class="headerlink" title="为什么文档中使用不同视图"></a>为什么文档中使用不同视图</h4><ul>
+<li>视图是一组系统元素和它们之间的关系的表示——不是所有的系统元素，而是特定类型的元素。</li>
+<li>视图让我们将系统实体划分为有趣的和可管理的系统表示。</li>
+<li>不同的视图支持不同的目标和用户，并突出不同的系统元素和关系。</li>
+<li>不同的视图在不同程度上暴露不同的质量属性。</li>
+</ul>
+<h4 id="连线并为每个样式列出四个视图"><a href="#连线并为每个样式列出四个视图" class="headerlink" title="连线并为每个样式列出四个视图"></a>连线并为每个样式列出四个视图</h4><p><img src="image-20210626150659798.png"></p>
+<ul>
+<li>模块视图Module View<ul>
+<li>分解视图Decomposition view、</li>
+<li>使用视图Uses view、</li>
+<li>泛化视图Generalization view、</li>
+<li>分层视图Layered view、</li>
+<li>切面视图Aspects view、</li>
+<li>数据模型视图Data model view</li>
+</ul>
+</li>
+<li>组件-连接件视图 C&amp;C View<ul>
+<li>Pipe-and-filter view、</li>
+<li>Client-server view、</li>
+<li>Peer-to-peer view、</li>
+<li>Service-oriented view、</li>
+<li>Publish-subscribe view、</li>
+<li>Shared-data view</li>
+<li>Multi-tier view</li>
+</ul>
+</li>
+<li>分配视图 Allocation View<ul>
+<li>部署视图Deployment view、</li>
+<li>安装视图Install view、</li>
+<li>工作分配视图Work assignment view、</li>
+<li>其它分配视图</li>
+</ul>
+</li>
+</ul>
+<p><img src="image-20210626152453901.png"></p>
+<h4 id="Quality-View"><a href="#Quality-View" class="headerlink" title="Quality View"></a>Quality View</h4><ul>
+<li>安全性视图、</li>
+<li>性能视图、</li>
+<li>可靠性视图、</li>
+<li>通信视图、</li>
+<li>异常视图……</li>
+</ul>
+<h4 id="选择视图步骤"><a href="#选择视图步骤" class="headerlink" title="选择视图步骤"></a>选择视图步骤</h4><ol>
+<li><p>建立一个利益相关者的视图表格：不同的利益相关者对不同视图有不同的关注点</p>
+</li>
+<li><p>合并视图</p>
+<ol>
+<li>确定上表中的边缘视图</li>
+<li>将每个边缘视图与其他视图结合</li>
+</ol>
+</li>
+<li><p>优先级和排序：80/20原则</p>
+</li>
+</ol>
+<h4 id="文档打包Documentation-package"><a href="#文档打包Documentation-package" class="headerlink" title="文档打包Documentation package"></a>文档打包Documentation package</h4><p>把所有views和beyond放一起打包</p>
+<h3 id="2021Arch06-guest-lecture"><a href="#2021Arch06-guest-lecture" class="headerlink" title="2021Arch06-guest lecture"></a>2021Arch06-guest lecture</h3><h4 id="软件体系结构的作用"><a href="#软件体系结构的作用" class="headerlink" title="软件体系结构的作用"></a>软件体系结构的作用</h4><ol>
+<li>涉众(Stakeholder) 进行沟通的手段</li>
+<li>体系结构是早期设计决策的体现</li>
+<li>软件体系结构可以支持复用</li>
+<li>软件体系结构是需求和代码之间的桥梁，为开发提供了建设的蓝图，也是测试、维护和升级的依据。</li>
+</ol>
+<h3 id="2021Arch07-evaluation"><a href="#2021Arch07-evaluation" class="headerlink" title="2021Arch07-evaluation"></a>2021Arch07-evaluation</h3><h4 id="ATAM-Architecture-Tradeoff-Analysis-Method"><a href="#ATAM-Architecture-Tradeoff-Analysis-Method" class="headerlink" title="ATAM(Architecture Tradeoff Analysis Method)"></a>ATAM(Architecture Tradeoff Analysis Method)</h4><p>架构权衡分析法</p>
+<h5 id="Phase-0：Partnership-amp-Preparation"><a href="#Phase-0：Partnership-amp-Preparation" class="headerlink" title="Phase-0：Partnership &amp; Preparation"></a>Phase-0：Partnership &amp; Preparation</h5><ul>
+<li><p>Stakeholder</p>
+<ul>
+<li>evaluation team leadership and key project decision makers<br>评估团队领导和关键项目决策者</li>
+</ul>
+</li>
+<li><p>input</p>
+<ul>
+<li>the architecture documentation<br>架构文档</li>
+</ul>
+</li>
+<li><p>output</p>
+<ul>
+<li><p>the evaluation plan</p>
+<p>评估计划</p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Phase-1：Evaluation-1"><a href="#Phase-1：Evaluation-1" class="headerlink" title="Phase-1：Evaluation(1)"></a>Phase-1：Evaluation(1)</h5><ul>
+<li>Stakeholder<ul>
+<li>evaluation team and project decision makers<br>评估团队和项目决策者</li>
+</ul>
+</li>
+<li>Step1~6</li>
+<li>output<ul>
+<li>a concise presentation of the architecture .<br>架构的简洁表示</li>
+<li>articulation of the business goals (drivers)<br>业务目标(驱动因素)的表达</li>
+<li>a prioritized list of specific quality attribute requirements realized as scenarios<br>实现为场景的特定质量属性需求的优先级列表</li>
+<li>utility tree<br>效用树</li>
+<li>risks and nonrisks<br>风险和非风险</li>
+<li>sensitivity points and tradeoff points<br>敏感性点和权衡点</li>
+</ul>
+</li>
+</ul>
+<h5 id="Phase-2：Evaluation-2"><a href="#Phase-2：Evaluation-2" class="headerlink" title="Phase-2：Evaluation(2)"></a>Phase-2：Evaluation(2)</h5><ul>
+<li>Stakeholder<ul>
+<li>evaluation team, project decision makers, and architecture stakeholders<br>评估团队、项目决策者和架构涉众</li>
+</ul>
+</li>
+<li>Step(1)7~9</li>
+<li>output<ul>
+<li>a list of prioritized scenarios from the stakeholder community<br>来自涉众社区的优先场景列表</li>
+<li>risk themes and business drivers threatened by each one<br>风险主题和商业动机</li>
+</ul>
+</li>
+</ul>
+<h5 id="Phase-3：Follow-up"><a href="#Phase-3：Follow-up" class="headerlink" title="Phase-3：Follow-up"></a>Phase-3：Follow-up</h5><ul>
+<li>Stakeholder<ul>
+<li>evaluation team and key stakeholders (evaluation clients)<br>评估团队和关键干系人(评估客户)</li>
+</ul>
+</li>
+<li>output<ul>
+<li>the final evaluation report<br>最终评估报告</li>
+</ul>
+</li>
+</ul>
+<h5 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h5><ul>
+<li>Step 1：介绍ATAM方法（评估小组组长）</li>
+<li>Step 2：介绍商业动机（项目经理或系统客户）</li>
+<li>Step 3：介绍架构（首席结构师）</li>
+<li>Step 4：识别使用的架构方法（评估小组）</li>
+<li>Step 5：生成质量属性效用树（评估小组和项目设计决策者）决定性的一步</li>
+<li>Step 6：分析架构方法（评估小组）确保方法是正确的获得风险点、非风险点、敏感点和权衡点列表</li>
+<li>（Step 1）：介绍ATAM方法和之前的结果（评估小组组长）重复以确保涉众也知道方法并回顾分享之前2~6步的结果</li>
+<li>Step 7：头脑风暴、场景划分优先级（评估小组问涉众）与质量属性效用树进行比对</li>
+<li>Step 8：分析架构方法（评估小组、架构师）使用新产生的优先级靠前的场景、架构师解释与之相关的架构决定</li>
+<li>Step 9：展示结果（评估小组）</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Lhtian</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://deansama.cn/posts/c1c091e0/">https://deansama.cn/posts/c1c091e0/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Lhtian</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                                    <span class="chip bg-color">复习</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                                    <span class="chip bg-color">架构</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%8E%82/">
+                                    <span class="chip bg-color">软件工厂</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/f14983f2/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Devops复习">
+                        
+                        <span class="card-title">Devops复习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Devops复习整理
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Devops/" class="post-category">
+                                    Devops
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                        <span class="chip bg-color">复习</span>
+                    </a>
+                    
+                    <a href="/tags/Devops/">
+                        <span class="chip bg-color">Devops</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/383dff78/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Vue组件通信">
+                        
+                        <span class="card-title">Vue组件通信</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            软工三前端框架用的vue,被组件通信折磨的好惨
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-19
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%89%8D%E7%AB%AF/" class="post-category">
+                                    前端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Vue/">
+                        <span class="chip bg-color">Vue</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">
+                        <span class="chip bg-color">前端开发</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Erio<br />'
+            + '文章作者: Lhtian<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="1997830041"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.6'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2020-2021</span>
+            
+<!--            <span id="year">2020</span>-->
+            <a href="/about" target="_blank">Lhtian</a>
+<!--            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>-->
+<!--            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
+                class="white-color">67k</span>&nbsp;
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;times
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;users
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "12";
+                    var startDate = "8";
+                    var startHour = "21";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "Erio: " + diffDays + " days " + diffHours +
+                            " hours " + diffMinutes + " minutes " + diffSeconds + " seconds";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "Erio " + diffYears + " years " + diffDays +
+                            " days " + diffHours + " hours " + diffMinutes + " minutes " + diffSeconds + " seconds";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备19034718-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/L-htian" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1425112581@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1425112581" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1425112581" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <!--动态线条背景-->
+    <script type="text/javascript"
+            color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+</body>
+
+</html>

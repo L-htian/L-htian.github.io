@@ -1,0 +1,1827 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Devops复习, Erio">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Devops复习 | Erio</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+    <script src="https://v1.hitokoto.cn/?c=d&encode=js&select=%23hitokoto" defer></script>
+<!--    <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>-->
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+    <style type="text/css" lang="css">
+    #loading-container{
+        position: fixed;
+        top: 0;
+        left: 0;
+        min-height: 100vh;
+        width: 100vw;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #FFF;
+        text-align: center;
+        /* loader页面消失采用渐隐的方式*/
+        -webkit-transition: opacity 1s ease;
+        -moz-transition: opacity 1s ease;
+        -o-transition: opacity 1s ease;
+        transition: opacity 1s ease;
+    }
+    .loading-image{
+        width: 120px;
+        height: 50px;
+        transform: translate(-50%);
+    }
+
+    .loading-image div:nth-child(2) {
+        -webkit-animation: pacman-balls 1s linear 0s infinite;
+        animation: pacman-balls 1s linear 0s infinite
+    }
+
+    .loading-image div:nth-child(3) {
+        -webkit-animation: pacman-balls 1s linear .33s infinite;
+        animation: pacman-balls 1s linear .33s infinite
+    }
+
+    .loading-image div:nth-child(4) {
+        -webkit-animation: pacman-balls 1s linear .66s infinite;
+        animation: pacman-balls 1s linear .66s infinite
+    }
+
+    .loading-image div:nth-child(5) {
+        -webkit-animation: pacman-balls 1s linear .99s infinite;
+        animation: pacman-balls 1s linear .99s infinite
+    }
+
+    .loading-image div:first-of-type {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_up .5s 0s infinite;
+        animation: rotate_pacman_half_up .5s 0s infinite;
+    }
+    .loading-image div:nth-child(2) {
+        width: 0;
+        height: 0;
+        border: 25px solid #49b1f5;
+        border-right-color: transparent;
+        border-radius: 25px;
+        -webkit-animation: rotate_pacman_half_down .5s 0s infinite;
+        animation: rotate_pacman_half_down .5s 0s infinite;
+        margin-top: -50px;
+    }
+    @-webkit-keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @keyframes rotate_pacman_half_up {0% {transform: rotate(270deg)}50% {transform: rotate(1turn)}to {transform: rotate(270deg)}}
+
+    @-webkit-keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @keyframes rotate_pacman_half_down {0% {transform: rotate(90deg)}50% {transform: rotate(0deg)}to {transform: rotate(90deg)}}
+
+    @-webkit-keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+    @keyframes pacman-balls {75% {opacity: .7}to {transform: translate(-100px, -6.25px)}}
+
+
+    .loading-image div:nth-child(3),
+    .loading-image div:nth-child(4),
+    .loading-image div:nth-child(5),
+    .loading-image div:nth-child(6){
+        background-color: #49b1f5;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        margin: 2px;
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        transform: translateY(-6.25px);
+        top: 25px;
+        left: 100px;
+    }
+    .loading-text{
+        margin-bottom: 20vh;
+        text-align: center;
+        color: #2c3e50;
+        font-size: 2rem;
+        box-sizing: border-box;
+        padding: 0 10px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    @media only screen and (max-width: 500px) {
+        .loading-text{
+            font-size: 1.5rem;
+        }
+    }
+    .fadeout {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+    /* logo出现动画 */
+    @-webkit-keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);transform:translate3d(0,-100%,0)}100%{opacity:1;-webkit-transform:none;transform:none}}
+    @keyframes fadeInDown{0%{opacity:0;-webkit-transform:translate3d(0,-100%,0);}}
+</style>
+<script>
+    (function () {
+        const loaded = function(){
+            setTimeout(function(){
+                const loader = document.getElementById("loading-container");
+                loader.className="fadeout" ;//使用渐隐的方法淡出loading page
+                // document.getElementById("body-wrap").style.display="flex";
+                setTimeout(function(){
+                    loader.style.display="none";
+                },2500);
+            },1000);//强制显示loading page 1s
+        };
+        loaded();
+    })()
+</script>
+
+
+   <style>
+    body{
+       background-image: url(https://s3.ax1x.com/2020/12/09/rCtuWQ.png);
+       background-repeat:no-repeat;
+       background-size:cover;
+       background-attachment:fixed;
+    }
+</style>
+
+
+
+<body>
+    
+        <div id="loading-container">
+            <p class="loading-text">Loading . . . </p>
+        <div class="loading-image">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        </div>
+    
+
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Erio</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Erio</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Devops复习</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                                <span class="chip bg-color">复习</span>
+                            </a>
+                        
+                            <a href="/tags/Devops/">
+                                <span class="chip bg-color">Devops</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Devops/" class="post-category">
+                                Devops
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-06-29
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-06-29
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    5.5k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    19 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="Devops复习"><a href="#Devops复习" class="headerlink" title="Devops复习"></a>Devops复习</h2><h3 id="DevOps导论-第一讲"><a href="#DevOps导论-第一讲" class="headerlink" title="DevOps导论 第一讲"></a>DevOps导论 第一讲</h3><h4 id="DevOps概念"><a href="#DevOps概念" class="headerlink" title="DevOps概念"></a>DevOps概念</h4><ul>
+<li>DevOps是运营和开发工程师共同参与整个服务生命周期的实践，从设计到开发过程再到生产支持。</li>
+<li>DevOps的另一个特点是，操作人员在他们的系统工作中使用许多与开发人员相同的技术。  </li>
+</ul>
+<h4 id="DevOps五个概念"><a href="#DevOps五个概念" class="headerlink" title="DevOps五个概念"></a>DevOps五个概念</h4><ul>
+<li>价值<ul>
+<li>工作软件变为服务或交付软件</li>
+</ul>
+</li>
+<li>原则<ul>
+<li>将敏捷的原则扩展到包括系统和操作，例如，基础设施就是代码</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>与敏捷相同，除了一些不同的方法，例如可视操作风格的变更控制</li>
+</ul>
+</li>
+<li>实践<ul>
+<li>CD，工具链，虚拟化和云计算，度量和监控方案，</li>
+</ul>
+</li>
+<li>工具<ul>
+<li>Jenkins，Travis，Teamcity，Ansible，Mesos，OpenStack，Docker</li>
+</ul>
+</li>
+</ul>
+<h4 id="DevOps关键术语"><a href="#DevOps关键术语" class="headerlink" title="DevOps关键术语"></a>DevOps关键术语</h4><h5 id="持续集成（-Continuous-Integration-CI）"><a href="#持续集成（-Continuous-Integration-CI）" class="headerlink" title="持续集成（ Continuous Integration, CI）"></a>持续集成（ Continuous Integration, CI）</h5><ul>
+<li>是一种开发实践，它要求开发人员每天多次将代码集成到共享存储库中。然后，每个签入都被一个自动化的构建验证，允许团队早期检测问题</li>
+</ul>
+<h5 id="持续交付（-Continuous-Delivery-CD）"><a href="#持续交付（-Continuous-Delivery-CD）" class="headerlink" title="持续交付（ Continuous Delivery ,CD）"></a>持续交付（ Continuous Delivery ,CD）</h5><ul>
+<li>是一组过程和实践，从根本上消除了软件生产过程中的浪费，实现了高质量功能的更快交付，并在业务和用户之间建立了快速有效的反馈循环</li>
+</ul>
+<h5 id="持续部署（Continuous-Deployment-CD-）"><a href="#持续部署（Continuous-Deployment-CD-）" class="headerlink" title="持续部署（Continuous Deployment, CD ）"></a>持续部署（Continuous Deployment, CD ）</h5><ul>
+<li>意味着实际上立即部署并向用户公开更改。</li>
+</ul>
+<h5 id="Saas"><a href="#Saas" class="headerlink" title="Saas"></a>Saas</h5><ul>
+<li>是一种软件许可和交付模型，其中软件以订阅为基础获得许可并集中托管。</li>
+</ul>
+<h5 id="Iaas"><a href="#Iaas" class="headerlink" title="Iaas"></a>Iaas</h5><ul>
+<li>云托管的虚拟机通常以“现收现付”的方式计费。用户可以完全控制机器，但需要自己安装和配置任何所需的中间件和应用程序。</li>
+</ul>
+<h5 id="Paas"><a href="#Paas" class="headerlink" title="Paas"></a>Paas</h5><ul>
+<li>PaaS 供应商为应用程序开发人员提供了一个开发环境。供应商通常开发用于开发的工具包和标准，以及用于分发和支付的渠道。</li>
+</ul>
+<h5 id="部署频率（Deployment-frequency）"><a href="#部署频率（Deployment-frequency）" class="headerlink" title="部署频率（Deployment frequency）"></a>部署频率（<strong>Deployment frequency</strong>）</h5><ul>
+<li>多久部署一次代码</li>
+</ul>
+<h5 id="变更前置时间（Lead-time-for-changes）"><a href="#变更前置时间（Lead-time-for-changes）" class="headerlink" title="变更前置时间（Lead time for changes）"></a>变更前置时间（<strong>Lead time for changes</strong>）</h5><ul>
+<li>从代码提交到代码在生产环境中成功运行需要多长时间</li>
+</ul>
+<h5 id="平均恢复时间（Mean-time-to-recover，MTTR）"><a href="#平均恢复时间（Mean-time-to-recover，MTTR）" class="headerlink" title="平均恢复时间（Mean time to recover，MTTR）"></a>平均恢复时间（<strong>Mean time to recover</strong>，MTTR）</h5><ul>
+<li>发生服务事故时，一般需要多长时间恢复服务</li>
+</ul>
+<h5 id="变更失败率（Change-failure-rate-）"><a href="#变更失败率（Change-failure-rate-）" class="headerlink" title="变更失败率（Change failure rate ）"></a>变更失败率（<strong>Change failure rate</strong> ）</h5><ul>
+<li>有多少百分比的变化导致服务退化或随后需要补救</li>
+</ul>
+<h5 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a><strong>Pipeline</strong></h5><ul>
+<li>为了从概念应用到生产，工程师们都要经过一系列的步骤，最终成为例行公事。</li>
+</ul>
+<h5 id="管道编排（Pipeline-Orchestration）"><a href="#管道编排（Pipeline-Orchestration）" class="headerlink" title="管道编排（Pipeline Orchestration）"></a>管道编排（Pipeline Orchestration）</h5><ul>
+<li>允许在正确的时间调用组成持续交付管道的各种自动化任务的工具或产品。它们通常还记录每个任务的状态和输出，并可视化通过管道的特性流。</li>
+</ul>
+<h5 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h5><ul>
+<li>容器为虚拟机提供了一种轻量级的替代方案，使开发人员能够使用相同的开发环境和堆栈。它们还通过鼓励使用无状态设计来促进DevOps。 </li>
+</ul>
+<h5 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h5><ul>
+<li>Docker是一个开源项目，可自动部署软件容器内的Linux应用程序。</li>
+</ul>
+<h5 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h5><ul>
+<li>微服务是用于建立分布式软件系统的面向服务的架构（SOA）的更具体和现代的解释。</li>
+<li>“微服务架构”术语在过去几年中涌现，以描述设计软件应用程序作为独立部署服务的套件的特定方式。</li>
+</ul>
+<h5 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h5><ul>
+<li>Git是一种分布式修订控制系统，重点是速度，数据完整性和对分布式非线性工作流的支持。</li>
+</ul>
+<h5 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h5><ul>
+<li>GitHub是一个基于Web的Git存储库托管服务，它提供了Git的所有分布式修订控件和源代码管理（SCM）功能以及添加其自己的功能。它提供了一个基于web的图形界面和桌面以及移动集成。</li>
+</ul>
+<h5 id="A-B-Testing"><a href="#A-B-Testing" class="headerlink" title="A/B Testing"></a>A/B Testing</h5><ul>
+<li>一种技术，其中一个新的特性，或者一个特性的不同变体，可用于不同的用户集，并通过比较度量和用户行为进行评估。</li>
+</ul>
+<h3 id="Devops导论-第二讲"><a href="#Devops导论-第二讲" class="headerlink" title="Devops导论 第二讲"></a>Devops导论 第二讲</h3><h4 id="IT服务标准"><a href="#IT服务标准" class="headerlink" title="IT服务标准"></a>IT服务标准</h4><ul>
+<li>CMMI-SVC</li>
+<li>ITIL</li>
+<li>ISO20000</li>
+<li>ITSS</li>
+</ul>
+<h3 id="Kubernetes"><a href="#Kubernetes" class="headerlink" title="Kubernetes"></a>Kubernetes</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>Kubernetes 是一个可移植的、可扩展的开源平台，云原生操作系统，大规模集群上的应用管理系统。用于管理容器化的工作负载和服务，可促进声明式配置和自动化。</p>
+<ul>
+<li>可移植，可扩展，开源</li>
+<li>容器化的工作负载和服务</li>
+<li>声明式配置</li>
+<li>自动化</li>
+</ul>
+<h4 id="为什么用Kubernetes"><a href="#为什么用Kubernetes" class="headerlink" title="为什么用Kubernetes"></a>为什么用Kubernetes</h4><p>Docker一般是用来管理单个节点上的容器，但是在生产环境中，一般会有多个节点，运行着大量的容器。这样Docker就有点力不从心了。此时就需要一个系统来管理集群上的大量的容器。Kubernetes就是这样的一个系统。</p>
+<h4 id="部署架构"><a href="#部署架构" class="headerlink" title="部署架构"></a>部署架构</h4><p><img src="image-20210618101832991.png"></p>
+<h4 id="逻辑架构"><a href="#逻辑架构" class="headerlink" title="逻辑架构"></a>逻辑架构</h4><h5 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h5><p><img src="image-20210618101936596.png"></p>
+<h5 id="Node"><a href="#Node" class="headerlink" title="Node"></a>Node</h5><p><img src="image-20210618102006838.png"></p>
+<h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><h5 id="控制平面"><a href="#控制平面" class="headerlink" title="控制平面"></a>控制平面</h5><p>控制平面的组件对集群做出全局决策(比如调度)，以及检测和响应集群事件（例如，当不满足部署的replicas 字段时，启动新的 pod）</p>
+<ul>
+<li>kube-apiserver</li>
+<li>kube-scheduler</li>
+<li>kube-controller-manager</li>
+<li>cloud-controller-manager</li>
+<li>etcd</li>
+</ul>
+<h5 id="计算平面"><a href="#计算平面" class="headerlink" title="计算平面"></a>计算平面</h5><p>计算平面由K8S的Node节点组成，Node节点上运行的组件包括:</p>
+<ul>
+<li>kubelet</li>
+<li>kube-proxy</li>
+<li>容器运行时（Container Runtime）</li>
+</ul>
+<h5 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h5><p>插件是k8s的辅助工具。</p>
+<ul>
+<li>DNS</li>
+<li>Dashboard</li>
+<li>容器资源监控</li>
+<li>日志</li>
+</ul>
+<h4 id="重要概念POD"><a href="#重要概念POD" class="headerlink" title="重要概念POD"></a>重要概念POD</h4><p>POD是Kubernetes的最小资源管理单位。比较脆弱。包含</p>
+<ul>
+<li>一个或多个应用程序容器</li>
+<li>存储卷</li>
+<li>网络信息，如IP地址、端口等</li>
+</ul>
+<h4 id="Workload工作负载"><a href="#Workload工作负载" class="headerlink" title="Workload工作负载"></a>Workload工作负载</h4><p>工作负载是在 Kubernetes 上运行的应用程序。K8s主要支持如下几种Workload工作<br>负载</p>
+<ul>
+<li>Deployment</li>
+<li>Statefulset</li>
+<li>Damonset</li>
+<li>Job</li>
+<li>CronJob</li>
+</ul>
+<h4 id="Service"><a href="#Service" class="headerlink" title="Service"></a>Service</h4><p>Service定义了POD提供给外部应用的访问方式。一个服务后端有多个容器，service负责在 kubernetes 中进行负载均衡，做服务发现以及会话保持，Service通过选择一组Pod的label就直接可以访问到Pod，而且可以使用不变的域名，所以就选择Service了。</p>
+<p>类型：</p>
+<ul>
+<li>ClusterIP</li>
+<li>NodePort</li>
+<li>LoadBalancer </li>
+<li>ExternalName</li>
+</ul>
+<h4 id="label"><a href="#label" class="headerlink" title="label"></a>label</h4><ul>
+<li>标签就是key/value键值对。</li>
+<li>标签是K8S的一种管理资源的方式，通常用来识别资源。</li>
+<li>标签和资源是m:n的关系，一个标签可以对应多个资源，一个资源也可以有多个标签。</li>
+<li>Node、Pod、工作负载、密钥、configmap、service等等所有资源都可以增加标签</li>
+<li>标签通常用来识别资源，一般和标签选择器配合使用。</li>
+</ul>
+<h3 id="架构演化及进展"><a href="#架构演化及进展" class="headerlink" title="架构演化及进展"></a>架构演化及进展</h3><h4 id="单体应用"><a href="#单体应用" class="headerlink" title="单体应用"></a>单体应用</h4><h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><ul>
+<li>为人所熟知</li>
+<li>IDE友好</li>
+<li>便于共享</li>
+<li>易于测试</li>
+<li>容易部署</li>
+</ul>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><ul>
+<li>不够灵活</li>
+<li>妨碍持续交付</li>
+<li>受技术栈限制</li>
+<li>技术债务</li>
+<li>性能</li>
+</ul>
+<h4 id="微服务-1"><a href="#微服务-1" class="headerlink" title="微服务"></a>微服务</h4><h5 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h5><ul>
+<li> 每个微服务可独立运行在自己的进程里</li>
+<li> 一系列独立运行的微服务共同构建起整个系统</li>
+<li> 一个微服务只服务于某个特定的业务服务，例如订单管理、用户管理等</li>
+<li> 微服务之间通过一些轻量的通信机制进行通信，例如通过REST API</li>
+<li> 可以使用不同的语言与数据存储技术</li>
+<li> 全自动的部署／监控／运维机制</li>
+</ul>
+<h5 id="理念——分而治之"><a href="#理念——分而治之" class="headerlink" title="理念——分而治之"></a>理念——分而治之</h5><h5 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h5><ul>
+<li>高度可观察</li>
+<li>隔离失败</li>
+<li>独立部署</li>
+<li>围绕业务概念建模</li>
+<li>自动化文化</li>
+<li>隐藏内部实现细节</li>
+<li>一切去中心化</li>
+</ul>
+<h5 id="关注点"><a href="#关注点" class="headerlink" title="关注点"></a>关注点</h5><ul>
+<li>自动伸缩与修复</li>
+<li>调度与部署</li>
+<li>集中性能监控</li>
+<li>集中日志管理</li>
+<li>服务安全</li>
+<li>API管理</li>
+<li>韧性及容错</li>
+<li>服务发现与均衡</li>
+<li>配置管理</li>
+</ul>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p><img src="image-20210618105415291.png"></p>
+<h4 id="云原生"><a href="#云原生" class="headerlink" title="云原生"></a>云原生</h4><h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>是一种基于微服务的软件架构思想以及基于DevOps 进行软件开发实践的一组方法论，其实现了以分布式和容器技术为核心在异构云平台环境下利用云计算交付模型优势来快速构建、部署和运行企业应用。</p>
+<h5 id="为什么使用"><a href="#为什么使用" class="headerlink" title="为什么使用"></a>为什么使用</h5><ul>
+<li>更高的资源效率可以用更少的服务器运行同样数量的服务</li>
+<li>云原生基础设施提高了开发速度</li>
+<li>云原生允许多种云(包括公有云之间的转换或在多个云上运行) 以及混合云(在数据中心和公有云上切换任务)</li>
+<li>云原生架构使得更快速地部署成为可能</li>
+</ul>
+<h3 id="敏捷与精益"><a href="#敏捷与精益" class="headerlink" title="敏捷与精益"></a>敏捷与精益</h3><h4 id="敏捷宣言"><a href="#敏捷宣言" class="headerlink" title="敏捷宣言"></a>敏捷宣言</h4><ul>
+<li>个体和互动胜过流程和工具  </li>
+<li>可以工作的软件胜过详尽的文档  </li>
+<li>客户合作胜过合同谈判  </li>
+<li>响应变化胜过遵循计划</li>
+</ul>
+<h5 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h5><p>虽然右项也具有其价值，但我们认为左项具有更大的价值。</p>
+<h4 id="敏捷原则"><a href="#敏捷原则" class="headerlink" title="敏捷原则"></a>敏捷原则</h4><ul>
+<li>最重要的目标是持续不断地及早交付有价值的软件</li>
+<li>欣然应对需求变化</li>
+<li>经常地交付可工作的软件</li>
+<li>业务人员和开发人员必须相互合作</li>
+<li>激发个体的斗志</li>
+<li>面对面交谈</li>
+<li>可工作的软件是进度的首要度量标准。  </li>
+<li>倡导可持续开发</li>
+<li>坚持不懈追求技术卓越与良好设计</li>
+<li>简洁为本</li>
+<li>最好的架构、需求和设计出自自组织团队。 </li>
+<li>团队定期地反思如何能提高成效，并依此调整自身的举止表现。</li>
+</ul>
+<h4 id="精益原则"><a href="#精益原则" class="headerlink" title="精益原则"></a>精益原则</h4><ul>
+<li><p>全局优化</p>
+<ul>
+<li>专注于整体价值流</li>
+<li>交付完整产品</li>
+<li>着眼长期</li>
+</ul>
+</li>
+<li><p>浪费消灭</p>
+<p>三大浪费</p>
+<ul>
+<li>构建错误的功能</li>
+<li>拒绝学习</li>
+<li>辗转现象</li>
+</ul>
+</li>
+<li><p>品质优先</p>
+<ul>
+<li>最终验证不应发现缺陷</li>
+<li>采用测试先行的开发模式让流程具有防误机制</li>
+<li>打破依赖</li>
+</ul>
+</li>
+<li><p>不断学习</p>
+<ul>
+<li>可预测的性能来自于反馈</li>
+<li>保持选择方案</li>
+<li>最后可靠时刻</li>
+</ul>
+</li>
+<li><p>尽快交付</p>
+<ul>
+<li>快速交付、高质量和低成本是完全相互兼容的</li>
+<li>排队理论同样适用于开发，而不仅仅是服务行业</li>
+<li>管理工作流比管理进度表要容易得多</li>
+</ul>
+</li>
+<li><p>人人参与</p>
+<ul>
+<li>自主性</li>
+<li>成长性</li>
+<li>使命感</li>
+</ul>
+</li>
+<li><p>不断提高</p>
+<ul>
+<li>失败是个学习机会</li>
+<li>标准存在的目的就是要被质疑和提高的</li>
+<li>使用科学方法</li>
+</ul>
+</li>
+</ul>
+<h3 id="Scrum"><a href="#Scrum" class="headerlink" title="Scrum"></a>Scrum</h3><h4 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h4><p>Scrum 不是构建产品的一种过程或一项技术,而是<strong>一个框架</strong>,在这个框架里可以应用各种流程和技术。Scrum 能使产品管理和开发实践的相对功效显现出来,以便随时改进。</p>
+<h4 id="Scrum-3355"><a href="#Scrum-3355" class="headerlink" title="Scrum 3355"></a>Scrum 3355</h4><h5 id="三个角色"><a href="#三个角色" class="headerlink" title="三个角色"></a>三个角色</h5><ul>
+<li><p>Scrum Master</p>
+<ul>
+<li>负责确保 Scrum 被理解并实施</li>
+<li>担当教练角色，引领团队达到更高级的凝聚力、自组织和表现。</li>
+</ul>
+</li>
+<li><p>Product Owner（产品负责人）</p>
+<ul>
+<li>负责最大化产品以及开发团队工作的价值</li>
+<li>持有产品愿景、代表业务 （ the business ）、代表客户、拥有产品列表、划定故事优先级、设立故事的接收标准 、有空回答团队成员们的问题。</li>
+</ul>
+</li>
+<li><p>Team（团队）</p>
+<ul>
+<li><strong>自组织</strong>团队选择如何最好地完成他们的工作,而不是由团队外的其他人来指使他们。</li>
+<li><strong>全功能</strong>团队拥有完成工作所需要的全部技能,不需要依赖团队外部的人（特性团队）。</li>
+<li><strong>特性团队</strong>：一种组建跨职能团队的常见方式是让团队对某个特性负责。有些人将其称之为特性团队。这个团队对于某个特性从开始到结束全程负责。</li>
+</ul>
+</li>
+</ul>
+<h5 id="三个工件"><a href="#三个工件" class="headerlink" title="三个工件"></a>三个工件</h5><ul>
+<li>Product Backlog（产品待办事项）</li>
+<li>Sprint Backlog （Sprint 待办事项）</li>
+<li>可交付产品增量（也有说是燃尽图）</li>
+</ul>
+<h5 id="五大仪式（事件）"><a href="#五大仪式（事件）" class="headerlink" title="五大仪式（事件）"></a>五大仪式（事件）</h5><ul>
+<li>Sprint（冲刺）</li>
+<li>Sprint Planning（Sprint规划）</li>
+<li>Sprint Daily Standup（每日站会）</li>
+<li>Sprint Review（Sprint 评审）</li>
+<li>Sprint Retrospective（回顾）</li>
+</ul>
+<h5 id="五大价值观-COFCR"><a href="#五大价值观-COFCR" class="headerlink" title="五大价值观 COFCR"></a>五大价值观 COFCR</h5><ul>
+<li>Coverage（勇气）</li>
+<li>Openness（开放）</li>
+<li>Focus（专注）</li>
+<li>Commitment（承诺）</li>
+<li>Respect （尊重）</li>
+</ul>
+<h4 id="3C原则"><a href="#3C原则" class="headerlink" title="3C原则"></a>3C原则</h4><ul>
+<li>卡 片 (Card) （placeholder，占位符）<ul>
+<li>在一堆卡片上写下你期望的软件特性</li>
+</ul>
+</li>
+<li>交 谈 (Conversation) <ul>
+<li>聚在一起对要开发的软件进行深人讨论</li>
+</ul>
+</li>
+<li>确 认 (Confirmation) <ul>
+<li>对完工条件进行确认</li>
+</ul>
+</li>
+</ul>
+<h4 id="产品Backlog"><a href="#产品Backlog" class="headerlink" title="产品Backlog"></a>产品Backlog</h4><p>是Scrum的核心，是按重要性排序的需求或故事（Story）的列表（客户语言描述的客户需求）</p>
+<h5 id="用户故事地图"><a href="#用户故事地图" class="headerlink" title="用户故事地图"></a>用户故事地图</h5><ul>
+<li><p>是一门在需求拆分过程中保持全景图的技术。</p>
+</li>
+<li><p>敏捷软件开发中使用用户故事地图来发现、管理需求。</p>
+</li>
+</ul>
+<h4 id="Sprint计划会议"><a href="#Sprint计划会议" class="headerlink" title="Sprint计划会议"></a>Sprint计划会议</h4><h5 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h5><ul>
+<li>所有重要的backlog条目都已经根据重要性被评过分,不同的重要程度对应不同的分数。</li>
+<li>所有人都可以编写添加条目，但只有Product Owner才能决定优先级。</li>
+</ul>
+<h5 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h5><ul>
+<li>sprint目标（尽可能简单的语言，团队成员认同）。</li>
+<li>团队成员名单(以及他们的投入程度,如果不是100%的话)。</li>
+<li>sprint backlog(即sprint中包括的故事列表)。</li>
+<li>确定好sprint演示日期。</li>
+<li>确定好时间地点,供举行每日scrum会议。</li>
+</ul>
+<h4 id="Scrum周期"><a href="#Scrum周期" class="headerlink" title="Scrum周期"></a>Scrum周期</h4><p>一个星期</p>
+<h4 id="每日站会—Daily-Scrum"><a href="#每日站会—Daily-Scrum" class="headerlink" title="每日站会—Daily Scrum"></a>每日站会—Daily Scrum</h4><ul>
+<li>不超过15分钟</li>
+<li>回答三个问题<ul>
+<li>昨天我做了什么</li>
+<li>今天准备干什么</li>
+<li>你遇到了什么障碍，需要其他人如何帮你</li>
+</ul>
+</li>
+</ul>
+<h4 id="Sprint演示会议"><a href="#Sprint演示会议" class="headerlink" title="Sprint演示会议"></a>Sprint演示会议</h4><p>Sprint结束于演示</p>
+<h4 id="Sprint回顾会议"><a href="#Sprint回顾会议" class="headerlink" title="Sprint回顾会议"></a>Sprint回顾会议</h4><p><img src="image-20210620093441866.png"></p>
+<h3 id="看板"><a href="#看板" class="headerlink" title="看板"></a>看板</h3><h4 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h4><p>看板方法，由David Anderson创立，它脱胎于大野耐一所创立的丰田生产方式（TPS），以及埃利亚胡·高德拉特（EliGol-dratt）的约束理论（TOC），并结合统计质量控制（SQC）、排队论（QT）、工业工程（IE）、软件成熟度模型（CMMI）等多个领域的知识，在软件开发社区中获得了极高的关注度，并迅速传播开来。</p>
+<h4 id="白板：可视化工作"><a href="#白板：可视化工作" class="headerlink" title="白板：可视化工作"></a>白板：可视化工作</h4><ul>
+<li>你无法对自己没有看到的进行改进。</li>
+<li>让隐藏的工作无所遁形<ul>
+<li>为每个工作项建立一个即时贴即可轻易做到</li>
+</ul>
+</li>
+<li>帮你理凊<ul>
+<li>谁在干什么</li>
+<li>你正在处理的工作</li>
+<li>进行中的工作数量</li>
+</ul>
+</li>
+<li>工作可视化之后，信息将散播给看到的每个人</li>
+</ul>
+<h4 id="工作流映射"><a href="#工作流映射" class="headerlink" title="工作流映射"></a>工作流映射</h4><p><img src="image-20210620094253649.png"></p>
+<h4 id="Work-in-Progress-WIP"><a href="#Work-in-Progress-WIP" class="headerlink" title="Work in Progress(WIP)"></a>Work in Progress(WIP)</h4><p>在制品 (WIP) 是同时进行中的工作数量，减少在制品使其快速流过整个工作流，即前置时间缩短</p>
+<h4 id="限制在制品"><a href="#限制在制品" class="headerlink" title="限制在制品"></a>限制在制品</h4><ul>
+<li>致力于减少同时处理的工作项</li>
+<li>批量规模越小，前置时间越短</li>
+<li>流动效率提升的同时资源效率会有所降低</li>
+<li>立即实施:停止立项并开始完成</li>
+<li>限制在制品将使改进机会浮出水面</li>
+<li>着手改进后会获得更快的流动</li>
+<li>不要企图找到一个唯一正确的数字作为团队的在制品限制规模.</li>
+<li>在制品限制不是仅为了设立规则，而是为了触发讨论</li>
+</ul>
+<h4 id="度量"><a href="#度量" class="headerlink" title="度量"></a>度量</h4><ul>
+<li>有利于团队改进</li>
+<li>团队自己选择度量指标，但不要将度量指标用于绩效考核</li>
+<li>两个常用的度量指标为:<ul>
+<li>前置时间是整个工作流的时间</li>
+<li>吞吐量是一定时间段内完成的工作项数量</li>
+</ul>
+</li>
+</ul>
+<h4 id="看板核心实践"><a href="#看板核心实践" class="headerlink" title="看板核心实践"></a>看板核心实践</h4><ul>
+<li>可视化</li>
+<li>限制在制品</li>
+<li>管理流程</li>
+<li>度量和管理流动</li>
+<li>协同改进</li>
+</ul>
+<h3 id="探索可观测性的技术原理"><a href="#探索可观测性的技术原理" class="headerlink" title="探索可观测性的技术原理"></a>探索可观测性的技术原理</h3><h4 id="软件开发架构的发展历程"><a href="#软件开发架构的发展历程" class="headerlink" title="软件开发架构的发展历程"></a>软件开发架构的发展历程</h4><p><img src="image-20210621090611243.png"></p>
+<h5 id="驱动力"><a href="#驱动力" class="headerlink" title="驱动力"></a>驱动力</h5><ul>
+<li>内在驱动力：期望把当前的业务做得更好，开发更多新业务</li>
+<li>外在驱动力：用户量的上升、用户种类的多样化</li>
+</ul>
+<h4 id="构建分布式追踪系统难点"><a href="#构建分布式追踪系统难点" class="headerlink" title="构建分布式追踪系统难点"></a>构建分布式追踪系统难点</h4><ul>
+<li><p>低开销</p>
+<ul>
+<li>开销越小，开发人员越能接受</li>
+</ul>
+</li>
+<li><p>可扩展性</p>
+<ul>
+<li>能够满足至少未来几年需求</li>
+</ul>
+</li>
+<li><p>应用层透明</p>
+<ul>
+<li>应当对程序员是不可见的</li>
+</ul>
+</li>
+</ul>
+<h4 id="应用性能管理（APM）"><a href="#应用性能管理（APM）" class="headerlink" title="应用性能管理（APM）"></a>应用性能管理（APM）</h4><p>在信息科学和管理控制领域，APM致力于监控和管理应用软件性能和可用性。通过检测和诊断复杂应用程序的性能问题，来保证软件应用程序的良好运行。</p>
+<h5 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h5><p>通过探针（自动字节码注入或者手动API）的形式，采集并测量端到端的性能指标</p>
+<h3 id="DevOps思考实践"><a href="#DevOps思考实践" class="headerlink" title="DevOps思考实践"></a>DevOps思考实践</h3><h4 id="软件发展三阶段和主流开发方法"><a href="#软件发展三阶段和主流开发方法" class="headerlink" title="软件发展三阶段和主流开发方法"></a>软件发展三阶段和主流开发方法</h4><h5 id="三阶段"><a href="#三阶段" class="headerlink" title="三阶段"></a>三阶段</h5><ul>
+<li><p>第一代（20世纪60年代）是软件作坊时代，那时候没有规范的流程，瀑布软件；</p>
+</li>
+<li><p>第二代（20世纪80、90年代）进入了过程控制时代（全面质量管理、精益制造、CCMI等）；</p>
+</li>
+<li><p>到2001年进入了敏捷、精益和DevOps持续交付，持续部署的时代。</p>
+</li>
+</ul>
+<p><img src="image-20210621092350240.png"></p>
+<h5 id="主流开发方法"><a href="#主流开发方法" class="headerlink" title="主流开发方法"></a>主流开发方法</h5><ul>
+<li>结构化方法</li>
+<li>Jackson方法</li>
+<li>原型方法</li>
+<li>面向对象方法</li>
+<li>敏捷方法</li>
+<li>水晶法</li>
+<li>并列争求法</li>
+<li>自适应软件开发</li>
+</ul>
+<h4 id="Devops可以实现"><a href="#Devops可以实现" class="headerlink" title="Devops可以实现"></a>Devops可以实现</h4><ul>
+<li><strong>更高质量：</strong> DevOps通过基础设施的代码化、自动化、快速反馈，提高软件开发的质量</li>
+<li><strong>可预测性：</strong> DevOps大大降低了新版本的故障率，版本交付上线偏差更少</li>
+<li><strong>快速上线：</strong> DevOps通过持续交付持续部署将部署上线时间缩短了50％</li>
+<li><strong>可维护性：</strong>DevOps通过架构优化灰度部署等方式，可以快速回滚恢复系统</li>
+<li><strong>降低安全风险：</strong> DevOps可以将安全纳入软件交付生命周期降低安全风险</li>
+<li><strong>端到端协同：</strong>DevOps强化了围绕客户价值的跨团队、跨组织一体化协同</li>
+</ul>
+<h4 id="任务管理、项目管理、流程管理关系"><a href="#任务管理、项目管理、流程管理关系" class="headerlink" title="任务管理、项目管理、流程管理关系"></a>任务管理、项目管理、流程管理关系</h4><h5 id="任务管理"><a href="#任务管理" class="headerlink" title="任务管理"></a>任务管理</h5><p>任务管理使用<strong>单个非重复性动作来完成每个任务</strong>，可能是一个独立的系统，但是更有可能是其他更高级别管理系统（例如PM和BPM）的一部分。</p>
+<h5 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h5><p>PM使用严格定义的<strong>非重复顺序阶段来实现项目目标</strong>。PM涉及任务管理，由此每个项目阶段都具有明确分配的里程碑，这些里程碑可细分为各个任务。项目管理应该在业务流程的约束下开展。</p>
+<h5 id="流程管理"><a href="#流程管理" class="headerlink" title="流程管理"></a>流程管理</h5><p>业务流程管理（BPM）涉及<strong>可重复的流程，旨在确保对运营流程进行优化，以有效，高效地满足日常的客户和业务需求</strong>。BPM使用可重复的阶段，可以修改这些阶段以实现期望的目标。BPM可以支持最大程度地提高运营效率，也可以作为项目管理工作的一部分。BPM涉及将流程分解为单个任务，从而使<strong>任务管理成为BPM不可或缺的一部分</strong>。</p>
+<h3 id="DevSecOps"><a href="#DevSecOps" class="headerlink" title="DevSecOps"></a>DevSecOps</h3><h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><h5 id="静态应用安全工具-SAST"><a href="#静态应用安全工具-SAST" class="headerlink" title="静态应用安全工具 (SAST)"></a>静态应用安全工具 (SAST)</h5><ul>
+<li>Checkmax</li>
+<li>Fortify</li>
+<li>IBM Appscan</li>
+<li>酷德啄木鸟</li>
+</ul>
+<p><strong>优势</strong>：</p>
+<ul>
+<li>白盒测试，代码具有高度可视性，安全漏洞精准定位，检测问题类型更丰富</li>
+<li>不需要用户界面，漏洞发现更及时</li>
+<li>容易被程序员接受</li>
+</ul>
+<p><strong>劣势：</strong></p>
+<ul>
+<li>区分开发语言和平台，误报多，人工成本高</li>
+<li>扫码时间随着代码量的提高显著变长</li>
+<li>不能测试整个问题，集成系统的漏洞发现不了</li>
+</ul>
+<h5 id="动态应用安全工具-DAST"><a href="#动态应用安全工具-DAST" class="headerlink" title="动态应用安全工具 (DAST)"></a>动态应用安全工具 (DAST)</h5><ul>
+<li>HP Webinspect</li>
+<li>Burpsuite</li>
+<li>OWASP ZAP</li>
+</ul>
+<p><strong>优势：</strong></p>
+<ul>
+<li>攻击者视角，可发现大多数高风险问题</li>
+<li>黑盒测试，无需源代码，测试对象范围较广</li>
+<li>支持当前的各类主流编程语言开发的应用</li>
+</ul>
+<p><strong>劣势：</strong></p>
+<ul>
+<li>对测试人员有一定的专业要求</li>
+<li>大部分工具不能被自动化</li>
+<li>无法定位漏洞的具体位置</li>
+<li>较强入侵性，安全测试的脏数据会污染业务测试数据</li>
+</ul>
+<h5 id="交互式应用安全工具-IAST"><a href="#交互式应用安全工具-IAST" class="headerlink" title="交互式应用安全工具 (IAST)"></a>交互式应用安全工具 (IAST)</h5><ul>
+<li><p>Contrast Security</p>
+</li>
+<li><p>悬镜灵脉</p>
+</li>
+</ul>
+<p><strong>优势：</strong></p>
+<ul>
+<li><p>漏洞检出率和准确性高，误报漏极低，漏洞信息详细度高</p>
+</li>
+<li><p>测试过程无感知，漏洞发现快</p>
+</li>
+</ul>
+<p><strong>劣势：</strong></p>
+<ul>
+<li>每次更新agent需要重启webserver, 部署成本较高</li>
+<li>无法测试业务逻辑漏洞</li>
+</ul>
+<h5 id="开源软件安全工具-FOSS"><a href="#开源软件安全工具-FOSS" class="headerlink" title="开源软件安全工具 (FOSS)"></a>开源软件安全工具 (FOSS)</h5><ul>
+<li>Sonatype IQ Server</li>
+<li>Dependencies Check</li>
+<li>Jfrog X-ray</li>
+<li>Blackduck</li>
+</ul>
+<h4 id="CAMS原则"><a href="#CAMS原则" class="headerlink" title="CAMS原则"></a>CAMS原则</h4><ul>
+<li><p>Culture（文化）- 是指拥抱变革，促进协作和沟通</p>
+</li>
+<li><p>Automation（自动化）- 是指将人为干预的环节从价值链中消除</p>
+</li>
+<li><p>Metrics（指标）- 是指衡量每一个环节，并通过数据来改进循环周期</p>
+</li>
+<li><p>Sharing（分享）- 是指与他人开放分享成功与失败的经验，并在错误中不断学习改进</p>
+</li>
+<li><p>Lean（精益）- 是指通过使用精益原则促使高频率循环周期</p>
+</li>
+</ul>
+<h3 id="微服务开发与部署"><a href="#微服务开发与部署" class="headerlink" title="微服务开发与部署"></a>微服务开发与部署</h3><h4 id="微服务架构模式的特征"><a href="#微服务架构模式的特征" class="headerlink" title="微服务架构模式的特征"></a>微服务架构模式的特征</h4><ul>
+<li>应用程序分解为具有明确定义了职责范围的细粒度组件</li>
+<li>完全独立部署，独立测试，并可复用</li>
+<li>使用轻量级通信协议， HTTP 和 JSON ，松耦合</li>
+<li>服务实现可使用多种编程语言和技术</li>
+<li>将大型团队划分成多个小型开发团队，每个团队只负责他们各自的服务</li>
+</ul>
+<h4 id="Service-Mesh"><a href="#Service-Mesh" class="headerlink" title="Service Mesh"></a>Service Mesh</h4><ul>
+<li>一种基础设施层，服务间的通信通过Service Mesh 进行。</li>
+<li>可靠地传输复杂网络拓扑中服务的请求，将服务变成现代的云原生服务。</li>
+<li>一种网络代理的实现，通常与业务服务部署在一起，业务服务不感知。</li>
+<li>一种 TCP/IP 之上的网络模型。</li>
+</ul>
+<h4 id="为什么使用Service-Mesh"><a href="#为什么使用Service-Mesh" class="headerlink" title="为什么使用Service Mesh"></a>为什么使用Service Mesh</h4><ul>
+<li>无需多种语言的微服务框架开发</li>
+<li>对业务代码 0 侵入</li>
+<li>不适合改造的单体应用</li>
+<li>开发出的应用既是云原生的又具有独立性</li>
+</ul>
+<h4 id="关于容器，容器和虚拟机的区别"><a href="#关于容器，容器和虚拟机的区别" class="headerlink" title="关于容器，容器和虚拟机的区别"></a>关于容器，容器和虚拟机的区别</h4><ul>
+<li>容器是与主机共享资源的独立进程。</li>
+<li>与虚拟机不同，容器不会虚拟化硬件，也不需要客户操作系统。</li>
+<li>在容器中，运行应用程序所需的必要组件都打包为单个映像，可重复使用。</li>
+<li>执行映像时，它在隔离环境中运行，不共享内存、CPU 或主机操作系统磁盘。这可以保证容器内的进程无法监视容器外的任何进程。</li>
+</ul>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Lhtian</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://deansama.cn/posts/f14983f2/">https://deansama.cn/posts/f14983f2/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Lhtian</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                                    <span class="chip bg-color">复习</span>
+                                </a>
+                            
+                                <a href="/tags/Devops/">
+                                    <span class="chip bg-color">Devops</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/a0781d2a/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="计算机视觉复习">
+                        
+                        <span class="card-title">计算机视觉复习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            计算机视觉复习整理
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-06-29
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/cv/" class="post-category">
+                                    cv
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                        <span class="chip bg-color">复习</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/">
+                        <span class="chip bg-color">计算机视觉</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/c1c091e0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="软件系统设计复习">
+                        
+                        <span class="card-title">软件系统设计复习</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            软件系统设计复习
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%9E%B6%E6%9E%84/" class="post-category">
+                                    架构
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%A4%8D%E4%B9%A0/">
+                        <span class="chip bg-color">复习</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%9E%B6%E6%9E%84/">
+                        <span class="chip bg-color">架构</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E5%8E%82/">
+                        <span class="chip bg-color">软件工厂</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Erio<br />'
+            + '文章作者: Lhtian<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="1997830041"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.6'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2020-2021</span>
+            
+<!--            <span id="year">2020</span>-->
+            <a href="/about" target="_blank">Lhtian</a>
+<!--            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>-->
+<!--            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>-->
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;Total words:&nbsp;<span
+                class="white-color">67k</span>&nbsp;
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;times
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;users
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2020";
+                    var startMonth = "12";
+                    var startDate = "8";
+                    var startHour = "21";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "Erio: " + diffDays + " days " + diffHours +
+                            " hours " + diffMinutes + " minutes " + diffSeconds + " seconds";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "Erio " + diffYears + " years " + diffDays +
+                            " days " + diffHours + " hours " + diffMinutes + " minutes " + diffSeconds + " seconds";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备19034718-1</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/L-htian" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:1425112581@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1425112581" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1425112581" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <!--动态线条背景-->
+    <script type="text/javascript"
+            color="122 103 238" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+    </script>
+</body>
+
+</html>
