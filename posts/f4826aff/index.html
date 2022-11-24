@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="操作系统第三次问答, L-htian">
+    <meta name="keywords" content="代码安全审计平台使用记录, L-htian">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>操作系统第三次问答 | L-htian</title>
+    <title>代码安全审计平台使用记录 | L-htian</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -360,12 +360,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">操作系统第三次问答</h1>
+                    <h1 class="description center-align post-title">代码安全审计平台使用记录</h1>
                 </div>
             </div>
         </div>
@@ -481,8 +481,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                                <span class="chip bg-color">操作系统</span>
+                            <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8/">
+                                <span class="chip bg-color">代码安全</span>
                             </a>
                         
                     </div>
@@ -493,8 +493,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                操作系统
+                            <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8/" class="post-category">
+                                软件安全
                             </a>
                         
                     </div>
@@ -506,28 +506,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-12-29
+                    2022-11-24
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-12-29
+                    2022-11-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.5k
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    4 分
                 </div>
                 
 
@@ -550,140 +550,124 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="操作系统第三次问答"><a href="#操作系统第三次问答" class="headerlink" title="操作系统第三次问答"></a>操作系统第三次问答</h2><h4 id="1、解释中断向量"><a href="#1、解释中断向量" class="headerlink" title="1、解释中断向量"></a>1、解释中断向量</h4><ul>
-<li>中断源的识别标志，可用来形成相应的中断服务程序的入口地址或存放中断服务程序的首地址称为中断向量。</li>
-<li>一个中断向量占据4字节空间，包含中断服务程序入口地址的偏移量与段基址。</li>
-<li>低地址两个Byte放偏移量</li>
-<li>高地址两个Byte放段描述符</li>
-</ul>
-<h4 id="2、解释中断类型码"><a href="#2、解释中断类型码" class="headerlink" title="2、解释中断类型码"></a>2、解释中断类型码</h4><ul>
-<li>我们把每个中断服务程序进行编号，这个号就代表一个中断服务程序，就是中断类型码。</li>
-<li>这个中断类型码是计算机用来查找中断向量用的。</li>
-</ul>
-<h4 id="3、解释中断向量表"><a href="#3、解释中断向量表" class="headerlink" title="3、解释中断向量表"></a>3、解释中断向量表</h4><ul>
-<li>中断向量表是指中断服务程序入口地址的偏移量与段基值，一个中断向量占据4字节空间。中断向量表是8086系统内存中最低端1K字节空间，它的作用就是按照中断类型号从小到大的顺序存储对应的中断向量，总共存储256个中断向量。</li>
-<li>中断向量表在内存单元的最低处，地址空间为00000H—-003FFH(0-1024B)</li>
-<li>这个地址正好和中断类型码有一种对应的关系：中断类型码*4(一个中断向量所占的空间) 就等于这个中断向量的首地址。</li>
-</ul>
-<h4 id="4、实模式下中断程序地址如何得到？"><a href="#4、实模式下中断程序地址如何得到？" class="headerlink" title="4、实模式下中断程序地址如何得到？"></a>4、实模式下中断程序地址如何得到？</h4><ul>
-<li>根据中断源提供的中断类型号，中断号×4KB，查找中断向量表，获取中断程序入口地址。</li>
-<li>段描述符查GDT获得段基址加上偏移量</li>
-</ul>
-<h4 id="5、保护模式下中断程序地址如何得到？"><a href="#5、保护模式下中断程序地址如何得到？" class="headerlink" title="5、保护模式下中断程序地址如何得到？"></a>5、保护模式下中断程序地址如何得到？</h4><ol>
-<li>中断向量×8，访问IDT</li>
-<li>找到对应的描述符</li>
-<li>是中断门或陷阱门描述符（先不讨论任务门，可以看最下面的补充）<br>当描述符是任务门时，处理的不是简单的中断处理程序，而是任务切换。</li>
-<li>获取其中的选择子，访问GDT或者LDT</li>
-<li>从中在获得目标段的描述符，从中得到目标段基地址</li>
-<li>基地址与门描述符中的偏移量相加的到中断处的程序的32位线性地址</li>
-<li>若未开启分页，线性地址就是物理地址</li>
+                <h1 id="代码安全审计平台使用记录"><a href="#代码安全审计平台使用记录" class="headerlink" title="代码安全审计平台使用记录"></a>代码安全审计平台使用记录</h1><h2 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h2><h4 id="DVWA下载"><a href="#DVWA下载" class="headerlink" title="DVWA下载"></a>DVWA下载</h4><p><a target="_blank" rel="noopener" href="https://github.com/digininja/DVWA/releases/tag/2.0.1">地址</a>，选择一个source code下载解压即可</p>
+<h4 id="phpStudy下载"><a href="#phpStudy下载" class="headerlink" title="phpStudy下载"></a>phpStudy下载</h4><p>看了很多博客，都是拿这个跑DVWA的，遂下了一个，<a target="_blank" rel="noopener" href="https://www.xp.cn/">地址</a></p>
+<h4 id="phpStudy配置"><a href="#phpStudy配置" class="headerlink" title="phpStudy配置"></a>phpStudy配置</h4><ol>
+<li>找到安装目录，例如我的是<code>D:\phpstudy_pro</code></li>
+<li>将DVWA项目解压到<code>D:\phpstudy_pro\WWW</code></li>
+<li>打开DVWA项目文件夹<code>D:\phpstudy_pro\WWW\DVWA-2.0.1\config</code>，将<code>config.inc.php.dist</code>文件拷贝到随便一个目录中，删掉<code>.dist</code>，然后拷贝回来。如下</li>
 </ol>
-<h4 id="6、中断向量的地址如何得到？"><a href="#6、中断向量的地址如何得到？" class="headerlink" title="6、中断向量的地址如何得到？"></a>6、中断向量的地址如何得到？</h4><ul>
-<li>中断类型码*4就等于这个中断向量的首地址。</li>
-</ul>
-<h4 id="7、实模式下如何根据中断向量的地址得到中断程序地址？"><a href="#7、实模式下如何根据中断向量的地址得到中断程序地址？" class="headerlink" title="7、实模式下如何根据中断向量的地址得到中断程序地址？"></a>7、实模式下如何根据中断向量的地址得到中断程序地址？</h4><ul>
-<li>段描述符查GDT获得段基址加上偏移量</li>
-</ul>
-<h4 id="8、解释中断描述符"><a href="#8、解释中断描述符" class="headerlink" title="8、解释中断描述符"></a>8、解释中断描述符</h4><ul>
-<li>低地址的0和1两个字节是中断代码的偏移量A15～A0； 高地址的6和7两个字节是中断代码的偏移量A31～A16；</li>
-<li>2和3两个字节是段选择符，段选择符和偏移量用来形成中断服务子程序的入口地址； </li>
-<li>4和5两个字节称为访问权限字节，它标识该中断描述符是否有效、服务程序的特权级和描述符的类型等信息；</li>
-</ul>
-<h4 id="9、保护模式下中断描述符表如何得到？"><a href="#9、保护模式下中断描述符表如何得到？" class="headerlink" title="9、保护模式下中断描述符表如何得到？"></a>9、保护模式下中断描述符表如何得到？</h4><ul>
-<li>引入一个48位的全地址寄存器（即中断描述符表寄存器IDTR）存放IDT的内存地址，和GDTR一样，IDTR包含32位的基地址和16位段限，基地址定义中断描述符表IDT在存储器中的起始点，段限定义中断描述符表所占的字节个数</li>
-</ul>
-<h4 id="10、保护模式下中断门如何得到？"><a href="#10、保护模式下中断门如何得到？" class="headerlink" title="10、保护模式下中断门如何得到？"></a>10、保护模式下中断门如何得到？</h4><ul>
-<li>查中断描述符表以IDTR指定的中断描述符表的基地址为起始地址，用调用号N×8算出偏移量，即为N号中断门描述符的首地址</li>
-</ul>
-<h4 id="11、保护模式下如何根据中断门得到中断处理程序地址？"><a href="#11、保护模式下如何根据中断门得到中断处理程序地址？" class="headerlink" title="11、保护模式下如何根据中断门得到中断处理程序地址？"></a>11、保护模式下如何根据中断门得到中断处理程序地址？</h4><ul>
-<li>查全局或局部描述符表根据中断门中的选择子（段选择符）和偏移量得到中断处理程序入口</li>
-</ul>
-<h4 id="12、中断的分类，举例不同类型的中断"><a href="#12、中断的分类，举例不同类型的中断" class="headerlink" title="12、中断的分类，举例不同类型的中断"></a>12、中断的分类，举例不同类型的中断</h4><ul>
-<li><p>从中断源的角度分类</p>
-<ul>
-<li>由计算机硬件异常或故障引起的中断，也称为内部异常中断。</li>
-<li>由程序中执行了中断指令引起的中断，也称为软中断。由程序员通过INT或INT3指令触发，通常当做trap处理，用处：实现系统调用。</li>
-<li>外部设备（如输入输出设备）请求引起的中断，也称为外部中断或Ｉ／Ｏ中断。</li>
-</ul>
-</li>
-<li><p><strong>主要分类</strong>：</p>
-<ul>
-<li><p>中断：由CPU以外的事件引起的中断</p>
-<p>如：IO中断、时钟中断、控制台中断等</p>
-</li>
-<li><p>异常：来自CPU的内部事件或程序执行中的事件引起的过程</p>
-<p>如：由于CPU本身故障、程序故障、请求系统服务的指令引起的中断等</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="13、中断和异常的区别？"><a href="#13、中断和异常的区别？" class="headerlink" title="13、中断和异常的区别？"></a>13、中断和异常的区别？</h4><ul>
-<li><p>中断，是CPU所具备的功能。通常因为“硬件”而随机发生。</p>
-<p>异常，是“软件”运行过程中的一种开发过程中没有考虑到的程序错误。 </p>
-</li>
-<li><p>中断是CPU暂停当前工作，有计划地去处理其他的事情。中断的发生一般是可以预知的，处理的过程也是事先制定好的。处理中断时程序是正常运行的。</p>
-<p>异常是CPU遇到了无法响应的工作，而后进入一种非正常状态。异常的出现表明程序有缺陷。</p>
-</li>
-<li><p>中断是异步的，异常是同步的。</p>
-<ul>
-<li>中断是来自处理器外部的I/O设备的信号的结果，它不是由指令流中某条指令执行引起的，从这个意义上讲，它是异步的，是来自指令流之外的。</li>
-<li>异常是执行当前指令流中的某条指令的结果，是来自指令流内部的，从这个意义上讲它们都是同步的。</li>
-</ul>
-</li>
-<li><p>中断或异常的返回点</p>
-<ul>
-<li>良性的如中断和trap，只是在正常的工作流之外执行额外的操作，然后继续干没干完的活。因此处理程序完了后返回到原指令流的下一条指令，继续执行。</li>
-<li>恶性的如fault和abort，对于可修复fault，由于是在上一条指令执行过程中发生（是由正在执行的指令引发的）的，在修复fault之后，会重新执行该指令；至于不可修复fault或abort，则不会再返回。</li>
-</ul>
-</li>
-<li><p>中断是由于当前程序无关的中断信号触发的，CPU对中断的响应是被动的，且与CPU模式无关。既可以发生在用户态，又可以发生在核心态。</p>
-<p>异常是由CPU控制单元产生的，大部分异常发生在用户态。</p>
-</li>
-</ul>
-<h4 id="14、实模式和保护模式下的中断处理差别"><a href="#14、实模式和保护模式下的中断处理差别" class="headerlink" title="14、实模式和保护模式下的中断处理差别"></a>14、实模式和保护模式下的中断处理差别</h4><ul>
-<li>实模式使用中断向量表获得中断程序入口地址；保护模式使用中断描述符表</li>
-<li>实模式下中断向量表地址从0开始；保护模式中中断描述符表地址不确定，需要靠IDTR记录</li>
-<li>实模式通过中断向量中的基址加偏移量寻址；保护模式通过中断描述符中的段选择符加偏移量，再通过查全局或局部描述符表寻址</li>
-</ul>
-<h4 id="15、如何识别键盘组合键（如shift-a）是否还有其他解决方案？"><a href="#15、如何识别键盘组合键（如shift-a）是否还有其他解决方案？" class="headerlink" title="15、如何识别键盘组合键（如shift+a）是否还有其他解决方案？"></a>15、如何识别键盘组合键（如shift+a）是否还有其他解决方案？</h4><p>建⽴扫描码的解析数组记录⼀个键在组合及⾮组合状态下的实际值并设置缓冲区；声明了组合键中前者（shift、ctrl 等）相应变量，若出现其make code或break code，设置其标志位以便与其他⾮组合键组合在解析数组中找到相应实际值</p>
-<h4 id="16、IDT是什么，有什么作用？"><a href="#16、IDT是什么，有什么作用？" class="headerlink" title="16、IDT是什么，有什么作用？"></a>16、IDT是什么，有什么作用？</h4><ul>
-<li>中断描述符表</li>
-<li>存放中断描述符，中断描述符记录着偏移量、段选择符、访问权限。</li>
-</ul>
-<h4 id="17、IDT中有几种描述符？"><a href="#17、IDT中有几种描述符？" class="headerlink" title="17、IDT中有几种描述符？"></a>17、IDT中有几种描述符？</h4><ul>
-<li>任务门、中断门和自陷门</li>
-</ul>
-<h4 id="18、异常的分类？"><a href="#18、异常的分类？" class="headerlink" title="18、异常的分类？"></a>18、异常的分类？</h4><ul>
-<li>Fault：可被更正的异常，一旦被更正程序可以不失连续性地继续执行。返回地址是产生fault的指令。</li>
-<li>Trap：一种在发生trap的指令执行之后立即被报告的异常，它也允许程序或任务不失连续性地继续执行。返回地址是产生trap的指令之后的那条指令。</li>
-<li>Abort：不总是报告精确异常发生位置的异常，不允许程序或任务继续执行，而是用来报告严重错误的</li>
-</ul>
-<h4 id="19、用户态和内核态的特权级分别是多少？"><a href="#19、用户态和内核态的特权级分别是多少？" class="headerlink" title="19、用户态和内核态的特权级分别是多少？"></a>19、用户态和内核态的特权级分别是多少？</h4><ul>
-<li>用户3</li>
-<li>内核0</li>
-</ul>
-<h4 id="20、中断向量表中，每个中断有几个字节？里面的结构是什么？"><a href="#20、中断向量表中，每个中断有几个字节？里面的结构是什么？" class="headerlink" title="20、中断向量表中，每个中断有几个字节？里面的结构是什么？"></a>20、中断向量表中，每个中断有几个字节？里面的结构是什么？</h4><ul>
-<li>4</li>
-<li>低地址两个Byte放偏移量</li>
-<li>高地址两个Byte放段描述符</li>
-</ul>
-<h4 id="21、中断异常共同点（至少两点），不同点（至少三点）"><a href="#21、中断异常共同点（至少两点），不同点（至少三点）" class="headerlink" title="21、中断异常共同点（至少两点），不同点（至少三点）"></a>21、中断异常共同点（至少两点），不同点（至少三点）</h4><p><strong>共同点</strong>：</p>
-<ul>
-<li>都是程序执行过程中的强制性转移，转移到相应的处理程序</li>
-<li>都是软件或者硬件发生了某种情形而通知处理器的行为</li>
-</ul>
-<p><strong>不同点</strong>：</p>
-<ul>
-<li><p>中断，是CPU所具备的功能。通常因为“硬件”而随机发生。</p>
-<p>异常，是“软件”运行过程中的一种开发过程中没有考虑到的程序错误。 </p>
-</li>
-<li><p>中断是CPU暂停当前工作，有计划地去处理其他的事情。中断的发生一般是可以预知的，处理的过程也是事先制定好的。处理中断时程序是正常运行的。</p>
-<p>异常是CPU遇到了无法响应的工作，而后进入一种非正常状态。异常的出现表明程序有缺陷。</p>
-</li>
-<li><p>中断是由于当前程序无关的中断信号触发的，CPU对中断的响应是被动的，且与CPU模式无关。既可以发生在用户态，又可以发生在核心态。</p>
-<p>异常是由CPU控制单元产生的，大部分异常发生在用户态。</p>
-</li>
-</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669272657673-490e0f4a-1c42-4bfc-bb2e-7bdfee084dcf.png" alt="img"></p>
+<ol>
+<li>修改<code>config.inc.php</code>文件内部的配置，底下两个key可以照抄这个，也可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/RBPicsdn/article/details/80059132">DVWA reCAPTCHA key: Missing解决方法</a>自行配置。</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">$_DVWA<span class="token punctuation">[</span> <span class="token string">'db_server'</span> <span class="token punctuation">]</span>   <span class="token operator">=</span> <span class="token string">'127.0.0.1:3307'</span><span class="token punctuation">;</span>
+$_DVWA<span class="token punctuation">[</span> <span class="token string">'db_user'</span> <span class="token punctuation">]</span>     <span class="token operator">=</span> <span class="token string">'root'</span><span class="token punctuation">;</span>
+$_DVWA<span class="token punctuation">[</span> <span class="token string">'db_password'</span> <span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'root'</span><span class="token punctuation">;</span>
+$_DVWA<span class="token punctuation">[</span> <span class="token string">'db_port '</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'3307'</span><span class="token punctuation">;</span>
+# ReCAPTCHA settings
+#   Used <span class="token keyword">for</span> the <span class="token string">'Insecure CAPTCHA'</span> module
+#   You'll need to generate your own keys at<span class="token operator">:</span> https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>google<span class="token punctuation">.</span>com<span class="token operator">/</span>recaptcha<span class="token operator">/</span>admin
+$_DVWA<span class="token punctuation">[</span> <span class="token string">'recaptcha_public_key'</span> <span class="token punctuation">]</span>  <span class="token operator">=</span> <span class="token string">'6LdJJlUUAAAAAH1Q6cTpZRQ2Ah8VpyzhnffD0mBb'</span><span class="token punctuation">;</span>
+$_DVWA<span class="token punctuation">[</span> <span class="token string">'recaptcha_private_key'</span> <span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'6LdJJlUUAAAAAM2a3HrgzLczqdYp4g05EqDs-W4K'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>找到类似的目录<code>D:\phpstudy_pro\Extensions\php\php7.3.4nts</code>里的php.ini，修改设置</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">allow_url_include<span class="token operator">=</span>On
+allow_url_fopen<span class="token operator">=</span>On<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="phpStudy使用"><a href="#phpStudy使用" class="headerlink" title="phpStudy使用"></a>phpStudy使用</h4><ol>
+<li>打开phpStudy</li>
+<li>启动下图中的两个套件</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273023283-fc5c72ac-aa09-4ac7-bfff-29ccb958f58b.png" alt="img"></p>
+<ol>
+<li>浏览器输入<code>http://127.0.0.1/&#123;你的DVWA解压之后的文件夹名称&#125;</code>，例如我需要输入<code>http://127.0.0.1/DVWA-2.0.1</code>，最后可以看到页面如下</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273145627-5d0ead8f-3d60-499d-91c9-c39869125489.png" alt="img"></p>
+<ol>
+<li>Windows环境中，如果phpStudy无法启动mysql，管理员模式打开命令行输入，同时将phpStudy中mysql的启动端口改为3307</li>
+</ol>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">sc <span class="token keyword">delete</span> mysql
+<span class="token comment">//需要使用本地mysql时运行下列命令</span>
+mysqld <span class="token operator">-</span>install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669275386700-7a1f3cf4-3670-41bd-a2e8-0f5a56ec9bf6.png" alt="img"></p>
+<ol>
+<li>点击按钮 Creat / Reset Database 完成创建，点击最后一条login，账号为admin密码为password</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669275519838-118235a0-fbe3-41c3-8751-683f503e4dcb.png" alt="img"></p>
+<h2 id="使用seay审计DVWA源代码"><a href="#使用seay审计DVWA源代码" class="headerlink" title="使用seay审计DVWA源代码"></a>使用seay审计DVWA源代码</h2><h3 id="seay配置"><a href="#seay配置" class="headerlink" title="seay配置"></a>seay配置</h3><h4 id="seay下载"><a href="#seay下载" class="headerlink" title="seay下载"></a>seay下载</h4><p><a target="_blank" rel="noopener" href="https://github.com/f1tz/cnseay">地址</a></p>
+<p>直接下载<img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669272311567-3becea9f-3040-4e30-afd9-9d27a30181e1.png" alt="img">，解压之后是exe，安装即可</p>
+<h4 id="seay界面"><a href="#seay界面" class="headerlink" title="seay界面"></a>seay界面</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669272379522-39ab3ea0-fc07-4942-9a9b-3575851b45fe.png" alt="img"></p>
+<h3 id="seay审计DVWA源代码"><a href="#seay审计DVWA源代码" class="headerlink" title="seay审计DVWA源代码"></a>seay审计DVWA源代码</h3><ol>
+<li>使用seay创建审计项目</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273474457-38d00907-0f7b-4b9f-8065-970a62d02679.png" alt="img"></p>
+<ol>
+<li>选择之前解压的DVWA文件夹</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273560173-317335f7-0759-466e-98d3-9d6959b97835.png" alt="img"></p>
+<ol>
+<li>创建完成</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273596459-c2125eb5-1a11-43c6-b937-1d51a706fcbe.png" alt="img"></p>
+<ol>
+<li>使用seay的自动审计功能</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273705754-ce706e19-62a2-4645-b318-5ec459e53b9d.png" alt="img"></p>
+<ol>
+<li>随便点一个漏洞就可以跳转到相关代码，这里点了六号</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273777819-ef368901-b85e-420a-856d-0f121153744f.png" alt="img"></p>
+<h2 id="使用RIPS审计DVWA源代码"><a href="#使用RIPS审计DVWA源代码" class="headerlink" title="使用RIPS审计DVWA源代码"></a>使用RIPS审计DVWA源代码</h2><h3 id="RIPS配置"><a href="#RIPS配置" class="headerlink" title="RIPS配置"></a>RIPS配置</h3><h4 id="RIPS下载"><a href="#RIPS下载" class="headerlink" title="RIPS下载"></a>RIPS下载</h4><p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/rips-scanner/files/">地址</a></p>
+<h4 id="RIPS部署"><a href="#RIPS部署" class="headerlink" title="RIPS部署"></a>RIPS部署</h4><ol>
+<li>将上面下载的安装包内的目录解压到<code>D:\phpstudy_pro\WWW</code></li>
+<li>浏览器输入<code>http://127.0.0.1/&#123;你的文件夹名称&#125;/</code>，例如我的是<code>http://127.0.0.1/rips-0.55/</code></li>
+</ol>
+<h3 id="RIPS审计"><a href="#RIPS审计" class="headerlink" title="RIPS审计"></a>RIPS审计</h3><ol>
+<li>输入代扫描的代码的本地目录</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276555572-3328c9be-f87c-4386-bf6d-749cbd8cf0be.png" alt="img"></p>
+<ol>
+<li>选择verbosity level（即扫描级别），选择vuln type（即扫描类型），这里全部都是默认，然后点击scan</li>
+<li>提示扫描文件太多，选择继续</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276764319-ac2abb14-b137-4a5b-8875-dd4e655e180a.png" alt="img"></p>
+<ol>
+<li>扫描结束</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276790215-da5ca073-2254-4580-8d9d-6e3fe40e8342.png" alt="img"></p>
+<ol>
+<li>右上角可以查看各种信息</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276863463-f8f90645-f7de-4a8e-a956-3626879c4627.png" alt="img"></p>
+<ol>
+<li>可以看出，RIPS的扫描结果比seay更加少一点，一个原因是seay的错误比较零碎，还有就是RIPS将一个文件中的问题集中报出。同时RIPS的速度要远快于seay。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276995143-4b62a50b-897f-462b-b775-aa7ff3783bd1.png" alt="img"></p>
+<h2 id="使用CodeXploiter审计DVWA源代码"><a href="#使用CodeXploiter审计DVWA源代码" class="headerlink" title="使用CodeXploiter审计DVWA源代码"></a>使用CodeXploiter审计DVWA源代码</h2><h3 id="CodeXploiter配置"><a href="#CodeXploiter配置" class="headerlink" title="CodeXploiter配置"></a>CodeXploiter配置</h3><h4 id="CodeXploiter下载"><a href="#CodeXploiter下载" class="headerlink" title="CodeXploiter下载"></a>CodeXploiter下载</h4><p><a target="_blank" rel="noopener" href="http://codexploiter.findmysoft.com/download/">地址</a></p>
+<h4 id="CodeXploiter部署"><a href="#CodeXploiter部署" class="headerlink" title="CodeXploiter部署"></a>CodeXploiter部署</h4><p>双击.exe安装即可</p>
+<h3 id="CodeXploiter审计DVWA代码"><a href="#CodeXploiter审计DVWA代码" class="headerlink" title="CodeXploiter审计DVWA代码"></a>CodeXploiter审计DVWA代码</h3><ol>
+<li>打开CodeXploiter</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669277571765-c66db660-8983-4619-a717-ffef1d3b9880.png" alt="img"></p>
+<ol>
+<li>手动添加需要扫描的php文件，具体操作为点击<code>Load Files</code>找到你的DVWA目录，进入之后全选然后open即可，这里只把DVWA目录内的php文件添加进来了</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669277627370-a9bc61c2-c975-4bbb-8a72-29d9739d3f10.png" alt="img"></p>
+<ol>
+<li>点击scan，可以看到结果出现在了右侧，同时指示了问题所在文件及其目录以及问题所在行数</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669277757239-45ee3bc6-6cd1-4442-86bd-55cea5339a3c.png" alt="img"></p>
+<h2 id="三种工具的审查结果比较"><a href="#三种工具的审查结果比较" class="headerlink" title="三种工具的审查结果比较"></a>三种工具的审查结果比较</h2><ol>
+<li>seay的检测是最细致也是最慢的，结果非常的零碎，但是可以通过点击报告的问题直接查看对应的代码</li>
+<li>RIPS的速度最快，对于问题是根据文件进行整合，但是不会想seay一样直接标记问题所在代码，需要人工去看，但是提供图表，较为清楚直观</li>
+<li>CodeXploiter的速度居于中间，对于审计出的问题，不会像seay那样直接跳转，但是会直接指出所在位置，便于定位。</li>
+<li>从使用的体验上来说，seay虽然审查速度最慢，但是体验是最好的，可以非常方便的定位问题。体验最差的是CodeXploiter，因为没法直接添加文件夹，需要手动选择单个文件进行添加，这样难免会有些遗漏。</li>
+<li>从部署上来看，只有RIPS是基于Web的，可以直接部署在服务器上，只需要拷贝文件夹到部署工具相应位置开箱即用。其他两者需要先安装再使用，难免有些局限了。</li>
+</ol>
 
                 
             </div>
@@ -710,7 +694,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://deansama.cn/posts/12b71a91/">https://deansama.cn/posts/12b71a91/</a>
+                    <a href="https://deansama.cn/posts/f4826aff/">https://deansama.cn/posts/f4826aff/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -748,8 +732,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                                    <span class="chip bg-color">操作系统</span>
+                                <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8/">
+                                    <span class="chip bg-color">代码安全</span>
                                 </a>
                             
                         </div>
@@ -793,46 +777,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/posts/b537eefd/">
+                <a href="/posts/f4826aff/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="操作系统第四次问答">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="代码安全审计平台使用记录">
                         
-                        <span class="card-title">操作系统第四次问答</span>
+                        <span class="card-title">代码安全审计平台使用记录</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第四次问答相关整理
+                            软件安全课程作业有相关使用要求，这里做个使用记录
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-12-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                    操作系统
+                            <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8/" class="post-category">
+                                    软件安全
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">操作系统</span>
+                    <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%89%E5%85%A8/">
+                        <span class="chip bg-color">代码安全</span>
                     </a>
                     
                 </div>
@@ -846,31 +832,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/posts/acf26814/">
+                <a href="/posts/666221c7/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="操作系统第二次问答">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="简单刷题记录2.22">
                         
-                        <span class="card-title">操作系统第二次问答</span>
+                        <span class="card-title">简单刷题记录2.22</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            第二次问答相关整理
+                            考研出分，开始准备实习，每天刷题做一下记录
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-12-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-22
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-category">
-                                    操作系统
+                            <a href="/categories/%E5%88%B7%E9%A2%98/" class="post-category">
+                                    刷题
                                 </a>
                             
                             
@@ -880,8 +866,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-                        <span class="chip bg-color">操作系统</span>
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">数据结构</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%88%B7%E9%A2%98/">
+                        <span class="chip bg-color">刷题</span>
                     </a>
                     
                 </div>
