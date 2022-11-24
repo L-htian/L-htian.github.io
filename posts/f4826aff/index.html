@@ -550,14 +550,15 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="代码安全审计平台使用记录"><a href="#代码安全审计平台使用记录" class="headerlink" title="代码安全审计平台使用记录"></a>代码安全审计平台使用记录</h1><h2 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h2><h4 id="DVWA下载"><a href="#DVWA下载" class="headerlink" title="DVWA下载"></a>DVWA下载</h4><p><a target="_blank" rel="noopener" href="https://github.com/digininja/DVWA/releases/tag/2.0.1">地址</a>，选择一个source code下载解压即可</p>
+                <h1 id="代码安全审计平台使用记录"><a href="#代码安全审计平台使用记录" class="headerlink" title="代码安全审计平台使用记录"></a>代码安全审计平台使用记录</h1><ol>
+<li><h2 id="前置准备"><a href="#前置准备" class="headerlink" title="前置准备"></a>前置准备</h2><h4 id="DVWA下载"><a href="#DVWA下载" class="headerlink" title="DVWA下载"></a>DVWA下载</h4><p><a target="_blank" rel="noopener" href="https://github.com/digininja/DVWA/releases/tag/2.0.1">地址</a>，选择一个source code下载解压即可</p>
 <h4 id="phpStudy下载"><a href="#phpStudy下载" class="headerlink" title="phpStudy下载"></a>phpStudy下载</h4><p>看了很多博客，都是拿这个跑DVWA的，遂下了一个，<a target="_blank" rel="noopener" href="https://www.xp.cn/">地址</a></p>
 <h4 id="phpStudy配置"><a href="#phpStudy配置" class="headerlink" title="phpStudy配置"></a>phpStudy配置</h4><ol>
 <li>找到安装目录，例如我的是<code>D:\phpstudy_pro</code></li>
 <li>将DVWA项目解压到<code>D:\phpstudy_pro\WWW</code></li>
 <li>打开DVWA项目文件夹<code>D:\phpstudy_pro\WWW\DVWA-2.0.1\config</code>，将<code>config.inc.php.dist</code>文件拷贝到随便一个目录中，删掉<code>.dist</code>，然后拷贝回来。如下</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669272657673-490e0f4a-1c42-4bfc-bb2e-7bdfee084dcf.png" alt="img"></p>
+<p><img src="1669272657673-490e0f4a-1c42-4bfc-bb2e-7bdfee084dcf.png"></p>
 <ol>
 <li>修改<code>config.inc.php</code>文件内部的配置，底下两个key可以照抄这个，也可以参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/RBPicsdn/article/details/80059132">DVWA reCAPTCHA key: Missing解决方法</a>自行配置。</li>
 </ol>
@@ -581,11 +582,11 @@ allow_url_fopen<span class="token operator">=</span>On<span aria-hidden="true" c
 <li>打开phpStudy</li>
 <li>启动下图中的两个套件</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273023283-fc5c72ac-aa09-4ac7-bfff-29ccb958f58b.png" alt="img"></p>
+<p><img src="1669273023283-fc5c72ac-aa09-4ac7-bfff-29ccb958f58b.png"></p>
 <ol>
 <li>浏览器输入<code>http://127.0.0.1/&#123;你的DVWA解压之后的文件夹名称&#125;</code>，例如我需要输入<code>http://127.0.0.1/DVWA-2.0.1</code>，最后可以看到页面如下</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273145627-5d0ead8f-3d60-499d-91c9-c39869125489.png" alt="img"></p>
+<p><img src="1669273145627-5d0ead8f-3d60-499d-91c9-c39869125489.png"></p>
 <ol>
 <li>Windows环境中，如果phpStudy无法启动mysql，管理员模式打开命令行输入，同时将phpStudy中mysql的启动端口改为3307</li>
 </ol>
@@ -593,34 +594,34 @@ allow_url_fopen<span class="token operator">=</span>On<span aria-hidden="true" c
 <span class="token comment">//需要使用本地mysql时运行下列命令</span>
 mysqld <span class="token operator">-</span>install<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669275386700-7a1f3cf4-3670-41bd-a2e8-0f5a56ec9bf6.png" alt="img"></p>
+<p><img src="1669275386700-7a1f3cf4-3670-41bd-a2e8-0f5a56ec9bf6.png"></p>
 <ol>
 <li>点击按钮 Creat / Reset Database 完成创建，点击最后一条login，账号为admin密码为password</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669275519838-118235a0-fbe3-41c3-8751-683f503e4dcb.png" alt="img"></p>
+<p><img src="1669275519838-118235a0-fbe3-41c3-8751-683f503e4dcb.png"></p>
 <h2 id="使用seay审计DVWA源代码"><a href="#使用seay审计DVWA源代码" class="headerlink" title="使用seay审计DVWA源代码"></a>使用seay审计DVWA源代码</h2><h3 id="seay配置"><a href="#seay配置" class="headerlink" title="seay配置"></a>seay配置</h3><h4 id="seay下载"><a href="#seay下载" class="headerlink" title="seay下载"></a>seay下载</h4><p><a target="_blank" rel="noopener" href="https://github.com/f1tz/cnseay">地址</a></p>
-<p>直接下载<img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669272311567-3becea9f-3040-4e30-afd9-9d27a30181e1.png" alt="img">，解压之后是exe，安装即可</p>
-<h4 id="seay界面"><a href="#seay界面" class="headerlink" title="seay界面"></a>seay界面</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669272379522-39ab3ea0-fc07-4942-9a9b-3575851b45fe.png" alt="img"></p>
+<p>直接下载<img src="1669272311567-3becea9f-3040-4e30-afd9-9d27a30181e1.png">，解压之后是exe，安装即可</p>
+<h4 id="seay界面"><a href="#seay界面" class="headerlink" title="seay界面"></a>seay界面</h4><p><img src="1669272379522-39ab3ea0-fc07-4942-9a9b-3575851b45fe.png"></p>
 <h3 id="seay审计DVWA源代码"><a href="#seay审计DVWA源代码" class="headerlink" title="seay审计DVWA源代码"></a>seay审计DVWA源代码</h3><ol>
 <li>使用seay创建审计项目</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273474457-38d00907-0f7b-4b9f-8065-970a62d02679.png" alt="img"></p>
+<p><img src="1669273474457-38d00907-0f7b-4b9f-8065-970a62d02679.png"></p>
 <ol>
 <li>选择之前解压的DVWA文件夹</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273560173-317335f7-0759-466e-98d3-9d6959b97835.png" alt="img"></p>
+<p><img src="1669273560173-317335f7-0759-466e-98d3-9d6959b97835.png"></p>
 <ol>
 <li>创建完成</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273596459-c2125eb5-1a11-43c6-b937-1d51a706fcbe.png" alt="img"></p>
+<p><img src="1669273596459-c2125eb5-1a11-43c6-b937-1d51a706fcbe.png"></p>
 <ol>
 <li>使用seay的自动审计功能</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273705754-ce706e19-62a2-4645-b318-5ec459e53b9d.png" alt="img"></p>
+<p><img src="1669273705754-ce706e19-62a2-4645-b318-5ec459e53b9d.png"></p>
 <ol>
 <li>随便点一个漏洞就可以跳转到相关代码，这里点了六号</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669273777819-ef368901-b85e-420a-856d-0f121153744f.png" alt="img"></p>
+<p><img src="1669273777819-ef368901-b85e-420a-856d-0f121153744f.png"></p>
 <h2 id="使用RIPS审计DVWA源代码"><a href="#使用RIPS审计DVWA源代码" class="headerlink" title="使用RIPS审计DVWA源代码"></a>使用RIPS审计DVWA源代码</h2><h3 id="RIPS配置"><a href="#RIPS配置" class="headerlink" title="RIPS配置"></a>RIPS配置</h3><h4 id="RIPS下载"><a href="#RIPS下载" class="headerlink" title="RIPS下载"></a>RIPS下载</h4><p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/rips-scanner/files/">地址</a></p>
 <h4 id="RIPS部署"><a href="#RIPS部署" class="headerlink" title="RIPS部署"></a>RIPS部署</h4><ol>
 <li>将上面下载的安装包内的目录解压到<code>D:\phpstudy_pro\WWW</code></li>
@@ -629,38 +630,40 @@ mysqld <span class="token operator">-</span>install<span aria-hidden="true" clas
 <h3 id="RIPS审计"><a href="#RIPS审计" class="headerlink" title="RIPS审计"></a>RIPS审计</h3><ol>
 <li>输入代扫描的代码的本地目录</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276555572-3328c9be-f87c-4386-bf6d-749cbd8cf0be.png" alt="img"></p>
+<p><img src="1669276555572-3328c9be-f87c-4386-bf6d-749cbd8cf0be.png"></p>
 <ol>
 <li>选择verbosity level（即扫描级别），选择vuln type（即扫描类型），这里全部都是默认，然后点击scan</li>
 <li>提示扫描文件太多，选择继续</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276764319-ac2abb14-b137-4a5b-8875-dd4e655e180a.png" alt="img"></p>
+<p><img src="1669276764319-ac2abb14-b137-4a5b-8875-dd4e655e180a.png"></p>
 <ol>
 <li>扫描结束</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276790215-da5ca073-2254-4580-8d9d-6e3fe40e8342.png" alt="img"></p>
+<p><img src="1669276790215-da5ca073-2254-4580-8d9d-6e3fe40e8342.png"></p>
 <ol>
 <li>右上角可以查看各种信息</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276863463-f8f90645-f7de-4a8e-a956-3626879c4627.png" alt="img"></p>
+<p><img src="1669276863463-f8f90645-f7de-4a8e-a956-3626879c4627.png"></p>
 <ol>
 <li>可以看出，RIPS的扫描结果比seay更加少一点，一个原因是seay的错误比较零碎，还有就是RIPS将一个文件中的问题集中报出。同时RIPS的速度要远快于seay。</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669276995143-4b62a50b-897f-462b-b775-aa7ff3783bd1.png" alt="img"></p>
+<p><img src="1669276995143-4b62a50b-897f-462b-b775-aa7ff3783bd1.png"></p>
 <h2 id="使用CodeXploiter审计DVWA源代码"><a href="#使用CodeXploiter审计DVWA源代码" class="headerlink" title="使用CodeXploiter审计DVWA源代码"></a>使用CodeXploiter审计DVWA源代码</h2><h3 id="CodeXploiter配置"><a href="#CodeXploiter配置" class="headerlink" title="CodeXploiter配置"></a>CodeXploiter配置</h3><h4 id="CodeXploiter下载"><a href="#CodeXploiter下载" class="headerlink" title="CodeXploiter下载"></a>CodeXploiter下载</h4><p><a target="_blank" rel="noopener" href="http://codexploiter.findmysoft.com/download/">地址</a></p>
 <h4 id="CodeXploiter部署"><a href="#CodeXploiter部署" class="headerlink" title="CodeXploiter部署"></a>CodeXploiter部署</h4><p>双击.exe安装即可</p>
 <h3 id="CodeXploiter审计DVWA代码"><a href="#CodeXploiter审计DVWA代码" class="headerlink" title="CodeXploiter审计DVWA代码"></a>CodeXploiter审计DVWA代码</h3><ol>
 <li>打开CodeXploiter</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669277571765-c66db660-8983-4619-a717-ffef1d3b9880.png" alt="img"></p>
+<p><img src="1669277571765-c66db660-8983-4619-a717-ffef1d3b9880.png"></p>
 <ol>
 <li>手动添加需要扫描的php文件，具体操作为点击<code>Load Files</code>找到你的DVWA目录，进入之后全选然后open即可，这里只把DVWA目录内的php文件添加进来了</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669277627370-a9bc61c2-c975-4bbb-8a72-29d9739d3f10.png" alt="img"></p>
+<p><img src="1669277627370-a9bc61c2-c975-4bbb-8a72-29d9739d3f10.png"></p>
 <ol>
 <li>点击scan，可以看到结果出现在了右侧，同时指示了问题所在文件及其目录以及问题所在行数</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/379544/1669277757239-45ee3bc6-6cd1-4442-86bd-55cea5339a3c.png" alt="img"></p>
+<p><img src="1669277757239-45ee3bc6-6cd1-4442-86bd-55cea5339a3c.png"></p>
+</li>
+</ol>
 <h2 id="三种工具的审查结果比较"><a href="#三种工具的审查结果比较" class="headerlink" title="三种工具的审查结果比较"></a>三种工具的审查结果比较</h2><ol>
 <li>seay的检测是最细致也是最慢的，结果非常的零碎，但是可以通过点击报告的问题直接查看对应的代码</li>
 <li>RIPS的速度最快，对于问题是根据文件进行整合，但是不会想seay一样直接标记问题所在代码，需要人工去看，但是提供图表，较为清楚直观</li>
